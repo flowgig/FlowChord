@@ -29,8 +29,6 @@ gulp.task('vendor-fonts', function() {
 
 gulp.task('scripts', function() {
     return gulp.src(config.paths.js)
-        .pipe(jshint())
-        .pipe(jshint.reporter('default'))
         .pipe(concat('main.js'))
         .pipe(gulp.dest(assets + '/js/'))
         .pipe(rename({ suffix: '.min' }))
