@@ -11,7 +11,8 @@
   },
   "paths": {
     "js": [
-      "src/js/vue.min.js"
+      "src/js/vue.min.js",
+      "src/js/functions.js"
     ],
     "css": [
       "src/sass/**/*.scss"
