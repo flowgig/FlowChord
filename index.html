@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Chord finder</title>
-    <script type="text/javascript" src="/assets/js/main.min.js"></script>
+    <script type="text/javascript" src="assets/js/main.min.js"></script>
     <style>
-        body{
+        body {
             font-family: Verdana, sans-serif;
             font-size: 12pt;
         }
-        .fret{
+
+        .fret {
             width: 66px;
             display: inline-block;
             border: 1px solid #AAA;
@@ -21,6 +22,7 @@
 <body>
 <h1>Chord finder</h1>
 <div id="app">
+
     <div class="fretboard">
         <div v-for="tuner in tuners" class="string">
             <select v-model="tuner.number" class="tuner string $index">
@@ -37,6 +39,14 @@
             </div>
         </div>
     </div>
+
+    <p>Chose a chord:</p>
+    <select v-model="selectedKey" v-on:change="setActiveNotes">
+        <option v-for="note in notes" v-bind:value="note.number">{{note.name}}</option>
+    </select>
+    <select v-model="selectedChord" v-on:change="setActiveNotes">
+        <option v-for="chord in chords" v-bind:value="chord">{{chord.name}}</option>
+    </select>
 </div>
 
 <script>
