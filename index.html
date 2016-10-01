@@ -7,5 +7,60 @@
 </head>
 <body>
 <h1>Chord finder</h1>
+<div id="app">
+</div>
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            notes: [
+                {"number": 0, "name": "C", "interval": ""},
+                {"number": 1, "name": "C#", "interval": ""},
+                {"number": 2, "name": "D", "interval": ""},
+                {"number": 3, "name": "D#", "interval": ""},
+                {"number": 4, "name": "E", "interval": ""},
+                {"number": 5, "name": "F", "interval": ""},
+                {"number": 6, "name": "F#", "interval": ""},
+                {"number": 7, "name": "G", "interval": ""},
+                {"number": 8, "name": "G#", "interval": ""},
+                {"number": 9, "name": "A", "interval": ""},
+                {"number": 10, "name": "A#", "interval": ""},
+                {"number": 11, "name": "B", "interval": ""}
+            ],
+            chords: "",
+            selectedChord: "",
+            tuners: [
+                {"number": 4},
+                {"number": 11},
+                {"number": 7},
+                {"number": 2},
+                {"number": 9},
+                {"number": 4}
+            ],
+            selectedKey: 0,
+        },
+        methods: {
+            getJsonData: function (path) {
+                var jsonData = loadJSON(function (response) {
+                    var jsonResponse = JSON.parse(response);
+                }, path);
+                return jsonData;
+            },
+            setActiveNotes: function () {
+                this.notes.forEach(function (note, index) {
+                    note.interval = "";
+                });
+                this.selectedChord.notes.forEach(function (note, index) {
+                    this.notes[(note.halfSteps + this.selectedKey) % 12].interval = note.interval;
+                }.bind(this));
+            }
+        },
+        created: function () {
+            this.chords = this.getJsonData("json/chords.json");
+        },
+        computed: {}
+    })
+</script>
 </body>
 </html>
