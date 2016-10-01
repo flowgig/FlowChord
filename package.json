@@ -1,0 +1,19 @@
+{
+  "name": "chord-finder-app-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benjamindehli/chord-finder-app-test.git"
+  },
+  "author": "Benjamin Dehli <superelg@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/benjamindehli/chord-finder-app-test/issues"
+  },
+  "homepage": "https://github.com/benjamindehli/chord-finder-app-test#readme"
+}
