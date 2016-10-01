@@ -1,0 +1,27 @@
+{
+  "vendorPaths": {
+    "js": [
+      "node_modules/vue/dist/vue.min.js"
+    ],
+    "css": [
+
+    ],
+    "fonts": [
+    ]
+  },
+  "paths": {
+    "js": [
+    ],
+    "css": [
+      "src/sass/**/*.scss"
+    ],
+    "fonts": [
+      "src/fonts/*.{otf,eot,svg,ttf,woff,woff2}"
+    ],
+    "images": [
+      "src/images/**/*.{png,jpg,jpeg,svg,gif}"
+    ],
+    "assets": "./assets",
+    "source": "./src"
+  }
+}
