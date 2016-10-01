@@ -1,0 +1,120 @@
+[
+  {
+    "name": "major",
+    "notes": [
+      {
+        "halfSteps": 0,
+        "interval": 1
+      },
+      {
+        "halfSteps": 4,
+        "interval": 3
+      },
+      {
+        "halfSteps": 7,
+        "interval": 5
+      }
+    ]
+  },
+  {
+    "name": "minor",
+    "notes": [
+      {
+        "halfSteps": 0,
+        "interval": 1
+      },
+      {
+        "halfSteps": 3,
+        "interval": 3
+      },
+      {
+        "halfSteps": 7,
+        "interval": 5
+      }
+    ]
+  },
+  {
+    "name": "major7",
+    "notes": [
+      {
+        "halfSteps": 0,
+        "interval": 1
+      },
+      {
+        "halfSteps": 4,
+        "interval": 3
+      },
+      {
+        "halfSteps": 7,
+        "interval": 5
+      },
+      {
+        "halfSteps": 10,
+        "interval": 7
+      }
+    ]
+  },
+  {
+    "name": "minor7",
+    "notes": [
+      {
+        "halfSteps": 0,
+        "interval": 1
+      },
+      {
+        "halfSteps": 3,
+        "interval": 3
+      },
+      {
+        "halfSteps": 7,
+        "interval": 5
+      },
+      {
+        "halfSteps": 10,
+        "interval": 7
+      }
+    ]
+  },
+  {
+    "name": "maj7",
+    "notes": [
+      {
+        "halfSteps": 0,
+        "interval": 1
+      },
+      {
+        "halfSteps": 4,
+        "interval": 3
+      },
+      {
+        "halfSteps": 7,
+        "interval": 5
+      },
+      {
+        "halfSteps": 11,
+        "interval": 7
+      }
+    ]
+  },
+  {
+    "name": "minor(maj7)",
+    "notes": [
+      {
+        "halfSteps": 0,
+        "interval": 1
+      },
+      {
+        "halfSteps": 3,
+        "interval": 3
+      },
+      {
+        "halfSteps": 7,
+        "interval": 5
+      },
+      {
+        "halfSteps": 11,
+        "interval": 7
+      }
+    ]
+  }
+]
