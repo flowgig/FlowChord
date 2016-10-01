@@ -4,10 +4,39 @@
     <meta charset="UTF-8">
     <title>Chord finder</title>
     <script type="text/javascript" src="/assets/js/main.min.js"></script>
+    <style>
+        body{
+            font-family: Verdana, sans-serif;
+            font-size: 12pt;
+        }
+        .fret{
+            width: 66px;
+            display: inline-block;
+            border: 1px solid #AAA;
+            text-align: center;
+            line-height: 25px
+        }
+    </style>
 </head>
 <body>
 <h1>Chord finder</h1>
 <div id="app">
+    <div class="fretboard">
+        <div v-for="tuner in tuners" class="string">
+            <select v-model="tuner.number" class="tuner string $index">
+                <option v-for="note in notes" v-bind:value="note.number">{{note.name}}</option>
+            </select>
+            <div v-for="fret in 17" class="fret">
+                {{ notes[(fret + tuner.number - 1) % 12].name }}
+
+                <span
+                        v-if="notes[(fret + tuner.number - 1) % 12].interval"
+                        v-bind:class="'marker marker-color-' + notes[(fret + tuner.number - 1) % 12].interval">
+						{{ notes[(fret + tuner.number - 1) % 12].interval }}
+                </span>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
