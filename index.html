@@ -7,8 +7,29 @@
     <link rel="stylesheet" type="text/css" href="assets/css/main.min.css">
     <style>
         body {
-            font-family: Verdana, sans-serif;
+            font-family: Roboto, Verdana, sans-serif;
             font-size: 12pt;
+        }
+
+        select{
+            width: 100%;
+            font-size: 12pt;
+            border: 1px solid #CCC;
+            box-shadow: none;
+            background: #F3F3F3;
+            border-radius: 0;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            padding: 3px 8px;
+        }
+
+        select:hover,
+        select:active,
+        select:focus{
+            cursor: pointer;
+            background-color: #fefefe;
+            outline: none;
         }
 
         .fretboard {
@@ -37,21 +58,20 @@
         }
 
         .keys{
-
+            padding-top: 12px;
         }
 
         .fret {
             width: 50px;
             display: inline-block;
-            border: 1px solid #AAA;
+            border: 1px solid #CCC;
             text-align: center;
             line-height: 25px
         }
 
         .key {
-            width: 16px;
             display: inline-block;
-            border: 1px solid #AAA;
+            border: 1px solid #CCC;
             text-align: center;
             height: 60px;
             font-size: 8pt;
@@ -60,20 +80,42 @@
         }
 
         .key.keycolor-black{
+            width: 18px;
             background-color: #222;
-            color: #FEFEFE;
             height: 40px;
+            position: relative;
+            margin: 0px -10px;
         }
 
         .key.keycolor-white{
+            width: 26px;
             background-color: #FEFEFE;
-            color: #222;
         }
 
         .marker {
             border-radius: 6px;
             padding: 2px 4px;
             color: white;
+        }
+
+        .key .keyname{
+            position: relative;
+            bottom: 14px;
+        }
+
+        .key .marker{
+            position: relative;
+            display: block;
+            margin: auto;
+            width: 8px;
+        }
+
+        .key.keycolor-black .marker{
+            top: 5px;
+        }
+
+        .key.keycolor-white .marker{
+            top: 27px;
         }
 
         .marker-color-1 {
@@ -135,7 +177,7 @@
     <div class="keyboard">
         <div class="keys">
             <div v-for="key in 61" v-bind:class="'key keycolor-' + notes[(key - 1) % 12].keycolor">
-                {{ notes[(key - 1) % 12].name }}
+                <span class="keyname">{{ notes[(key - 1) % 12].name }}</span>
                 <span
                         v-if="notes[(key - 1) % 12].interval"
                         v-bind:class="'marker marker-color-' + notes[(key - 1) % 12].interval">
