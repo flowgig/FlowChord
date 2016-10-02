@@ -11,7 +11,7 @@
             font-size: 12pt;
         }
 
-        select{
+        select {
             width: 100%;
             font-size: 12pt;
             border: 1px solid #CCC;
@@ -26,7 +26,7 @@
 
         select:hover,
         select:active,
-        select:focus{
+        select:focus {
             cursor: pointer;
             background-color: #fefefe;
             outline: none;
@@ -40,7 +40,7 @@
         .tuners {
             position: absolute;
             background-color: #FFF;
-            width: 60px;
+            width: 55px;
         }
 
         .tuner {
@@ -49,7 +49,7 @@
         }
 
         .frets {
-            margin-left: 60px;
+            margin-left: 55px;
         }
 
         .keyboard {
@@ -57,12 +57,12 @@
             overflow-x: auto;
         }
 
-        .keys{
+        .keys {
             padding-top: 12px;
         }
 
         .fret {
-            width: 50px;
+            width: 55px;
             display: inline-block;
             border: 1px solid #CCC;
             text-align: center;
@@ -79,7 +79,7 @@
             white-space: normal;
         }
 
-        .key.keycolor-black{
+        .key.keycolor-black {
             width: 18px;
             background-color: #222;
             height: 40px;
@@ -87,7 +87,7 @@
             margin: 0px -10px;
         }
 
-        .key.keycolor-white{
+        .key.keycolor-white {
             width: 26px;
             background-color: #FEFEFE;
         }
@@ -98,23 +98,23 @@
             color: white;
         }
 
-        .key .keyname{
+        .key .keyname {
             position: relative;
             bottom: 14px;
         }
 
-        .key .marker{
+        .key .marker {
             position: relative;
             display: block;
             margin: auto;
             width: 8px;
         }
 
-        .key.keycolor-black .marker{
+        .key.keycolor-black .marker {
             top: 5px;
         }
 
-        .key.keycolor-white .marker{
+        .key.keycolor-white .marker {
             top: 27px;
         }
 
@@ -149,9 +149,12 @@
         <option v-for="chord in chords" v-bind:value="chord">{{chord.name}}</option>
     </select>
 
-    <h2>Frets</h2>
+    <h2>Guitar</h2>
     <div class="fretboard">
         <div class="tuners">
+            <div class="fret fretnumber">
+                Fretno.
+            </div>
             <div v-for="tuner in tuners" class="tuner">
                 <select v-model="tuner.number" class="string $index">
                     <option v-for="note in notes" v-bind:value="note.number">{{note.name}}</option>
@@ -159,6 +162,9 @@
             </div>
         </div>
         <div class="frets">
+            <div v-for="fret in 22" class="fret fretnumber">
+                {{ fret }}
+            </div>
             <div v-for="tuner in tuners" class="string">
                 <div v-for="fret in 22" class="fret">
                     {{ notes[(fret + tuner.number - 1) % 12].name }}
@@ -176,12 +182,12 @@
     <h2>Keyboard</h2>
     <div class="keyboard">
         <div class="keys">
-            <div v-for="key in 61" v-bind:class="'key keycolor-' + notes[(key - 1) % 12].keycolor">
-                <span class="keyname">{{ notes[(key - 1) % 12].name }}</span>
+            <div v-for="key in 88" v-bind:class="'key keycolor-' + notes[(key + 8) % 12].keycolor">
+                <span class="keyname">{{ notes[(key + 8) % 12].name }}</span>
                 <span
-                        v-if="notes[(key - 1) % 12].interval"
-                        v-bind:class="'marker marker-color-' + notes[(key - 1) % 12].interval">
-						{{ notes[(key - 1) % 12].interval }}
+                        v-if="notes[(key + 8) % 12].interval"
+                        v-bind:class="'marker marker-color-' + notes[(key + 8) % 12].interval">
+						{{ notes[(key + 8) % 12].interval }}
                 </span>
             </div>
         </div>
