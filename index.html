@@ -163,7 +163,7 @@
         </div>
         <div class="frets">
             <div v-for="fret in 22" class="fret fretnumber">
-                {{ fret }}
+                {{ fret - 1 }}
             </div>
             <div v-for="tuner in tuners" class="string">
                 <div v-for="fret in 22" class="fret">
