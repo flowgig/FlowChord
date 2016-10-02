@@ -1,6 +1,7 @@
 {
   "vendorPaths": {
     "js": [
+      "node_modules/jquery/dist/jquery.min.js",
       "node_modules/vue/dist/vue.min.js"
     ],
     "css": [
@@ -14,6 +15,7 @@
   },
   "paths": {
     "js": [
+      "src/js/jquery.min.js",
       "src/js/vue.min.js",
       "src/js/functions.js"
     ],
