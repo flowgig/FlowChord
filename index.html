@@ -19,7 +19,7 @@
         .tuners {
             position: absolute;
             background-color: #FFF;
-            width: 80px;
+            width: 60px;
         }
 
         .tuner {
@@ -28,15 +28,46 @@
         }
 
         .frets {
-            margin-left: 80px;
+            margin-left: 60px;
+        }
+
+        .keyboard {
+            white-space: nowrap;
+            overflow-x: auto;
+        }
+
+        .keys{
+
         }
 
         .fret {
-            width: 66px;
+            width: 50px;
             display: inline-block;
             border: 1px solid #AAA;
             text-align: center;
             line-height: 25px
+        }
+
+        .key {
+            width: 16px;
+            display: inline-block;
+            border: 1px solid #AAA;
+            text-align: center;
+            height: 60px;
+            font-size: 8pt;
+            vertical-align: top;
+            white-space: normal;
+        }
+
+        .key.keycolor-black{
+            background-color: #222;
+            color: #FEFEFE;
+            height: 40px;
+        }
+
+        .key.keycolor-white{
+            background-color: #FEFEFE;
+            color: #222;
         }
 
         .marker {
@@ -76,6 +107,7 @@
         <option v-for="chord in chords" v-bind:value="chord">{{chord.name}}</option>
     </select>
 
+    <h2>Frets</h2>
     <div class="fretboard">
         <div class="tuners">
             <div v-for="tuner in tuners" class="tuner">
@@ -86,7 +118,7 @@
         </div>
         <div class="frets">
             <div v-for="tuner in tuners" class="string">
-                <div v-for="fret in 17" class="fret">
+                <div v-for="fret in 22" class="fret">
                     {{ notes[(fret + tuner.number - 1) % 12].name }}
 
                     <span
@@ -99,6 +131,20 @@
         </div>
     </div>
 
+    <h2>Keyboard</h2>
+    <div class="keyboard">
+        <div class="keys">
+            <div v-for="key in 61" v-bind:class="'key keycolor-' + notes[(key - 1) % 12].keycolor">
+                {{ notes[(key - 1) % 12].name }}
+                <span
+                        v-if="notes[(key - 1) % 12].interval"
+                        v-bind:class="'marker marker-color-' + notes[(key - 1) % 12].interval">
+						{{ notes[(key - 1) % 12].interval }}
+                </span>
+            </div>
+        </div>
+    </div>
+
 
 </div>
 
@@ -107,18 +153,18 @@
         el: '#app',
         data: {
             notes: [
-                {"number": 0, "name": "C", "interval": ""},
-                {"number": 1, "name": "C#", "interval": ""},
-                {"number": 2, "name": "D", "interval": ""},
-                {"number": 3, "name": "D#", "interval": ""},
-                {"number": 4, "name": "E", "interval": ""},
-                {"number": 5, "name": "F", "interval": ""},
-                {"number": 6, "name": "F#", "interval": ""},
-                {"number": 7, "name": "G", "interval": ""},
-                {"number": 8, "name": "G#", "interval": ""},
-                {"number": 9, "name": "A", "interval": ""},
-                {"number": 10, "name": "A#", "interval": ""},
-                {"number": 11, "name": "B", "interval": ""}
+                {"number": 0, "name": "C", "interval": "", "keycolor": "white"},
+                {"number": 1, "name": "C#", "interval": "", "keycolor": "black"},
+                {"number": 2, "name": "D", "interval": "", "keycolor": "white"},
+                {"number": 3, "name": "D#", "interval": "", "keycolor": "black"},
+                {"number": 4, "name": "E", "interval": "", "keycolor": "white"},
+                {"number": 5, "name": "F", "interval": "", "keycolor": "white"},
+                {"number": 6, "name": "F#", "interval": "", "keycolor": "black"},
+                {"number": 7, "name": "G", "interval": "", "keycolor": "white"},
+                {"number": 8, "name": "G#", "interval": "", "keycolor": "black"},
+                {"number": 9, "name": "A", "interval": "", "keycolor": "white"},
+                {"number": 10, "name": "A#", "interval": "", "keycolor": "black"},
+                {"number": 11, "name": "B", "interval": "", "keycolor": "white"}
             ],
             chords: "",
             selectedChord: "",
