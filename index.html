@@ -11,6 +11,26 @@
             font-size: 12pt;
         }
 
+        .fretboard {
+            white-space: nowrap;
+            overflow-x: auto;
+        }
+
+        .tuners {
+            position: absolute;
+            background-color: #FFF;
+            width: 80px;
+        }
+
+        .tuner {
+            line-height: 25px;
+            border: 1px solid #AAA;
+        }
+
+        .frets {
+            margin-left: 80px;
+        }
+
         .fret {
             width: 66px;
             display: inline-block;
@@ -18,21 +38,26 @@
             text-align: center;
             line-height: 25px
         }
-        .marker{
+
+        .marker {
             border-radius: 6px;
             padding: 2px 4px;
             color: white;
         }
-        .marker-color-1{
+
+        .marker-color-1 {
             background-color: #D32F2F;
         }
-        .marker-color-3{
+
+        .marker-color-3 {
             background-color: #1976D2;
         }
-        .marker-color-5{
+
+        .marker-color-5 {
             background-color: #388E3C;
         }
-        .marker-color-7{
+
+        .marker-color-7 {
             background-color: #0097A7;
         }
     </style>
@@ -41,30 +66,40 @@
 <h1>Chord finder</h1>
 <div id="app">
 
-    <div class="fretboard">
-        <div v-for="tuner in tuners" class="string">
-            <select v-model="tuner.number" class="tuner string $index">
-                <option v-for="note in notes" v-bind:value="note.number">{{note.name}}</option>
-            </select>
-            <div v-for="fret in 17" class="fret">
-                {{ notes[(fret + tuner.number - 1) % 12].name }}
+    <label for="selectKey">Select key</label>
+    <select v-model="selectedKey" id="selectKey" v-on:change="setActiveNotes">
+        <option v-for="note in notes" v-bind:value="note.number">{{note.name}}</option>
+    </select>
 
-                <span
-                        v-if="notes[(fret + tuner.number - 1) % 12].interval"
-                        v-bind:class="'marker marker-color-' + notes[(fret + tuner.number - 1) % 12].interval">
+    <label for="selectChord">Select chord</label>
+    <select v-model="selectedChord" id="selectChord" v-on:change="setActiveNotes">
+        <option v-for="chord in chords" v-bind:value="chord">{{chord.name}}</option>
+    </select>
+
+    <div class="fretboard">
+        <div class="tuners">
+            <div v-for="tuner in tuners" class="tuner">
+                <select v-model="tuner.number" class="string $index">
+                    <option v-for="note in notes" v-bind:value="note.number">{{note.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="frets">
+            <div v-for="tuner in tuners" class="string">
+                <div v-for="fret in 17" class="fret">
+                    {{ notes[(fret + tuner.number - 1) % 12].name }}
+
+                    <span
+                            v-if="notes[(fret + tuner.number - 1) % 12].interval"
+                            v-bind:class="'marker marker-color-' + notes[(fret + tuner.number - 1) % 12].interval">
 						{{ notes[(fret + tuner.number - 1) % 12].interval }}
                 </span>
+                </div>
             </div>
         </div>
     </div>
 
-    <p>Chose a chord:</p>
-    <select v-model="selectedKey" v-on:change="setActiveNotes">
-        <option v-for="note in notes" v-bind:value="note.number">{{note.name}}</option>
-    </select>
-    <select v-model="selectedChord" v-on:change="setActiveNotes">
-        <option v-for="chord in chords" v-bind:value="chord">{{chord.name}}</option>
-    </select>
+
 </div>
 
 <script>
