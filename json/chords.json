@@ -34,7 +34,7 @@
     ]
   },
   {
-    "name": "major7",
+    "name": "7",
     "notes": [
       {
         "halfSteps": 0,
@@ -55,7 +55,7 @@
     ]
   },
   {
-    "name": "minor7",
+    "name": "m7",
     "notes": [
       {
         "halfSteps": 0,
@@ -72,6 +72,48 @@
       {
         "halfSteps": 10,
         "interval": 7
+      }
+    ]
+  },
+  {
+    "name": "6",
+    "notes": [
+      {
+        "halfSteps": 0,
+        "interval": 1
+      },
+      {
+        "halfSteps": 4,
+        "interval": 3
+      },
+      {
+        "halfSteps": 7,
+        "interval": 5
+      },
+      {
+        "halfSteps": 9,
+        "interval": 6
+      }
+    ]
+  },
+  {
+    "name": "m6",
+    "notes": [
+      {
+        "halfSteps": 0,
+        "interval": 1
+      },
+      {
+        "halfSteps": 3,
+        "interval": 3
+      },
+      {
+        "halfSteps": 7,
+        "interval": 5
+      },
+      {
+        "halfSteps": 9,
+        "interval": 6
       }
     ]
   },
@@ -97,7 +139,7 @@
     ]
   },
   {
-    "name": "minor(maj7)",
+    "name": "m(maj7)",
     "notes": [
       {
         "halfSteps": 0,
@@ -114,6 +156,338 @@
       {
         "halfSteps": 11,
         "interval": 7
+      }
+    ]
+  },
+  {
+    "name": "add9",
+    "notes": [
+      {
+        "halfSteps": 0,
+        "interval": 1
+      },
+      {
+        "halfSteps": 4,
+        "interval": 3
+      },
+      {
+        "halfSteps": 7,
+        "interval": 5
+      },
+      {
+        "halfSteps": 14,
+        "interval": 9
+      }
+    ]
+  },
+  {
+    "name": "m(add9)",
+    "notes": [
+      {
+        "halfSteps": 0,
+        "interval": 1
+      },
+      {
+        "halfSteps": 3,
+        "interval": 3
+      },
+      {
+        "halfSteps": 7,
+        "interval": 5
+      },
+      {
+        "halfSteps": 14,
+        "interval": 9
+      }
+    ]
+  },
+  {
+    "name": "maj9",
+    "notes": [
+      {
+        "halfSteps": 0,
+        "interval": 1
+      },
+      {
+        "halfSteps": 4,
+        "interval": 3
+      },
+      {
+        "halfSteps": 7,
+        "interval": 5
+      },
+      {
+        "halfSteps": 11,
+        "interval": 7
+      },
+      {
+        "halfSteps": 14,
+        "interval": 9
+      }
+    ]
+  },
+  {
+    "name": "m(maj9)",
+    "notes": [
+      {
+        "halfSteps": 0,
+        "interval": 1
+      },
+      {
+        "halfSteps": 3,
+        "interval": 3
+      },
+      {
+        "halfSteps": 7,
+        "interval": 5
+      },
+      {
+        "halfSteps": 11,
+        "interval": 7
+      },
+      {
+        "halfSteps": 14,
+        "interval": 9
+      }
+    ]
+  },
+  {
+    "name": "maj11",
+    "notes": [
+      {
+        "halfSteps": 0,
+        "interval": 1
+      },
+      {
+        "halfSteps": 4,
+        "interval": 3
+      },
+      {
+        "halfSteps": 7,
+        "interval": 5
+      },
+      {
+        "halfSteps": 11,
+        "interval": 7
+      },
+      {
+        "halfSteps": 14,
+        "interval": 9
+      },
+      {
+        "halfSteps": 17,
+        "interval": 11
+      }
+    ]
+  },
+  {
+    "name": "m(maj11)",
+    "notes": [
+      {
+        "halfSteps": 0,
+        "interval": 1
+      },
+      {
+        "halfSteps": 3,
+        "interval": 3
+      },
+      {
+        "halfSteps": 7,
+        "interval": 5
+      },
+      {
+        "halfSteps": 11,
+        "interval": 7
+      },
+      {
+        "halfSteps": 14,
+        "interval": 9
+      },
+      {
+        "halfSteps": 17,
+        "interval": 11
+      }
+    ]
+  },
+  {
+    "name": "maj13",
+    "notes": [
+      {
+        "halfSteps": 0,
+        "interval": 1
+      },
+      {
+        "halfSteps": 4,
+        "interval": 3
+      },
+      {
+        "halfSteps": 7,
+        "interval": 5
+      },
+      {
+        "halfSteps": 11,
+        "interval": 7
+      },
+      {
+        "halfSteps": 14,
+        "interval": 9
+      },
+      {
+        "halfSteps": 21,
+        "interval": 13
+      }
+    ]
+  },
+  {
+    "name": "m(maj13)",
+    "notes": [
+      {
+        "halfSteps": 0,
+        "interval": 1
+      },
+      {
+        "halfSteps": 3,
+        "interval": 3
+      },
+      {
+        "halfSteps": 7,
+        "interval": 5
+      },
+      {
+        "halfSteps": 11,
+        "interval": 7
+      },
+      {
+        "halfSteps": 14,
+        "interval": 9
+      },
+      {
+        "halfSteps": 21,
+        "interval": 13
+      }
+    ]
+  },
+  {
+  "name": "maj9(#11)",
+  "notes": [
+    {
+      "halfSteps": 0,
+      "interval": 1
+    },
+    {
+      "halfSteps": 4,
+      "interval": 3
+    },
+    {
+      "halfSteps": 7,
+      "interval": 5
+    },
+    {
+      "halfSteps": 11,
+      "interval": 7
+    },
+    {
+      "halfSteps": 14,
+      "interval": 9
+    },
+    {
+      "halfSteps": 18,
+      "interval": 11
+    }
+  ]
+},
+  {
+    "name": "m(maj9)(#11)",
+    "notes": [
+      {
+        "halfSteps": 0,
+        "interval": 1
+      },
+      {
+        "halfSteps": 3,
+        "interval": 3
+      },
+      {
+        "halfSteps": 7,
+        "interval": 5
+      },
+      {
+        "halfSteps": 11,
+        "interval": 7
+      },
+      {
+        "halfSteps": 14,
+        "interval": 9
+      },
+      {
+        "halfSteps": 18,
+        "interval": 11
+      }
+    ]
+  },
+  {
+    "name": "maj13(#11)",
+    "notes": [
+      {
+        "halfSteps": 0,
+        "interval": 1
+      },
+      {
+        "halfSteps": 4,
+        "interval": 3
+      },
+      {
+        "halfSteps": 7,
+        "interval": 5
+      },
+      {
+        "halfSteps": 11,
+        "interval": 7
+      },
+      {
+        "halfSteps": 14,
+        "interval": 9
+      },
+      {
+        "halfSteps": 18,
+        "interval": 11
+      },
+      {
+        "halfSteps": 21,
+        "interval": 13
+      }
+    ]
+  },
+  {
+    "name": "m(maj13)(#11)",
+    "notes": [
+      {
+        "halfSteps": 0,
+        "interval": 1
+      },
+      {
+        "halfSteps": 3,
+        "interval": 3
+      },
+      {
+        "halfSteps": 7,
+        "interval": 5
+      },
+      {
+        "halfSteps": 11,
+        "interval": 7
+      },
+      {
+        "halfSteps": 14,
+        "interval": 9
+      },
+      {
+        "halfSteps": 18,
+        "interval": 11
+      },
+      {
+        "halfSteps": 21,
+        "interval": 13
       }
     ]
   }
