@@ -4,9 +4,11 @@
       "node_modules/vue/dist/vue.min.js"
     ],
     "css": [
+      "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
       "node_modules/font-awesome/css/font-awesome.css"
     ],
     "fonts": [
+      "node_modules/roboto-fontface/fonts/Roboto/*.{otf,eot,svg,ttf,woff,woff2}",
       "node_modules/font-awesome/fonts/*.{otf,eot,svg,ttf,woff,woff2}"
     ]
   },
