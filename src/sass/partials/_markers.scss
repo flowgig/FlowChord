@@ -1,0 +1,56 @@
+.marker {
+  border-radius: 6px;
+  padding: 2px 4px;
+  color: white;
+  &.marker-color-1 {
+    background-color: #D32F2F;
+  }
+
+  &.marker-color-3 {
+    background-color: #1976D2;
+  }
+
+  &.marker-color-5 {
+    background-color: #388E3C;
+  }
+
+  &.marker-color-6 {
+    background-color: #00796B;
+  }
+
+  &.marker-color-7 {
+    background-color: #0097A7;
+  }
+
+  &.marker-color-9 {
+    background-color: #C2185B;
+  }
+
+  &.marker-color-11 {
+    background-color: #E64A19;
+  }
+
+  &.marker-color-13 {
+    background-color: #512DA8;
+  }
+}
+
+.key {
+  &.keycolor-black {
+    .marker {
+      top: 5px;
+    }
+  }
+  &.keycolor-white {
+    .marker {
+      top: 27px;
+    }
+  }
+  .marker {
+    position: relative;
+    display: block;
+    margin: auto;
+    width: 8px;
+  }
+}
+

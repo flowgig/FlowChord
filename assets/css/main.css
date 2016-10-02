@@ -2336,3 +2336,36 @@
   font-family: 'Roboto-BlackItalic';
   src: url("../../fonts/Roboto/Roboto-BlackItalic.eot");
   src: local("Roboto BlackItalic"), local("Roboto-BlackItalic"), url("../../fonts/Roboto/Roboto-BlackItalic.eot?#iefix") format("embedded-opentype"), url("../../fonts/Roboto/Roboto-BlackItalic.woff2") format("woff2"), url("../../fonts/Roboto/Roboto-BlackItalic.woff") format("woff"), url("../../fonts/Roboto/Roboto-BlackItalic.ttf") format("truetype"), url("../../fonts/Roboto/Roboto-BlackItalic.svg#Roboto") format("svg"); }
+
+.marker {
+  border-radius: 6px;
+  padding: 2px 4px;
+  color: white; }
+  .marker.marker-color-1 {
+    background-color: #D32F2F; }
+  .marker.marker-color-3 {
+    background-color: #1976D2; }
+  .marker.marker-color-5 {
+    background-color: #388E3C; }
+  .marker.marker-color-6 {
+    background-color: #00796B; }
+  .marker.marker-color-7 {
+    background-color: #0097A7; }
+  .marker.marker-color-9 {
+    background-color: #C2185B; }
+  .marker.marker-color-11 {
+    background-color: #E64A19; }
+  .marker.marker-color-13 {
+    background-color: #512DA8; }
+
+.key.keycolor-black .marker {
+  top: 5px; }
+
+.key.keycolor-white .marker {
+  top: 27px; }
+
+.key .marker {
+  position: relative;
+  display: block;
+  margin: auto;
+  width: 8px; }
