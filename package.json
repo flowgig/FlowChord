@@ -18,15 +18,12 @@
   "homepage": "https://github.com/benjamindehli/chord-finder-app-test#readme",
   "devDependencies": {
     "del": "^2.2.2",
-    "font-awesome": "^4.6.3",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
     "gulp-cssnano": "^2.1.2",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.3.2",
     "gulp-uglify": "^2.0.0",
-    "jquery": "^3.1.1",
-    "roboto-fontface": "^0.6.0",
     "vue": "^2.0.1"
   }
 }

@@ -7,58 +7,58 @@
     <link rel="stylesheet" type="text/css" href="assets/css/main.min.css">
     <style>
         body {
-            font-family: Roboto, Verdana, sans-serif;
-            font-size: 12pt;
         }
 
-        select {
-            width: 100%;
-            font-size: 12pt;
-            border: 1px solid #CCC;
-            box-shadow: none;
-            background: #F3F3F3;
-            border-radius: 0;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            padding: 3px 8px;
-        }
+        /*  select {
+              width: 100%;
+              font-size: 12pt;
+              border: 1px solid #CCC;
+              box-shadow: none;
+              background: #F3F3F3;
+              border-radius: 0;
+              -webkit-appearance: none;
+              -moz-appearance: none;
+              appearance: none;
+              padding: 3px 8px;
+          }
 
-        select:hover,
-        select:active,
-        select:focus {
-            cursor: pointer;
-            background-color: #fefefe;
-            outline: none;
-        }
-
+          select:hover,
+          select:active,
+          select:focus {
+              cursor: pointer;
+              background-color: #fefefe;
+              outline: none;
+          }
+  */
         .fretboard {
-            white-space: nowrap;
-            overflow-x: auto;
+            position: relative;
         }
 
-        .tuners {
+        .fretboard .tuners {
             position: absolute;
             background-color: #FFF;
             width: 55px;
         }
 
-        .tuner {
+        .fretboard .tuner {
             line-height: 25px;
             border: 1px solid #AAA;
         }
 
-        .frets {
+        .fretboard .frets {
             margin-left: 55px;
-        }
-
-        .keyboard {
             white-space: nowrap;
             overflow-x: auto;
         }
 
-        .keys {
+        .keyboard {
+
+        }
+
+        .keyboard .keys {
             padding-top: 12px;
+            white-space: nowrap;
+            overflow-x: auto;
         }
 
         .fret {
@@ -92,121 +92,127 @@
             background-color: #FEFEFE;
         }
 
-        .marker {
-            border-radius: 6px;
-            padding: 2px 4px;
-            color: white;
-        }
-
         .key .keyname {
             position: relative;
             bottom: 14px;
         }
-
-        .key .marker {
-            position: relative;
-            display: block;
-            margin: auto;
-            width: 8px;
-        }
-
-        .key.keycolor-black .marker {
-            top: 5px;
-        }
-
-        .key.keycolor-white .marker {
-            top: 27px;
-        }
-
-        .marker-color-1 {
-            background-color: #D32F2F;
-        }
-
-        .marker-color-3 {
-            background-color: #1976D2;
-        }
-
-        .marker-color-5 {
-            background-color: #388E3C;
-        }
-
-        .marker-color-6 {
-            background-color: #00796B;
-        }
-
-        .marker-color-7 {
-            background-color: #0097A7;
-        }
-        .marker-color-9 {
-            background-color: #C2185B;
-        }
-        .marker-color-11 {
-            background-color: #E64A19;
-        }
-        .marker-color-13 {
-            background-color: #512DA8;
-        }
     </style>
 </head>
 <body>
-<h1>Chord finder</h1>
-<div id="app">
+<nav class="navbar navbar-dark z-2">
+    <a class="sidenav-toggle hide-big"><i class="sidenav-toggle-logo fa fa-bars"></i></a>
+    <a class="logo" href="/dashboard">
+        <!--<img src="" alt="App logo">-->
+    </a>
+    <span class="menu-divider hide-xsmall"></span>
+    <span class="hide-big hide-xsmall navbar-page-title"> Chord finder</span>
 
-    <label for="selectKey">Select key</label>
-    <select v-model="selectedKey" id="selectKey" v-on:change="setActiveNotes">
-        <option v-for="note in notes" v-bind:value="note.number">{{note.name}}</option>
-    </select>
-
-    <label for="selectChord">Select chord</label>
-    <select v-model="selectedChord" id="selectChord" v-on:change="setActiveNotes">
-        <option v-for="chord in chords" v-bind:value="chord">{{chord.name}}</option>
-    </select>
-
-    <h2>Guitar</h2>
-    <div class="fretboard">
-        <div class="tuners">
-            <div class="fret fretnumber">
-                Fretno.
-            </div>
-            <div v-for="tuner in tuners" class="tuner">
-                <select v-model="tuner.number" class="string $index">
-                    <option v-for="note in notes" v-bind:value="note.number">{{note.name}}</option>
-                </select>
-            </div>
+    <div class="main-menu hide-medium hide-small hide-xsmall">
+        <div class="menu-link">
+            <ul class="">
+                <li>
+                    <a href="#" class="content-toggle active" data-content-id="guitar"><span class="icon fa fa-music"></span> Guitar</a>
+                </li>
+                <li>
+                    <a href="#" class="content-toggle active" data-content-id="keyboard"><span class="icon fa fa-music"></span> Keyboard</a>
+                </li>
+            </ul>
         </div>
-        <div class="frets">
-            <div v-for="fret in 22" class="fret fretnumber">
-                {{ fret - 1 }}
-            </div>
-            <div v-for="tuner in tuners" class="string">
-                <div v-for="fret in 22" class="fret">
-                    {{ notes[(fret + tuner.number - 1) % 12].name }}
+    </div>
+</nav>
 
-                    <span
-                            v-if="notes[(fret + tuner.number - 1) % 12].interval"
-                            v-bind:class="'marker marker-color-' + notes[(fret + tuner.number - 1) % 12].interval">
+<div class="left-menu no-padding">
+    <div>
+        <div class="sidenav-logo">
+            <a class="sidenav-toggle">
+                <img src="/" alt="App logo">
+                <i class="fa fa-angle-left float-right"></i>
+                <span class="clearfix"></span>
+            </a>
+        </div>
+        <ul class="">
+            <li>
+                <a href="#" class="content-toggle active" data-content-id="guitar"><span class="icon fa fa-music"></span> Guitar</a>
+            </li>
+            <li>
+                <a href="#" class="content-toggle active" data-content-id="keyboard"><span class="icon fa fa-music"></span> Keyboard</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<div class="main-content">
+    <div class="container">
+        <div class="content">
+            <div class="box">
+                <div class="content">
+                    <h1>Chord finder</h1>
+                    <div id="app">
+                        <div class="input-group">
+                            <select v-model="selectedKey" id="selectKey" v-on:change="setActiveNotes">
+                                <option v-for="note in notes" v-bind:value="note.number">{{note.name}}</option>
+                            </select>
+                            <label for="selectKey">Select key</label>
+                        </div>
+                        <div class="input-group">
+                            <select v-model="selectedChord" id="selectChord" v-on:change="setActiveNotes">
+                                <option v-for="chord in chords" v-bind:value="chord">{{chord.name}}</option>
+                            </select>
+                            <label for="selectChord">Select chord</label>
+                        </div>
+
+                        <div id="guitar" class="active">
+                            <h2>Guitar</h2>
+                            <div class="fretboard">
+                                <div class="tuners">
+                                    <div class="fret fretnumber">
+                                        Fretno.
+                                    </div>
+                                    <div v-for="tuner in tuners" class="tuner">
+                                        <select v-model="tuner.number" class="string $index">
+                                            <option v-for="note in notes" v-bind:value="note.number">{{note.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="frets">
+                                    <div v-for="fret in 22" class="fret fretnumber">
+                                        {{ fret - 1 }}
+                                    </div>
+                                    <div v-for="tuner in tuners" class="string">
+                                        <div v-for="fret in 22" class="fret">
+                                            {{ notes[(fret + tuner.number - 1) % 12].name }}
+
+                                            <span
+                                                    v-if="notes[(fret + tuner.number - 1) % 12].interval"
+                                                    v-bind:class="'marker marker-color-' + notes[(fret + tuner.number - 1) % 12].interval">
 						{{ notes[(fret + tuner.number - 1) % 12].interval }}
                 </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div id="keyboard" class="keyboard active">
+                            <h2>Keyboard</h2>
+                            <div class="keys">
+                                <div v-for="key in 88" v-bind:class="'key keycolor-' + notes[(key + 8) % 12].keycolor">
+                                    <span class="keyname">{{ notes[(key + 8) % 12].name }}</span>
+                                    <span
+                                            v-if="notes[(key + 8) % 12].interval"
+                                            v-bind:class="'marker marker-color-' + notes[(key + 8) % 12].interval">
+						{{ notes[(key + 8) % 12].interval }}
+                </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <h2>Keyboard</h2>
-    <div class="keyboard">
-        <div class="keys">
-            <div v-for="key in 88" v-bind:class="'key keycolor-' + notes[(key + 8) % 12].keycolor">
-                <span class="keyname">{{ notes[(key + 8) % 12].name }}</span>
-                <span
-                        v-if="notes[(key + 8) % 12].interval"
-                        v-bind:class="'marker marker-color-' + notes[(key + 8) % 12].interval">
-						{{ notes[(key + 8) % 12].interval }}
-                </span>
-            </div>
-        </div>
-    </div>
-
-
 </div>
 
 <script>
@@ -260,6 +266,24 @@
         },
         computed: {}
     })
+
+    /* Help texts */
+    $("document").ready(function () {
+        $(".content-toggle").click(function (event) {
+            event.preventDefault();
+            var toggleButton = $(this);
+            var contentId = $(this).data("content-id");
+            $("#" + contentId).toggle();
+            if ($("#" + contentId).hasClass('active')) {
+                $("#" + contentId).removeClass('active');
+                toggleButton.removeClass('active');
+            } else {
+                $("#" + contentId).addClass('active');
+                toggleButton.addClass('active');
+            }
+        });
+    });
+
 </script>
 </body>
 </html>

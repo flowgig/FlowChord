@@ -1,0 +1,16 @@
+.main-nav ul {
+  display: block;
+  list-style: none;
+}
+
+.main-nav ul li {
+  display: inline-block;
+}
+
+.content-toggle:hover {
+  cursor: pointer;
+}
+
+.content-toggle.active {
+  background-color: #388E3C;
+}
