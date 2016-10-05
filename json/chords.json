@@ -34,6 +34,48 @@
     ]
   },
   {
+    "name": "6",
+    "notes": [
+      {
+        "halfSteps": 0,
+        "interval": 1
+      },
+      {
+        "halfSteps": 4,
+        "interval": 3
+      },
+      {
+        "halfSteps": 7,
+        "interval": 5
+      },
+      {
+        "halfSteps": 9,
+        "interval": 6
+      }
+    ]
+  },
+  {
+    "name": "m6",
+    "notes": [
+      {
+        "halfSteps": 0,
+        "interval": 1
+      },
+      {
+        "halfSteps": 3,
+        "interval": 3
+      },
+      {
+        "halfSteps": 7,
+        "interval": 5
+      },
+      {
+        "halfSteps": 9,
+        "interval": 6
+      }
+    ]
+  },
+  {
     "name": "7",
     "notes": [
       {
@@ -76,7 +118,7 @@
     ]
   },
   {
-    "name": "6",
+    "name": "9",
     "notes": [
       {
         "halfSteps": 0,
@@ -91,13 +133,17 @@
         "interval": 5
       },
       {
-        "halfSteps": 9,
-        "interval": 6
+        "halfSteps": 10,
+        "interval": 7
+      },
+      {
+        "halfSteps": 14,
+        "interval": 9
       }
     ]
   },
   {
-    "name": "m6",
+    "name": "m9",
     "notes": [
       {
         "halfSteps": 0,
@@ -112,8 +158,128 @@
         "interval": 5
       },
       {
-        "halfSteps": 9,
-        "interval": 6
+        "halfSteps": 10,
+        "interval": 7
+      },
+      {
+        "halfSteps": 14,
+        "interval": 9
+      }
+    ]
+  },
+  {
+    "name": "11",
+    "notes": [
+      {
+        "halfSteps": 0,
+        "interval": 1
+      },
+      {
+        "halfSteps": 4,
+        "interval": 3
+      },
+      {
+        "halfSteps": 7,
+        "interval": 5
+      },
+      {
+        "halfSteps": 10,
+        "interval": 7
+      },
+      {
+        "halfSteps": 14,
+        "interval": 9
+      },
+      {
+        "halfSteps": 17,
+        "interval": 11
+      }
+    ]
+  },
+  {
+    "name": "m11",
+    "notes": [
+      {
+        "halfSteps": 0,
+        "interval": 1
+      },
+      {
+        "halfSteps": 3,
+        "interval": 3
+      },
+      {
+        "halfSteps": 7,
+        "interval": 5
+      },
+      {
+        "halfSteps": 10,
+        "interval": 7
+      },
+      {
+        "halfSteps": 14,
+        "interval": 9
+      },
+      {
+        "halfSteps": 17,
+        "interval": 11
+      }
+    ]
+  },
+  {
+    "name": "13",
+    "notes": [
+      {
+        "halfSteps": 0,
+        "interval": 1
+      },
+      {
+        "halfSteps": 4,
+        "interval": 3
+      },
+      {
+        "halfSteps": 7,
+        "interval": 5
+      },
+      {
+        "halfSteps": 10,
+        "interval": 7
+      },
+      {
+        "halfSteps": 14,
+        "interval": 9
+      },
+      {
+        "halfSteps": 21,
+        "interval": 13
+      }
+    ]
+  },
+  {
+    "name": "m13",
+    "notes": [
+      {
+        "halfSteps": 0,
+        "interval": 1
+      },
+      {
+        "halfSteps": 3,
+        "interval": 3
+      },
+      {
+        "halfSteps": 7,
+        "interval": 5
+      },
+      {
+        "halfSteps": 10,
+        "interval": 7
+      },
+      {
+        "halfSteps": 14,
+        "interval": 9
+      },
+      {
+        "halfSteps": 21,
+        "interval": 13
       }
     ]
   },
@@ -160,6 +326,90 @@
     ]
   },
   {
+    "name": "maj7(b5)",
+    "notes": [
+      {
+        "halfSteps": 0,
+        "interval": 1
+      },
+      {
+        "halfSteps": 4,
+        "interval": 3
+      },
+      {
+        "halfSteps": 6,
+        "interval": 5
+      },
+      {
+        "halfSteps": 11,
+        "interval": 7
+      }
+    ]
+  },
+  {
+    "name": "m(maj7)(b5)",
+    "notes": [
+      {
+        "halfSteps": 0,
+        "interval": 1
+      },
+      {
+        "halfSteps": 3,
+        "interval": 3
+      },
+      {
+        "halfSteps": 6,
+        "interval": 5
+      },
+      {
+        "halfSteps": 11,
+        "interval": 7
+      }
+    ]
+  },
+  {
+    "name": "maj7(#5)",
+    "notes": [
+      {
+        "halfSteps": 0,
+        "interval": 1
+      },
+      {
+        "halfSteps": 4,
+        "interval": 3
+      },
+      {
+        "halfSteps": 8,
+        "interval": 5
+      },
+      {
+        "halfSteps": 11,
+        "interval": 7
+      }
+    ]
+  },
+  {
+    "name": "m(maj7)(#5)",
+    "notes": [
+      {
+        "halfSteps": 0,
+        "interval": 1
+      },
+      {
+        "halfSteps": 3,
+        "interval": 3
+      },
+      {
+        "halfSteps": 8,
+        "interval": 5
+      },
+      {
+        "halfSteps": 11,
+        "interval": 7
+      }
+    ]
+  },
+  {
     "name": "add9",
     "notes": [
       {
@@ -194,6 +444,56 @@
       {
         "halfSteps": 7,
         "interval": 5
+      },
+      {
+        "halfSteps": 14,
+        "interval": 9
+      }
+    ]
+  },
+  {
+    "name": "6add9",
+    "notes": [
+      {
+        "halfSteps": 0,
+        "interval": 1
+      },
+      {
+        "halfSteps": 4,
+        "interval": 3
+      },
+      {
+        "halfSteps": 7,
+        "interval": 5
+      },
+      {
+        "halfSteps": 9,
+        "interval": 6
+      },
+      {
+        "halfSteps": 14,
+        "interval": 9
+      }
+    ]
+  },
+  {
+    "name": "m(6add9)",
+    "notes": [
+      {
+        "halfSteps": 0,
+        "interval": 1
+      },
+      {
+        "halfSteps": 3,
+        "interval": 3
+      },
+      {
+        "halfSteps": 7,
+        "interval": 5
+      },
+      {
+        "halfSteps": 9,
+        "interval": 6
       },
       {
         "halfSteps": 14,
