@@ -16,6 +16,6 @@
     "tests"
   ],
   "devDependencies": {
-    "simple-gui-template": "^0.1.82"
+    "simple-gui-template": "^0.1.88"
   }
 }
