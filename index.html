@@ -169,18 +169,19 @@
                 <div class="box">
                     <div class="content">
                         <h1>Chord finder</h1>
-
-                        <div class="input-group">
-                            <select v-model="selectedKey" id="selectKey" v-on:change="setActiveNotes">
-                                <option v-for="note in notes" v-bind:value="note.number">{{note.name}}</option>
-                            </select>
-                            <label for="selectKey">Select key</label>
-                        </div>
-                        <div class="input-group">
-                            <select v-model="selectedChord" id="selectChord" v-on:change="setActiveNotes">
-                                <option v-for="chord in chords" v-bind:value="chord">{{chord.name}}</option>
-                            </select>
-                            <label for="selectChord">Select chord</label>
+                        <div class="row">
+                            <div class="input-group col-sm-6">
+                                <select v-model="selectedKey" id="selectKey" v-on:change="setActiveNotes">
+                                    <option v-for="note in notes" v-bind:value="note.number">{{note.name}}</option>
+                                </select>
+                                <label for="selectKey">Select key</label>
+                            </div>
+                            <div class="input-group col-sm-6">
+                                <select v-model="selectedChord" id="selectChord" v-on:change="setActiveNotes">
+                                    <option v-for="chord in chords" v-bind:value="chord">{{chord.name}}</option>
+                                </select>
+                                <label for="selectChord">Select chord</label>
+                            </div>
                         </div>
                         <div id="guitar" class="guitar active">
                             <h2>Guitar
@@ -263,7 +264,7 @@
             <footer>
                 <div class="container">
                     <div class="text-center">
-                    <img src="" alt="App Logo"
+                        <img src="" alt="App Logo"
                         style="width: 150px; opacity: .4;"/>
                         <p>AppName licensed under
                             <a href="#">GNU General Public License</a>
