@@ -203,7 +203,7 @@
                                     <div class="fret fretnumber">
                                         Fretno.
                                     </div>
-                                    <div v-for="tuner in tuners" class="tuner">
+                                    <div v-for="tuner in settings.guitar.tuners" class="tuner">
                                         <select v-model="tuner.number" class="string $index">
                                             <option v-for="note in notes" v-bind:value="note.number">{{note.name}}</option>
                                         </select>
@@ -213,7 +213,7 @@
                                     <div v-for="fret in settings.guitar.frets" class="fret fretnumber">
                                         {{ fret - 1 }}
                                     </div>
-                                    <div v-for="tuner in tuners" class="string">
+                                    <div v-for="tuner in settings.guitar.tuners" class="string">
                                         <div v-for="fret in settings.guitar.frets" class="fret">
                                             {{ notes[(fret + tuner.number - 1) % 12].name }}
 
@@ -283,14 +283,6 @@
                 notes: "",
                 chords: "",
                 selectedChord: "",
-                tuners: [
-                {"number": 4},
-                {"number": 11},
-                {"number": 7},
-                {"number": 2},
-                {"number": 9},
-                {"number": 4}
-                ],
                 selectedKey: 0,
                 settings: {
                     guitar: "",
