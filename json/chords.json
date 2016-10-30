@@ -668,34 +668,34 @@
     ]
   },
   {
-  "name": "maj9(#11)",
-  "notes": [
-    {
-      "halfSteps": 0,
-      "interval": 1
-    },
-    {
-      "halfSteps": 4,
-      "interval": 3
-    },
-    {
-      "halfSteps": 7,
-      "interval": 5
-    },
-    {
-      "halfSteps": 11,
-      "interval": 7
-    },
-    {
-      "halfSteps": 14,
-      "interval": 9
-    },
-    {
-      "halfSteps": 18,
-      "interval": 11
-    }
-  ]
-},
+    "name": "maj9(#11)",
+    "notes": [
+      {
+        "halfSteps": 0,
+        "interval": 1
+      },
+      {
+        "halfSteps": 4,
+        "interval": 3
+      },
+      {
+        "halfSteps": 7,
+        "interval": 5
+      },
+      {
+        "halfSteps": 11,
+        "interval": 7
+      },
+      {
+        "halfSteps": 14,
+        "interval": 9
+      },
+      {
+        "halfSteps": 18,
+        "interval": 11
+      }
+    ]
+  },
   {
     "name": "m(maj9)(#11)",
     "notes": [
