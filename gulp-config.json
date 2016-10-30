@@ -14,7 +14,8 @@
     "js": [
       "src/js/main.js",
       "src/js/functions.js",
-      "src/js/vue.min.js"
+      "src/js/vue.min.js",
+      "src/js/init.js"
     ],
     "css": [
       "src/sass/**/*.scss"

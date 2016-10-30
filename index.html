@@ -8,8 +8,8 @@
     <style>
         body {
         }
-
-        /*  select {
+/*
+          select {
               width: 100%;
               font-size: 12pt;
               border: 1px solid #CCC;
@@ -101,7 +101,8 @@
 <body>
 <nav class="navbar navbar-dark z-2">
     <a class="sidenav-toggle hide-big"><i class="sidenav-toggle-logo fa fa-bars"></i></a>
-    <a class="logo" href="/dashboard">
+    <a class="logo" href="#">
+    <span style="font-size: 26px; line-height: 40px;">App Logo</span>
         <!--<img src="" alt="App logo">-->
     </a>
     <span class="menu-divider hide-xsmall"></span>
@@ -111,10 +112,10 @@
         <div class="menu-link">
             <ul class="">
                 <li>
-                    <a href="#" class="content-toggle active" data-content-id="guitar"><span class="icon fa fa-music"></span> Guitar</a>
+                    <a href="#" class="content-toggle active" data-content-id=""><span class="icon fa fa-music"></span> Link</a>
                 </li>
                 <li>
-                    <a href="#" class="content-toggle active" data-content-id="keyboard"><span class="icon fa fa-music"></span> Keyboard</a>
+                    <a href="#" class="content-toggle active" data-content-id=""><span class="icon fa fa-music"></span> Link</a>
                 </li>
             </ul>
         </div>
@@ -125,30 +126,46 @@
     <div>
         <div class="sidenav-logo">
             <a class="sidenav-toggle">
-                <img src="/" alt="App logo">
+                <span>App Logo</span>
+               <!-- <img src="/" alt="App logo">-->
                 <i class="fa fa-angle-left float-right"></i>
                 <span class="clearfix"></span>
             </a>
         </div>
         <ul class="">
             <li>
-                <a href="#" class="content-toggle active" data-content-id="guitar"><span class="icon fa fa-music"></span> Guitar</a>
+                <a href="#" class="content-toggle active" data-content-id=""><span class="icon fa fa-music"></span> Link</a>
             </li>
             <li>
-                <a href="#" class="content-toggle active" data-content-id="keyboard"><span class="icon fa fa-music"></span> Keyboard</a>
+                <a href="#" class="content-toggle active" data-content-id=""><span class="icon fa fa-music"></span> Link</a>
             </li>
         </ul>
     </div>
 </div>
 
 
-<div class="main-content">
+<div class="action-button">
+    <i class="icon fa fa-plus"></i>
+</div>
+<div class="action-menu" id="action-menu">
+    <button class="toggle-action-button toggle-elements tooltip active" data-type="checkbox" title="Toggle guitar" value="guitar">
+        <span class="icon fg-icon fg-icon-guitar">
+        </span>
+    </button>
+    <button class="toggle-action-button toggle-elements tooltip active" data-type="checkbox" title="Toggle keyboard" value="keyboard">
+            <span class="icon fg-icon fg-icon-piano">
+            </span>
+    </button>
+</div>
+
+
+<div id="app" class="main-content">
     <div class="container">
         <div class="content">
             <div class="box">
                 <div class="content">
                     <h1>Chord finder</h1>
-                    <div id="app">
+                  
                         <div class="input-group">
                             <select v-model="selectedKey" id="selectKey" v-on:change="setActiveNotes">
                                 <option v-for="note in notes" v-bind:value="note.number">{{note.name}}</option>
@@ -161,10 +178,12 @@
                             </select>
                             <label for="selectChord">Select chord</label>
                         </div>
-
-                        <div id="guitar" class="active">
-                            <h2>Guitar</h2>
-                            <div class="fretboard">
+                        <div id="guitar" class="guitar active">
+                            <h2>Guitar</h2><span class="toggle-settings">settings</span>
+                            <div class="settings-view">
+                                
+                            </div>
+                            <div class="instrument-view fretboard">
                                 <div class="tuners">
                                     <div class="fret fretnumber">
                                         Fretno.
@@ -183,32 +202,29 @@
                                         <div v-for="fret in 22" class="fret">
                                             {{ notes[(fret + tuner.number - 1) % 12].name }}
 
-                                            <span
-                                                    v-if="notes[(fret + tuner.number - 1) % 12].interval"
-                                                    v-bind:class="'marker marker-color-' + notes[(fret + tuner.number - 1) % 12].interval">
-						{{ notes[(fret + tuner.number - 1) % 12].interval }}
-                </span>
+                                            <span v-if="notes[(fret + tuner.number - 1) % 12].interval"
+                                                  v-bind:class="'marker marker-color-' + notes[(fret + tuner.number - 1) % 12].interval">
+						                          {{ notes[(fret + tuner.number - 1) % 12].interval }}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-
                         <div id="keyboard" class="keyboard active">
                             <h2>Keyboard</h2>
                             <div class="keys">
                                 <div v-for="key in 88" v-bind:class="'key keycolor-' + notes[(key + 8) % 12].keycolor">
                                     <span class="keyname">{{ notes[(key + 8) % 12].name }}</span>
-                                    <span
-                                            v-if="notes[(key + 8) % 12].interval"
-                                            v-bind:class="'marker marker-color-' + notes[(key + 8) % 12].interval">
-						{{ notes[(key + 8) % 12].interval }}
-                </span>
+                                    <span v-if="notes[(key + 8) % 12].interval"
+                                          v-bind:class="'marker marker-color-' + notes[(key + 8) % 12].interval">
+						                  {{ notes[(key + 8) % 12].interval }}
+                                    </span>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                 
                 </div>
             </div>
         </div>
@@ -266,23 +282,6 @@
         },
         computed: {}
     })
-
-    /* Help texts */
-    $("document").ready(function () {
-        $(".content-toggle").click(function (event) {
-            event.preventDefault();
-            var toggleButton = $(this);
-            var contentId = $(this).data("content-id");
-            $("#" + contentId).toggle();
-            if ($("#" + contentId).hasClass('active')) {
-                $("#" + contentId).removeClass('active');
-                toggleButton.removeClass('active');
-            } else {
-                $("#" + contentId).addClass('active');
-                toggleButton.addClass('active');
-            }
-        });
-    });
 
 </script>
 </body>

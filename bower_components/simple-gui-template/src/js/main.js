@@ -1,4 +1,5 @@
 var active_elements = {};
+var active_modals = {};
 
 
 function toggleActionButton(element_class, active) {
@@ -25,11 +26,11 @@ function toggleElements(element_class, active) {
     }
 }
 
-function resetToggle() {
-    $(".toggle-elements").each(function () {
+function resetModalToggle() {
+    $(".toggle-modal").each(function () {
         var element_class = $(this).val();
         var active = false;
-        active_elements[element_class] = active;
+        active_modals[element_class] = active;
         toggleActionButton(element_class, active);
         toggleElements(element_class, active);
     });
@@ -100,18 +101,26 @@ $(document).ready(function () {
      toggleElements(element_class, active);
      });
      */
-    $(".toggle-elements").click(function () {
+    $(".toggle-modal").click(function () {
         var toggle_type = $(this).data('type');
         if (toggle_type == 'radio') {
             if ($(this).hasClass("active")) {
                 $("body").removeClass("modal-active");
-                resetToggle();
+                resetModalToggle();
                 return false;
             } else {
-                resetToggle();
+                resetModalToggle();
                 $("body").addClass("modal-active");
             }
         }
+        var element_class = $(this).val();
+        var active = (active_modals[element_class]) ? false : true;
+        active_modals[element_class] = active;
+        toggleActionButton(element_class, active);
+        toggleElements(element_class, active);
+    });
+
+    $(".toggle-elements").click(function () {
         var element_class = $(this).val();
         var active = (active_elements[element_class]) ? false : true;
         active_elements[element_class] = active;
@@ -121,7 +130,7 @@ $(document).ready(function () {
     });
 
     $(".action-button").click(function () {
-        resetToggle();
+        resetModalToggle();
         $(this).toggleClass('active');
         $(".action-menu").toggleClass('active');
         if ($(this).hasClass("active")) {
@@ -132,7 +141,7 @@ $(document).ready(function () {
     });
 
     $(".main-content").click(function () {
-        resetToggle();
+        resetModalToggle();
         $("body").removeClass("modal-active");
     });
 });
