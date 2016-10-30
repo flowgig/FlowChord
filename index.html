@@ -29,8 +29,8 @@
               background-color: #fefefe;
               outline: none;
           }
-  */
-        .fretboard {
+          */
+          .fretboard {
             position: relative;
         }
 
@@ -99,17 +99,39 @@
     </style>
 </head>
 <body>
-<nav class="navbar navbar-dark z-2">
-    <a class="sidenav-toggle hide-big"><i class="sidenav-toggle-logo fa fa-bars"></i></a>
-    <a class="logo" href="#">
-    <span style="font-size: 26px; line-height: 40px;">App Logo</span>
-        <!--<img src="" alt="App logo">-->
-    </a>
-    <span class="menu-divider hide-xsmall"></span>
-    <span class="hide-big hide-xsmall navbar-page-title"> Chord finder</span>
+    <nav class="navbar navbar-dark z-2">
+        <a class="sidenav-toggle hide-big"><i class="sidenav-toggle-logo fa fa-bars"></i></a>
+        <a class="logo" href="#">
+            <span style="font-size: 26px; line-height: 40px;">App Logo</span>
+            <!--<img src="" alt="App logo">-->
+        </a>
+        <span class="menu-divider hide-xsmall"></span>
+        <span class="hide-big hide-xsmall navbar-page-title"> Chord finder</span>
 
-    <div class="main-menu hide-medium hide-small hide-xsmall">
-        <div class="menu-link">
+        <div class="main-menu hide-medium hide-small hide-xsmall">
+            <div class="menu-link">
+                <ul class="">
+                    <li>
+                        <a href="#" class="content-toggle active" data-content-id=""><span class="icon fa fa-music"></span> Link</a>
+                    </li>
+                    <li>
+                        <a href="#" class="content-toggle active" data-content-id=""><span class="icon fa fa-music"></span> Link</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="left-menu no-padding">
+        <div>
+            <div class="sidenav-logo">
+                <a class="sidenav-toggle">
+                    <span>App Logo</span>
+                    <!-- <img src="/" alt="App logo">-->
+                    <i class="fa fa-angle-left float-right"></i>
+                    <span class="clearfix"></span>
+                </a>
+            </div>
             <ul class="">
                 <li>
                     <a href="#" class="content-toggle active" data-content-id=""><span class="icon fa fa-music"></span> Link</a>
@@ -120,52 +142,30 @@
             </ul>
         </div>
     </div>
-</nav>
 
-<div class="left-menu no-padding">
-    <div>
-        <div class="sidenav-logo">
-            <a class="sidenav-toggle">
-                <span>App Logo</span>
-               <!-- <img src="/" alt="App logo">-->
-                <i class="fa fa-angle-left float-right"></i>
-                <span class="clearfix"></span>
-            </a>
-        </div>
-        <ul class="">
-            <li>
-                <a href="#" class="content-toggle active" data-content-id=""><span class="icon fa fa-music"></span> Link</a>
-            </li>
-            <li>
-                <a href="#" class="content-toggle active" data-content-id=""><span class="icon fa fa-music"></span> Link</a>
-            </li>
-        </ul>
+
+    <div class="action-button">
+        <i class="icon fa fa-plus"></i>
     </div>
-</div>
-
-
-<div class="action-button">
-    <i class="icon fa fa-plus"></i>
-</div>
-<div class="action-menu" id="action-menu">
-    <button class="toggle-action-button toggle-elements tooltip active" data-type="checkbox" title="Toggle guitar" value="guitar">
-        <span class="icon fg-icon fg-icon-guitar">
-        </span>
-    </button>
-    <button class="toggle-action-button toggle-elements tooltip active" data-type="checkbox" title="Toggle keyboard" value="keyboard">
+    <div class="action-menu" id="action-menu">
+        <button class="toggle-action-button toggle-elements tooltip active" data-type="checkbox" title="Toggle guitar" value="guitar">
+            <span class="icon fg-icon fg-icon-guitar">
+            </span>
+        </button>
+        <button class="toggle-action-button toggle-elements tooltip active" data-type="checkbox" title="Toggle keyboard" value="keyboard">
             <span class="icon fg-icon fg-icon-piano">
             </span>
-    </button>
-</div>
+        </button>
+    </div>
 
 
-<div id="app" class="main-content">
-    <div class="container">
-        <div class="content">
-            <div class="box">
-                <div class="content">
-                    <h1>Chord finder</h1>
-                  
+    <div id="app" class="main-content">
+        <div class="container">
+            <div class="content">
+                <div class="box">
+                    <div class="content">
+                        <h1>Chord finder</h1>
+
                         <div class="input-group">
                             <select v-model="selectedKey" id="selectKey" v-on:change="setActiveNotes">
                                 <option v-for="note in notes" v-bind:value="note.number">{{note.name}}</option>
@@ -179,9 +179,19 @@
                             <label for="selectChord">Select chord</label>
                         </div>
                         <div id="guitar" class="guitar active">
-                            <h2>Guitar</h2><span class="toggle-settings">settings</span>
-                            <div class="settings-view">
-                                
+                            <h2>Guitar
+                                <a v-on:click="settings.guitar.edit = !settings.guitar.edit" class="button button-icon button-flat button-default tooltip" v-bind:title="settings.guitar.edit ? 'Hide settings' : 'Show settings'">
+                                    <span class="fa" v-bind:class="settings.guitar.edit ? 'fa-chevron-up' : 'fa-chevron-down'"></span>
+                                </a>
+                            </h2>
+                            <div v-show="settings.guitar.edit" class="accordion settings-view">
+                                <div class="row">
+                                    <div class="input-group col-sm-4">
+                                        <input id="guitar-settings-frets" type="number" v-model="settings.guitar.frets">
+                                        <label for="guitar-settings-frets">Frets</label>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
                             </div>
                             <div class="instrument-view fretboard">
                                 <div class="tuners">
@@ -195,17 +205,17 @@
                                     </div>
                                 </div>
                                 <div class="frets">
-                                    <div v-for="fret in 22" class="fret fretnumber">
+                                    <div v-for="fret in settings.guitar.frets" class="fret fretnumber">
                                         {{ fret - 1 }}
                                     </div>
                                     <div v-for="tuner in tuners" class="string">
-                                        <div v-for="fret in 22" class="fret">
+                                        <div v-for="fret in settings.guitar.frets" class="fret">
                                             {{ notes[(fret + tuner.number - 1) % 12].name }}
 
                                             <span v-if="notes[(fret + tuner.number - 1) % 12].interval"
-                                                  v-bind:class="'marker marker-color-' + notes[(fret + tuner.number - 1) % 12].interval">
-						                          {{ notes[(fret + tuner.number - 1) % 12].interval }}
-                                            </span>
+                                            v-bind:class="'marker marker-color-' + notes[(fret + tuner.number - 1) % 12].interval">
+                                            {{ notes[(fret + tuner.number - 1) % 12].interval }}</span>
+
                                         </div>
                                     </div>
                                 </div>
@@ -213,64 +223,88 @@
                         </div>
 
                         <div id="keyboard" class="keyboard active">
-                            <h2>Keyboard</h2>
+                            <h2>Keyboard
+                                <a v-on:click="settings.keyboard.edit = !settings.keyboard.edit" class="button button-icon button-flat button-default tooltip" v-bind:title="settings.keyboard.edit ? 'Hide settings' : 'Show settings'">
+                                    <span class="fa" v-bind:class="settings.keyboard.edit ? 'fa-chevron-up' : 'fa-chevron-down'"></span>
+                                </a>
+                            </h2>
+                            <div v-show="settings.keyboard.edit" class="accordion settings-view">
+                                <div class="row">
+                                    <div class="input-group col-sm-4">
+                                        <input id="keyboard-settings-keys" type="number" v-model="settings.keyboard.keys">
+                                        <label for="keyboard-settings-keys">Keys</label>
+                                    </div>
+                                    <div class="input-group col-sm-4">
+                                        <select id="keyboard-settings-lowestNote" type="number" v-model="settings.keyboard.lowestNote">
+                                            <option v-for="note in notes" v-bind:value="note.number - 1">{{ note.name }}</option>
+                                        </select>
+                                        <label for="keyboard-settings-lowestNote">Lowest note</label>
+                                    </div>  
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+
                             <div class="keys">
-                                <div v-for="key in 88" v-bind:class="'key keycolor-' + notes[(key + 8) % 12].keycolor">
-                                    <span class="keyname">{{ notes[(key + 8) % 12].name }}</span>
-                                    <span v-if="notes[(key + 8) % 12].interval"
-                                          v-bind:class="'marker marker-color-' + notes[(key + 8) % 12].interval">
-						                  {{ notes[(key + 8) % 12].interval }}
-                                    </span>
+                                <div v-for="key in settings.keyboard.keys" v-bind:class="'key keycolor-' + notes[(key + settings.keyboard.lowestNote) % 12].keycolor">
+                                    <span class="keyname">{{ notes[(key + settings.keyboard.lowestNote) % 12].name }}</span>
+                                    <span v-if="notes[(key + settings.keyboard.lowestNote) % 12].interval"
+                                    v-bind:class="'marker marker-color-' + notes[(key + settings.keyboard.lowestNote) % 12].interval">
+                                    {{ notes[(key + settings.keyboard.lowestNote) % 12].interval }}</span>
                                 </div>
                             </div>
                         </div>
-                 
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    var vm = new Vue({
-        el: '#app',
-        data: {
-            notes: "",
-            chords: "",
-            selectedChord: "",
-            tuners: [
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                notes: "",
+                chords: "",
+                selectedChord: "",
+                tuners: [
                 {"number": 4},
                 {"number": 11},
                 {"number": 7},
                 {"number": 2},
                 {"number": 9},
                 {"number": 4}
-            ],
-            selectedKey: 0,
-        },
-        methods: {
-            getJsonData: function (path) {
-                var jsonData = loadJSON(function (response) {
-                    var jsonResponse = JSON.parse(response);
-                }, path);
-                return jsonData;
+                ],
+                selectedKey: 0,
+                settings: {
+                    guitar: "",
+                    keyboard: ""
+                }
             },
-            setActiveNotes: function () {
-                this.notes.forEach(function (note, index) {
-                    note.interval = "";
-                });
-                this.selectedChord.notes.forEach(function (note, index) {
-                    this.notes[(note.halfSteps + this.selectedKey) % 12].interval = note.interval;
-                }.bind(this));
-            }
-        },
-        created: function () {
-            this.notes = this.getJsonData("json/notes.json");
-            this.chords = this.getJsonData("json/chords.json");
-        },
-        computed: {}
-    })
+            methods: {
+                getJsonData: function (path) {
+                    var jsonData = loadJSON(function (response) {
+                        var jsonResponse = JSON.parse(response);
+                    }, path);
+                    return jsonData;
+                },
+                setActiveNotes: function () {
+                    this.notes.forEach(function (note, index) {
+                        note.interval = "";
+                    });
+                    this.selectedChord.notes.forEach(function (note, index) {
+                        this.notes[(note.halfSteps + this.selectedKey) % 12].interval = note.interval;
+                    }.bind(this));
+                }
+            },
+            created: function () {
+                this.notes = this.getJsonData("json/notes.json");
+                this.chords = this.getJsonData("json/chords.json");
+                this.settings.guitar = this.getJsonData("json/settings-guitar.json");
+                this.settings.keyboard = this.getJsonData("json/settings-keyboard.json");
+            },
+            computed: {}
+        })
 
-</script>
+    </script>
 </body>
 </html>
