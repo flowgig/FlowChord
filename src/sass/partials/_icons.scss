@@ -1,0 +1,17 @@
+.fg-icon{
+	padding: 4px;
+
+	&.fg-icon-guitar:before{
+		content: url(/assets/images/svg/fg-icon-guitar.svg);
+	}
+	&.fg-icon-piano:before{
+		content: url(/assets/images/svg/fg-icon-piano.svg);
+		
+	}
+}
+
+.action-menu .toggle-action-button.active .icon.fg-icon,
+.action-menu .toggle-action-button .icon.fg-icon{
+	line-height: 0;
+}
+
