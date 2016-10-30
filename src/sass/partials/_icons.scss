@@ -1,11 +1,11 @@
 .fg-icon{
-	padding: 4px;
+	padding: 6px;
 
 	&.fg-icon-guitar:before{
-		content: url(/assets/images/svg/fg-icon-guitar.svg);
+		content: url(../../assets/images/svg/fg-icon-guitar.svg);
 	}
 	&.fg-icon-piano:before{
-		content: url(/assets/images/svg/fg-icon-piano.svg);
+		content: url(../../assets/images/svg/fg-icon-piano.svg);
 		
 	}
 }
