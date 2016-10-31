@@ -35,9 +35,9 @@
           }
           */
 
-    </style>
-</head>
-<body>
+      </style>
+  </head>
+  <body>
     <nav class="navbar navbar-dark z-2">
         <a class="sidenav-toggle hide-big"><i class="sidenav-toggle-logo fa fa-bars"></i></a>
         <a class="logo" href="#">
@@ -103,7 +103,21 @@
             <div class="content">
                 <div class="box">
                     <div class="content">
-                        <h1>Chord finder</h1>
+                        <h1>
+                            Chord finder
+                            <a v-on:click="settings.chords.edit = !settings.chords.edit" class="button button-icon button-flat button-default tooltip" v-bind:title="settings.chords.edit ? 'Hide settings' : 'Show settings'">
+                                <span class="fa" v-bind:class="settings.chords.edit ? 'fa-chevron-up' : 'fa-chevron-down'"></span>
+                            </a>
+                        </h1>
+                        <div v-show="settings.chords.edit" class="accordion settings-view">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <p>Select intervals</p>
+                                    <span v-for="(interval, halfSteps) in intervals"><span v-bind:class="'marker marker-color-' + interval">{{interval}}</span><input type="checkbox" v-on:change="updateSelectedChord" v-model="selectedIntervals" v-bind:value="parseInt(halfSteps)" /></span>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="input-group col-sm-6">
                                 <select v-model="selectedKey" id="selectKey" v-on:change="setActiveNotes">
@@ -113,13 +127,15 @@
                             </div>
                             <div class="input-group col-sm-6">
                                 <select v-model="selectedChord" id="selectChord" v-on:change="setActiveNotes">
-                                    <option v-for="chord in chords" v-bind:value="chord">{{chord.name}}</option>
+                                    <option v-for="(halfSteps, name) in chords" v-bind:value="halfSteps">{{name}}</option>
                                 </select>
                                 <label for="selectChord">Select chord</label>
                             </div>
                         </div>
+                        
                         <div id="guitar" class="guitar active">
-                            <h2>Guitar
+                            <h2>
+                                Guitar
                                 <a v-on:click="settings.guitar.edit = !settings.guitar.edit" class="button button-icon button-flat button-default tooltip" v-bind:title="settings.guitar.edit ? 'Hide settings' : 'Show settings'">
                                     <span class="fa" v-bind:class="settings.guitar.edit ? 'fa-chevron-up' : 'fa-chevron-down'"></span>
                                 </a>
@@ -161,7 +177,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div id="keyboard" class="keyboard active">
                             <h2>Keyboard
                                 <a v-on:click="settings.keyboard.edit = !settings.keyboard.edit" class="button button-icon button-flat button-default tooltip" v-bind:title="settings.keyboard.edit ? 'Hide settings' : 'Show settings'">
@@ -217,9 +232,12 @@
             data: {
                 notes: "",
                 chords: "",
-                selectedChord: "",
+                intervals: "",
+                selectedIntervals: [0, 4, 7],
+                selectedChord: [0, 4, 7],
                 selectedKey: 0,
                 settings: {
+                    chords: "",
                     guitar: "",
                     keyboard: ""
                 }
@@ -232,17 +250,39 @@
                     return jsonData;
                 },
                 setActiveNotes: function () {
+                    var selectedHalfSteps = [];
                     this.notes.forEach(function (note, index) {
                         note.interval = "";
                     });
-                    this.selectedChord.notes.forEach(function (note, index) {
-                        this.notes[(note.halfSteps + this.selectedKey) % 12].interval = note.interval;
+                    this.selectedChord.forEach(function (note, index) {
+                        this.notes[(note + this.selectedKey) % 12].interval = this.intervals[note];
                     }.bind(this));
+                    this.selectedIntervals = this.selectedChord;
+                },
+                updateSelectedChord : function () {
+                    var selectedChord = false;
+                    for(chordName in this.chords){
+                        var thisChord = this.chords[chordName].sort().join(',');
+                        var selectedIntervals = this.selectedIntervals.sort().join(',');
+                        if (thisChord == selectedIntervals){
+                            //this.selectedChord = this.chords[chordName];
+                            selectedChord = this.chords[chordName];
+                        }
+                    }
+                    if (selectedChord){
+                        this.selectedChord = selectedChord;
+                    }else{
+                        this.chords["custom"] = this.selectedIntervals;
+                        this.selectedChord = this.chords["custom"];
+                    }
+                    this.setActiveNotes();
                 }
             },
             created: function () {
                 this.notes = this.getJsonData("json/notes.json");
                 this.chords = this.getJsonData("json/chords.json");
+                this.intervals = this.getJsonData("json/intervals.json");
+                this.settings.chords = this.getJsonData("json/settings-chords.json");
                 this.settings.guitar = this.getJsonData("json/settings-guitar.json");
                 this.settings.keyboard = this.getJsonData("json/settings-keyboard.json");
             },
