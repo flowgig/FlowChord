@@ -1,3 +1,23 @@
+.fretboard {
+  position: relative; }
+  .fretboard .tuners {
+    position: absolute;
+    background-color: #FFF;
+    width: 55px; }
+  .fretboard .tuner {
+    line-height: 25px;
+    border: 1px solid #AAA; }
+  .fretboard .frets {
+    margin-left: 55px;
+    white-space: nowrap;
+    overflow-x: auto; }
+  .fretboard .fret {
+    width: 55px;
+    display: inline-block;
+    border: 1px solid #CCC;
+    text-align: center;
+    line-height: 25px; }
+
 .fg-icon {
   padding: 6px; }
   .fg-icon.fg-icon-guitar:before {
@@ -9,10 +29,36 @@
 .action-menu .toggle-action-button .icon.fg-icon {
   line-height: 0; }
 
+.keyboard .keys {
+  padding-top: 12px;
+  white-space: nowrap;
+  overflow-x: auto; }
+  .keyboard .keys .key {
+    display: inline-block;
+    border: 1px solid #CCC;
+    text-align: center;
+    height: 60px;
+    font-size: 8pt;
+    vertical-align: top;
+    white-space: normal; }
+    .keyboard .keys .key.keycolor-black {
+      width: 18px;
+      background-color: #222;
+      height: 40px;
+      position: relative;
+      margin: 0px -10px; }
+    .keyboard .keys .key.keycolor-white {
+      width: 26px;
+      background-color: #FEFEFE; }
+    .keyboard .keys .key .keyname {
+      position: relative;
+      bottom: 14px; }
+
 .marker {
   border-radius: 6px;
   padding: 2px 4px;
-  color: white; }
+  color: white;
+  background-color: #272b2f; }
   .marker.marker-color-1 {
     background-color: #D32F2F; }
   .marker.marker-color-3 {

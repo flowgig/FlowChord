@@ -1,0 +1,31 @@
+.keyboard {
+    .keys {
+        padding-top: 12px;
+        white-space: nowrap;
+        overflow-x: auto;
+        .key {
+            display: inline-block;
+            border: 1px solid #CCC;
+            text-align: center;
+            height: 60px;
+            font-size: 8pt;
+            vertical-align: top;
+            white-space: normal;
+            &.keycolor-black {
+                width: 18px;
+                background-color: #222;
+                height: 40px;
+                position: relative;
+                margin: 0px -10px;
+            }
+            &.keycolor-white {
+                width: 26px;
+                background-color: #FEFEFE;
+            }
+            .keyname {
+                position: relative;
+                bottom: 14px;
+            }
+        }
+    }
+}
