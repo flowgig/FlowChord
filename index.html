@@ -146,9 +146,20 @@
                                         <input id="guitar-settings-frets" type="number" v-model="settings.guitar.frets">
                                         <label for="guitar-settings-frets">Frets</label>
                                     </div>
+                                    <div class="col-sm-4">
+                                        <div class="input-group">
+                                            <input type="radio" id="settings-guitar-label-key" value="key" name="settings-guitar-label" v-model="settings.guitar.label">
+                                            <label for="settings-guitar-label-key">Key</label>
+                                        </div>
+                                        <div class="input-group">
+                                            <input type="radio" id="settings-guitar-label-interval" value="interval" name="settings-guitar-label" v-model="settings.guitar.label">
+                                            <label for="settings-guitar-label-interval">Interval</label>
+                                        </div>
+                                    </div>
                                     <div class="clearfix"></div>
                                 </div>
                             </div>
+                            {{ selectedKey }}
                             <div class="instrument-view fretboard">
                                 <div class="tuners">
                                     <div class="fret fretnumber">
@@ -166,11 +177,28 @@
                                     </div>
                                     <div v-for="tuner in settings.guitar.tuners" class="string">
                                         <div v-for="fret in settings.guitar.frets" class="fret">
-                                            {{ notes[(fret + tuner.number - 1) % 12].name }}
-
-                                            <span v-if="notes[(fret + tuner.number - 1) % 12].interval"
+                                            <div v-if="(fret + tuner.number - selectedKey - 1) % 12 >= 0">
+                                                <input type="checkbox" v-on:change="updateSelectedChord" v-model="selectedIntervals" v-bind:value="(fret + tuner.number - selectedKey - 1) % 12"  />
+                                                <span v-if="settings.guitar.label == 'key'"> 
+                                                    {{ notes[(fret + tuner.number - 1) % 12].name }}
+                                                </span>
+                                                <span v-if="settings.guitar.label == 'interval'"> 
+                                                    {{ intervals[(fret + tuner.number - selectedKey - 1) % 12] }}
+                                                </span>
+                                            </div>
+                                            <div v-if="(fret + tuner.number - selectedKey - 1) % 12 < 0">
+                                                <input  type="checkbox" v-on:change="updateSelectedChord" v-model="selectedIntervals" v-bind:value="(12 + fret + tuner.number - selectedKey - 1) % 12"  />
+                                                <span v-if="settings.guitar.label == 'key'"> 
+                                                    {{ notes[(fret + tuner.number - 1) % 12].name }}
+                                                </span>
+                                                <span v-if="settings.guitar.label == 'interval'"> 
+                                                    {{ intervals[(12 + fret + tuner.number - selectedKey - 1) % 12] }}
+                                                </span>
+                                            </div>
+                                         <!--  
+                                          <span v-if="notes[(fret + tuner.number - 1) % 12].interval"
                                             v-bind:class="'marker marker-color-' + notes[(fret + tuner.number - 1) % 12].interval">
-                                            {{ notes[(fret + tuner.number - 1) % 12].interval }}</span>
+                                            {{ notes[(fret + tuner.number - 1) % 12].interval }}</span>-->
 
                                         </div>
                                     </div>
