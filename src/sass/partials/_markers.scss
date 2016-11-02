@@ -4,35 +4,35 @@
   color: white;
   background-color: #272b2f;
   &.marker-color-1 {
-    background-color: #D32F2F;
+    background-color: $marker-color-1;
   }
 
   &.marker-color-3 {
-    background-color: #1976D2;
+    background-color: $marker-color-3;
   }
 
   &.marker-color-5 {
-    background-color: #388E3C;
+    background-color: $marker-color-5;
   }
 
   &.marker-color-6 {
-    background-color: #00796B;
+    background-color: $marker-color-6;
   }
 
   &.marker-color-7 {
-    background-color: #0097A7;
+    background-color: $marker-color-7;
   }
 
   &.marker-color-9 {
-    background-color: #C2185B;
+    background-color: $marker-color-9;
   }
 
   &.marker-color-11 {
-    background-color: #E64A19;
+    background-color: $marker-color-11;
   }
 
   &.marker-color-13 {
-    background-color: #512DA8;
+    background-color: $marker-color-13;
   }
 }
 
