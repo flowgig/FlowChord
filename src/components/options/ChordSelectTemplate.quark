@@ -1,0 +1,35 @@
+import * as quark from "quark-gui";
+
+let SelectList = quark.Molecules.FormElements.SelectList;
+let chords = require("../../json/chords.json");
+
+let chordOptions = [];
+for (let chord in chords){
+	chordOptions.push({
+		name: chord,
+		value: chords[chord]
+	})
+}
+let formElements = {
+	chordSelect: SelectList.getModule({
+		id: 'chordSelect',
+		name: 'chordSelect',
+		type: 'text',
+		placeholder: 'Select a chord',
+		label: 'Select chord',
+		options: chordOptions,
+		searchable: true,
+		attributes: [
+		"v-model='$parent.selectedChord'",
+		"v-on:click='$parent.setActiveNotes'"
+		]
+	})
+};
+
+let template = `
+<div>
+${formElements.chordSelect}
+</div>
+`;
+
+export default template;

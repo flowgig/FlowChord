@@ -1,0 +1,35 @@
+import * as quark from "quark-gui";
+
+let SelectList = quark.Molecules.FormElements.SelectList;
+let notes = require("../../json/notes.json");
+
+let noteOptions = [];
+notes.forEach(function(note){
+	noteOptions.push({
+		name: note.name,
+		value: note.number
+	});
+});
+let formElements = {
+	keySelect: SelectList.getModule({
+		id: 'keySelect',
+		name: 'keySelect',
+		type: 'text',
+		placeholder: 'Select a key',
+		label: 'Select key',
+		options: noteOptions,
+		searchable: true,
+		attributes: [
+		"v-model='$parent.selectedKey'",
+		"v-on:keyup='$parent.setActiveNotes'"
+		]
+	})
+};
+
+let template = `
+<div>
+${formElements.keySelect}
+</div>
+`;
+
+export default template;

@@ -3,12 +3,24 @@
   padding: 2px 4px;
   color: white;
   background-color: #272b2f;
+  &.marker-color-0 {
+    background-color: $marker-color-0;
+  }
+
   &.marker-color-1 {
     background-color: $marker-color-1;
   }
 
+  &.marker-color-2 {
+    background-color: $marker-color-2;
+  }
+
   &.marker-color-3 {
     background-color: $marker-color-3;
+  }
+
+  &.marker-color-4 {
+    background-color: $marker-color-4;
   }
 
   &.marker-color-5 {
@@ -17,22 +29,10 @@
 
   &.marker-color-6 {
     background-color: $marker-color-6;
-  }
+  }  
 
   &.marker-color-7 {
     background-color: $marker-color-7;
-  }
-
-  &.marker-color-9 {
-    background-color: $marker-color-9;
-  }
-
-  &.marker-color-11 {
-    background-color: $marker-color-11;
-  }
-
-  &.marker-color-13 {
-    background-color: $marker-color-13;
   }
 }
 

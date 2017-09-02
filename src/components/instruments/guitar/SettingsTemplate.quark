@@ -1,0 +1,64 @@
+import * as quark from "quark-gui";
+
+let InputField = quark.Molecules.FormElements.InputField;
+let RadioButton = quark.Molecules.FormElements.RadioButton;
+
+let formElements = {
+	frets: InputField.getModule({
+		id: "guitar-settings-frets",
+		name: "guitar-settings-frets",
+		label: "Frets",
+		type: "number",
+		placeholder: "21",
+		attributes: [
+		"min='1'",
+		"v-model.number='$parent.settings.frets'"
+		]
+	}),
+	labels: {
+		key: RadioButton.getModule({
+			id: 'settings-guitar-label-key',
+			name: 'settings-guitar-label',
+			value: 'key',
+			label: 'Show key',
+			attributes: [
+			"v-model.number='$parent.settings.label'"
+			]
+		}),
+		interval: RadioButton.getModule({
+			id: 'settings-guitar-label-interval',
+			name: 'settings-guitar-label',
+			value: 'interval',
+			label: 'Show interval',
+			attributes: [
+			"v-model.number='$parent.settings.label'"
+			]
+		}),
+		halfSteps: RadioButton.getModule({
+			id: 'settings-guitar-label-halssteps',
+			name: 'settings-guitar-label',
+			value: 'halfSteps',
+			label: 'Show half steps',
+			attributes: [
+			"v-model.number='$parent.settings.label'"
+			]
+		})
+	}
+}
+
+let template = `
+<div class="row">
+<div class="input-group col-sm-4">
+${formElements.frets}
+</div>
+<div class="col-sm-4">
+Labels:
+${formElements.labels.key}
+${formElements.labels.interval}
+${formElements.labels.halfSteps}
+</div>
+<div class="clearfix"></div>
+</div>
+`;
+
+export default template;
