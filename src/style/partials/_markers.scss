@@ -6,40 +6,59 @@
   &.marker-color-0 {
     background-color: $marker-color-0;
   }
-
   &.marker-color-1 {
     background-color: $marker-color-1;
   }
-
   &.marker-color-2 {
     background-color: $marker-color-2;
   }
-
   &.marker-color-3 {
     background-color: $marker-color-3;
   }
-
   &.marker-color-4 {
     background-color: $marker-color-4;
   }
-
   &.marker-color-5 {
     background-color: $marker-color-5;
   }
-
   &.marker-color-6 {
     background-color: $marker-color-6;
   }  
-
   &.marker-color-7 {
     background-color: $marker-color-7;
+  }
+  &.marker-color-8 {
+    background-color: $marker-color-8;
+  }
+  &.marker-color-9 {
+    background-color: $marker-color-9;
+  }
+  &.marker-color-10 {
+    background-color: $marker-color-10;
+  }
+  &.marker-color-11 {
+    background-color: $marker-color-11;
+  }
+  &.no-marker{
+    background-color: transparent;
+    color: #333;
+    &:hover{
+      background-color: #EEE;
+    }
   }
 }
 
 .key {
   &.keycolor-black {
     .marker {
-      top: 5px;
+      top: 15px;
+      &.no-marker{
+        background-color: transparent;
+        color: #FFF;
+        &:hover{
+          background-color: #444;
+        }
+      }
     }
   }
   &.keycolor-white {
