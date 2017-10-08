@@ -1,14 +1,14 @@
 [
-    {"number": 0, "name": "C", "interval": "", "keycolor": "white"},
-    {"number": 1, "name": "C#", "interval": "", "keycolor": "black"},
-    {"number": 2, "name": "D", "interval": "", "keycolor": "white"},
-    {"number": 3, "name": "D#", "interval": "", "keycolor": "black"},
-    {"number": 4, "name": "E", "interval": "", "keycolor": "white"},
-    {"number": 5, "name": "F", "interval": "", "keycolor": "white"},
-    {"number": 6, "name": "F#", "interval": "", "keycolor": "black"},
-    {"number": 7, "name": "G", "interval": "", "keycolor": "white"},
-    {"number": 8, "name": "G#", "interval": "", "keycolor": "black"},
-    {"number": 9, "name": "A", "interval": "", "keycolor": "white"},
-    {"number": 10, "name": "A#", "interval": "", "keycolor": "black"},
-    {"number": 11, "name": "B", "interval": "", "keycolor": "white"}
+    {"number": 0,  "name": "C",  "selected": false, "interval": "", "keycolor": "white"},
+    {"number": 1,  "name": "C#", "selected": false, "interval": "", "keycolor": "black"},
+    {"number": 2,  "name": "D",  "selected": false, "interval": "", "keycolor": "white"},
+    {"number": 3,  "name": "D#", "selected": false, "interval": "", "keycolor": "black"},
+    {"number": 4,  "name": "E",  "selected": false, "interval": "", "keycolor": "white"},
+    {"number": 5,  "name": "F",  "selected": false, "interval": "", "keycolor": "white"},
+    {"number": 6,  "name": "F#", "selected": false, "interval": "", "keycolor": "black"},
+    {"number": 7,  "name": "G",  "selected": false, "interval": "", "keycolor": "white"},
+    {"number": 8,  "name": "G#", "selected": false, "interval": "", "keycolor": "black"},
+    {"number": 9,  "name": "A",  "selected": false, "interval": "", "keycolor": "white"},
+    {"number": 10, "name": "A#", "selected": false, "interval": "", "keycolor": "black"},
+    {"number": 11, "name": "B",  "selected": false, "interval": "", "keycolor": "white"}
 ]
