@@ -7,19 +7,19 @@
             display: inline-block;
             border: 1px solid #CCC;
             text-align: center;
-            height: 60px;
-            font-size: 8pt;
+            height: 180px;
             vertical-align: top;
             white-space: normal;
             &.keycolor-black {
-                width: 18px;
+                width: 36px;
                 background-color: #222;
-                height: 40px;
+                height: 95px;
                 position: relative;
-                margin: 0px -10px;
+                margin: 0px -18px;
+                color: #FFF;
             }
             &.keycolor-white {
-                width: 26px;
+                width: 50px;
                 background-color: #FEFEFE;
             }
             .keyname {
