@@ -1,0 +1,89 @@
+import * as quark from "quark-gui";
+
+let SelectList = quark.Molecules.FormElements.SelectList;
+let Header = quark.Organisms.Global.Header;
+
+
+let selectLists = {
+	keySelect: `
+		<div class="navbar-select-container">
+			<label for="selectKey" class="navbar-label">Key</label>
+			<select v-model="$parent.selectedKey" id="selectKey" v-on:change="$parent.setActiveNotes" class="navbar-select">
+				<option v-for="note in $parent.notes" v-bind:value="note.number">{{note.name}}</option>
+			</select>
+		</div>
+	`,
+	chordSelect: `
+		<div class="navbar-select-container">
+			<label for="selectChord" class="navbar-label">Chord</label>
+			<select v-model="$parent.selectedChord" id="selectChord" v-on:change="$parent.setActiveNotes" class="navbar-select">
+				<option v-for="(halfSteps, name) in $parent.chords" v-bind:value="halfSteps">{{name}}</option>
+			</select>
+		</div>
+	`,
+	labelSelect: `
+		<div class="navbar-select-container">
+			<label for="selectLabel" class="navbar-label">Label type</label>
+			<select v-model="$parent.selectedLabel" id="selectLabel" class="navbar-select">
+				<option value="key">Key</option>
+				<option value="interval">Interval</option>
+				<option value="halfSteps">Half steps</option>
+			</select>
+		</div>
+	`,
+	instrumentSelect: `
+		<div class="navbar-select-container">
+			<label for="selectInstrument" class="navbar-label">Instrument</label>
+			<select v-model="$parent.selectedInstrument" id="selectInstrument" class="navbar-select">
+				<option value="guitar">Guitar</option>
+				<option value="keyboard">Keyboard</option>
+			</select>
+		</div>
+	`
+}
+
+let htmlContent = `<div class="navbar-html-content">${selectLists.keySelect}${selectLists.chordSelect}${selectLists.labelSelect}${selectLists.instrumentSelect}</div>`;
+
+let header = Header.getModule({
+	id: 'main-header',
+	theme: 'primary',
+	/*logo: {
+		image: {
+            src: "", //require('../../images/svg/chord-finder-logo-white.svg'),
+            alt: 'ChordFinder logo'
+        },
+        url: "/dashboard"
+    },*/
+    htmlContent: htmlContent,
+    sidebar: {
+    	sidebarNavigation: {
+    		listItems: [
+    		{
+    			name: "About",
+    			link: "",
+    			iconClass: "fa fa-info-circle"
+    		},
+    		{
+    			name: "Developers",
+    			link: "",
+    			iconClass: "fa fa-code"
+    		},
+    		{
+    			name: "Send feedback",
+    			link: "",
+    			iconClass: "fa fa-comment"
+    		}
+    		]
+    	}
+    }
+});
+
+
+
+let template = `
+<div>
+${header}
+</div>
+`;
+
+export default template;

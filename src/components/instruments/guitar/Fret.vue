@@ -2,19 +2,21 @@
 	<div>
 		<span>
 			<label v-bind:for="'select-interval-guitar-' + stringNumber + '-' + fretNumber">
-				<span v-if="$parent.$parent.notes[keyNumber].interval" v-bind:class="'marker marker-color-' + halfSteps">
-					<span v-if="$parent.settings.label == 'key'">{{ keyName }}</span>
-					<span v-if="$parent.settings.label == 'interval'">{{ $parent.$parent.notes[keyNumber].interval }}</span>
-					<span v-if="$parent.settings.label == 'halfSteps'">{{ halfSteps }}</span>
+				<span v-if="$parent.$parent.notes[keyNumber].selected" v-bind:class="'marker marker-color-' + halfSteps">
+					<span v-if="$parent.$parent.selectedLabel == 'key'">{{ keyName }}</span>
+					<span v-if="$parent.$parent.selectedLabel == 'interval'">{{ $parent.$parent.notes[keyNumber].interval }}</span>
+					<span v-if="$parent.$parent.selectedLabel == 'halfSteps'">{{ halfSteps }}</span>
 				</span>
-				<span v-else="$parent.settings.label == 'key'"> 
-					{{ keyName }}
+				<span v-else class="marker no-marker"> 
+					<span v-if="$parent.$parent.selectedLabel == 'key'">{{ keyName }}</span>
+					<span v-if="$parent.$parent.selectedLabel == 'interval'">{{ $parent.$parent.notes[keyNumber].interval }}</span>
+					<span v-if="$parent.$parent.selectedLabel == 'halfSteps'">{{ halfSteps }}</span>
 				</span>
 			</label>
 			<input v-bind:id="'select-interval-guitar-' + stringNumber + '-' + fretNumber" 
 			type="checkbox" 
 			v-on:change="$parent.$parent.updateSelectedChord()"
-			v-model="$parent.$parent.selectedIntervals" 
+			v-model="$parent.$parent.selectedHalfSteps" 
 			v-bind:value="halfSteps"  />
 		</span>
 	</div>

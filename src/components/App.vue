@@ -3,43 +3,19 @@
 		<main-navigation></main-navigation>
 		<main id="mainContent">
 			<div class="main-content">
-				<h1>
-					Chord finder
-				</h1>
 				<!--<interval-select></interval-select> -->
-				<div class="row">
-					<div class="input-group col-sm-4">
-						<!--<key-select></key-select> -->
-						<select v-model="selectedKey" id="selectKey" v-on:change="setActiveNotes">
-							<option v-for="note in notes" v-bind:value="note.number">{{note.name}}</option>
-						</select>
-						<label for="selectKey">Select key</label>
-					</div>
-					<div class="input-group col-sm-4">
-						<!--<chord-select></chord-select> -->
-						<select v-model="selectedChord" id="selectChord" v-on:change="setActiveNotes">
-							<option v-for="(halfSteps, name) in chords" v-bind:value="halfSteps">{{name}}</option>
-						</select>
-						<label for="selectChord">Select chord</label>
-					</div>
-					<div class="col-sm-4">
-						<div v-show="alternativeChords.length">
-							<span>Similar chords:</span>
-							<ul style="margin: 0; padding: 0 0 0 20px">
-								<li v-for="alternativeChord in alternativeChords">
-									{{alternativeChord.note.name}}{{alternativeChord.chordName}}
-								</li>
-							</ul>
-						</div>
-					</div>
-					<div class="clearfix"></div>
+				
+				<label for="selectChord">Select Instrument</label>
+				<guitar v-show="selectedInstrument == 'guitar'" v-bind:settings="settings.guitar"></guitar>
+				<keyboard v-show="selectedInstrument == 'keyboard'" v-bind:settings="settings.keyboard"></keyboard>
+				<div v-show="alternativeChords.length">
+					<span>Similar chords:</span>
+					<ul style="margin: 0; padding: 0 0 0 20px">
+						<li v-for="alternativeChord in alternativeChords">
+							{{alternativeChord.note.name}}{{alternativeChord.chordName}}
+						</li>
+					</ul>
 				</div>
-				<!--<p>Selected chord: {{selectedKeyName}}{{selectedChordName}}</p>-->
-				
-				<guitar v-bind:settings="settings.guitar"></guitar>
-				<keyboard v-bind:settings="settings.keyboard"></keyboard>
-
-				
 			</div>
 			<main-footer></main-footer> 
 		</main>
@@ -65,19 +41,21 @@ export default {
 		chordSelect: ChordSelect,
 		intervalSelect: IntervalSelect,
 		guitar: Guitar,
-		keyboard: Keyboard
+		keyboard: Keyboard,
 	},
 	data: function () {
 		return {
 			notes: require("../json/notes.json"),
 			chords: require("../json/chords.json"),
 			intervals: require("../json/intervals.json"),
-			selectedIntervals: [0, 4, 7],
+			selectedHalfSteps: [0, 4, 7],
 			selectedChord: {"halfSteps": [0, 4, 7], "parsedHalfSteps": [0, 4, 7]},
 			selectedChordName: "",
 			alternativeChords: [],
 			selectedKey: 0,
 			selectedKeyName: "",
+			selectedInstrument: 'guitar',
+			selectedLabel: 'key',
 			settings: {
 				chords: require("../json/settings-chords.json"),
 				guitar: require("../json/settings-guitar.json"),
@@ -129,21 +107,23 @@ export default {
 			}
 			var selectedHalfSteps = [];
 			this.notes.forEach(function (note, index) {
-				note.interval = "";
-			});
-			this.selectedChord.parsedHalfSteps.forEach(function (note, index) {
-				this.notes[(note + this.selectedKey) % 12].interval = this.intervals[note];
+				let relativeNoteNumber = note.number - this.selectedKey + 12;
+				note.interval = this.intervals[relativeNoteNumber % 12];
+				note.selected = false;
 			}.bind(this));
-			this.selectedIntervals = this.selectedChord.parsedHalfSteps;
+			this.selectedChord.parsedHalfSteps.forEach(function (note, index) {
+				this.notes[(note + this.selectedKey) % 12].selected = true;
+			}.bind(this));
+			this.selectedHalsSteps = this.selectedChord.parsedHalfSteps;
 			this.setAlternativeChords();
 		},
 		updateSelectedChord: function () {
-			this.selectedIntervals.sort(this.sortNumber).join(',');
+			this.selectedHalfSteps.sort(this.sortNumber).join(',');
 			var isCustomChord = true;
 			for (var chordName in this.chords){
 				if (chordName !== undefined){
-					var is_same = this.chords[chordName].parsedHalfSteps.length == this.selectedIntervals.length && this.chords[chordName].parsedHalfSteps.every(function(element, index){
-						return element === this.selectedIntervals[index];
+					var is_same = this.chords[chordName].parsedHalfSteps.length == this.selectedHalfSteps.length && this.chords[chordName].parsedHalfSteps.every(function(element, index){
+						return element === this.selectedHalfSteps[index];
 					}.bind(this));
 					if (is_same){
 						this.selectedChordName = chordName;
@@ -157,7 +137,7 @@ export default {
 				}
 			}
 			if(isCustomChord){
-				this.chords["custom"] = {halfSteps: this.selectedIntervals, parsedHalfSteps: this.selectedIntervals};
+				this.chords["custom"] = {halfSteps: this.selectedHalfSteps, parsedHalfSteps: this.selectedHalfSteps};
 				this.selectedChordName = "custom chord";
 				this.selectedChord = this.chords["custom"];
 			}

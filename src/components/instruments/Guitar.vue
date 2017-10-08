@@ -1,6 +1,5 @@
 <template>
 	<div id="guitar" class="guitar active">
-		<h2>Guitar</h2>
 		<div>
 			<settings></settings>
 		</div>
