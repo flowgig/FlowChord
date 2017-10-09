@@ -23,25 +23,52 @@ export default {
     margin: 0;
     display: inline-block;
     vertical-align: top;
-    padding: 5px 0;
+    padding: 0;
 }
 .navbar-select-container{
     display: inline-block;
-    padding: 3px 4px;
+    padding: 0;
 }
 
 .navbar-label{
-    display: block;
+    display: none;
     font-size: 12px;
     cursor: default;
+
 }
 .navbar-select{
     -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     background: none;
     color: white;
     font-size: 16px;
     border: none;
     cursor: pointer;
+    height: 48px;
+    width: 48px;
+
+}
+.navbar-select option{
+    background-color: #f9f9f9;
+    color: #333435;
+    font-size: 12px;
+}
+
+@media (min-width: 420px){
+    .navbar-html-content{
+        padding: 5px 0;
+    }
+    .navbar-select-container{
+        padding: 3px 4px;
+    }
+    .navbar-label{
+        display: block;
+    }
+    .navbar-select{
+        height: auto;
+        width: auto;
+    }
 }
 
 @media (min-width: 768px){
