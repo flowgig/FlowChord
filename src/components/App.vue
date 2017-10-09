@@ -114,7 +114,7 @@ export default {
 			this.selectedChord.parsedHalfSteps.forEach(function (note, index) {
 				this.notes[(note + this.selectedKey) % 12].selected = true;
 			}.bind(this));
-			this.selectedHalsSteps = this.selectedChord.parsedHalfSteps;
+			this.selectedHalfSteps = this.selectedChord.parsedHalfSteps;
 			this.setAlternativeChords();
 		},
 		updateSelectedChord: function () {
