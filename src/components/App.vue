@@ -5,7 +5,6 @@
 			<div class="main-content">
 				<!--<interval-select></interval-select> -->
 				
-				<label for="selectChord">Select Instrument</label>
 				<guitar v-show="selectedInstrument == 'guitar'" v-bind:settings="settings.guitar"></guitar>
 				<keyboard v-show="selectedInstrument == 'keyboard'" v-bind:settings="settings.keyboard"></keyboard>
 				<div v-show="alternativeChords.length">

@@ -54,16 +54,17 @@
 		position: relative;
 		.tuners {
 			position: absolute;
-			background-color: #FFF;
-			width: 150px;
+			width: 110px;
 			.fretnumber{
-				border: 1px solid transparent;
+				border: none;
+			}
+			select{
+				width: 16px;
 			}
 		}
 		.tuner {
 			line-height: 25px;
-			border: 1px solid transparent;
-			border-right: none;
+			border: none;
 			.fret{
 				border: none;
 				display: inline-block;
@@ -73,16 +74,19 @@
 			}
 		}
 		.frets {
-			margin-left: 150px;
+			margin-left: 110px;
 			white-space: nowrap;
 			overflow-x: auto;
 		}
 		.fret {
 			width: 75px;
 			display: inline-block;
-			border: 1px solid #CCC;
+			border-left: 1px solid #CCC;
 			text-align: center;
-			line-height: 25px;
+			line-height: 35px;
+			&.fretnumber{
+				border-left: 1px solid transparent;
+			}
 		}
 
 	}

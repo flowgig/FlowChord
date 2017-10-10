@@ -52,7 +52,6 @@ export default {
 .navbar-select option{
     background-color: #f9f9f9;
     color: #333435;
-    font-size: 12px;
 }
 
 @media (min-width: 420px){
