@@ -66,7 +66,8 @@ export default {
 		sortNumber: function(a,b) {
 			return a - b;
 		},
-		setAlternativeChords: function () {
+		getAlternativeChords: function (firstChordOnly) {
+			let single = firstChordOnly !== undefined ? firstChordOnly : false;
 			let alternativeChords = [];
 			for (var keyIndex in this.notes) {
 				if (keyIndex != this.selectedKey){
@@ -84,16 +85,32 @@ export default {
 							return element === relativeParsedHalfSteps[index];
 						}.bind(this));
 						if (is_same){
-							alternativeChords.push({
+							let alternativeChord = {
 								note: this.notes[keyIndex],
 								chord: this.chords[chordName],
 								chordName: chordName
-							});
+							};
+							if (single) return alternativeChord;
+							else alternativeChords.push(alternativeChord);
 						}
 					}
 				}
 			}
-			this.alternativeChords = alternativeChords;
+			return alternativeChords;
+		},
+		useAlternativeChordIfPossible: function (){
+			let alternativeChord = this.getAlternativeChords(true);
+			let hasalternativeChord = Object.keys(alternativeChord).length > 0;
+			if (hasalternativeChord){
+				console.log(alternativeChord.chordName);
+				this.selectedChord = alternativeChord.chord;
+				this.selectedKeyName = alternativeChord.note.name;
+				this.selectedKey = alternativeChord.note.number;
+				this.selectedChordName = alternativeChord.chordName;
+				delete this.chords["custom"];
+			}else{
+				console.log("ikke akkord");
+			}
 		},
 		setActiveNotes: function (event) {
 			if (event !== undefined){ // Changed from selectlist
@@ -103,6 +120,10 @@ export default {
 				}else if(targetId == "selectChord"){
 					this.selectedChordName = event.target.options[event.target.selectedIndex].text;
 				}
+			}
+			if (this.selectedChordName == "custom"){
+				console.log("custom chord");
+				this.useAlternativeChordIfPossible();
 			}
 			var selectedHalfSteps = [];
 			this.notes.forEach(function (note, index) {
@@ -114,7 +135,7 @@ export default {
 				this.notes[(note + this.selectedKey) % 12].selected = true;
 			}.bind(this));
 			this.selectedHalfSteps = this.selectedChord.parsedHalfSteps;
-			this.setAlternativeChords();
+			this.alternativeChords = this.getAlternativeChords();
 		},
 		updateSelectedChord: function () {
 			this.selectedHalfSteps.sort(this.sortNumber).join(',');
@@ -137,7 +158,7 @@ export default {
 			}
 			if(isCustomChord){
 				this.chords["custom"] = {halfSteps: this.selectedHalfSteps, parsedHalfSteps: this.selectedHalfSteps};
-				this.selectedChordName = "custom chord";
+				this.selectedChordName = "custom";
 				this.selectedChord = this.chords["custom"];
 			}
 			this.setActiveNotes();
