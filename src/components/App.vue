@@ -102,14 +102,11 @@ export default {
 			let alternativeChord = this.getAlternativeChords(true);
 			let hasalternativeChord = Object.keys(alternativeChord).length > 0;
 			if (hasalternativeChord){
-				console.log(alternativeChord.chordName);
 				this.selectedChord = alternativeChord.chord;
 				this.selectedKeyName = alternativeChord.note.name;
 				this.selectedKey = alternativeChord.note.number;
 				this.selectedChordName = alternativeChord.chordName;
 				delete this.chords["custom"];
-			}else{
-				console.log("ikke akkord");
 			}
 		},
 		setActiveNotes: function (event) {
@@ -122,7 +119,6 @@ export default {
 				}
 			}
 			if (this.selectedChordName == "custom"){
-				console.log("custom chord");
 				this.useAlternativeChordIfPossible();
 			}
 			var selectedHalfSteps = [];
