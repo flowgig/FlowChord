@@ -14,10 +14,16 @@ let selectLists = {
 		</div>
 	`,
 	chordSelect: `
-		<div class="navbar-select-container">
+		<div v-if="$parent.selectionType == 'chord'" class="navbar-select-container">
 			<label for="selectChord" class="navbar-label">Chord</label>
 			<select v-model="$parent.selectedChord" id="selectChord" v-on:change="$parent.setActiveNotes" class="navbar-select">
 				<option v-for="(halfSteps, name) in $parent.chords" v-bind:value="halfSteps">{{name}}</option>
+			</select>
+		</div>
+		<div v-else-if="$parent.selectionType == 'scale'" class="navbar-select-container">
+			<label for="selectChord" class="navbar-label">Scale</label>
+			<select v-model="$parent.selectedChord" id="selectChord" v-on:change="$parent.setActiveNotes" class="navbar-select">
+				<option v-for="(halfSteps, name) in $parent.scales" v-bind:value="halfSteps">{{name}}</option>
 			</select>
 		</div>
 	`,

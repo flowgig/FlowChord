@@ -14,6 +14,15 @@ notes.forEach(function(note){
 });
 
 let globalSettings = {
+	selectionTypeSelect: `
+		<div class="settings-select-container">
+			<label for="selectLabel">Selection type</label>
+			<select v-model="$parent.selectionType" id="selectionTypeLabel">
+				<option value="chord">Chord</option>
+				<option value="scale">Scale</option>
+			</select>
+		</div>
+	`,
 	labelSelect: `
 		<div class="settings-select-container">
 			<label for="selectLabel">Label type</label>
@@ -80,6 +89,7 @@ let keyboardSettings = {
 let globalSettingsTemplate = `
 <div>
 <h2>Global:</h2>
+${globalSettings.selectionTypeSelect}
 ${globalSettings.labelSelect}
 ${globalSettings.instrumentSelect}
 </div>

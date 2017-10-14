@@ -13,10 +13,11 @@
 					<keyboard v-show="isSelectedInstrument('keyboard')" v-bind:settings="settings.keyboard"></keyboard>
 				</div>
 				<div v-show="alternativeChords.length">
-					<span>Similar chords:</span>
+					<span v-if="selectionType == 'chord'">Similar chords:</span>
+					<span v-else-if="selectionType == 'scale'">Similar scales:</span>
 					<ul style="margin: 0; padding: 0 0 0 20px">
 						<li v-for="alternativeChord in alternativeChords">
-							{{alternativeChord.note.name}}{{alternativeChord.chordName}}
+							{{alternativeChord.note.name}} {{alternativeChord.chordName}}
 						</li>
 					</ul>
 				</div>
@@ -53,6 +54,7 @@ export default {
 		return {
 			notes: require("../json/notes.json"),
 			chords: require("../json/chords.json"),
+			scales: require("../json/scales.json"),
 			intervals: require("../json/intervals.json"),
 			selectedHalfSteps: [],
 			selectedChord: {},
@@ -60,6 +62,7 @@ export default {
 			alternativeChords: [],
 			selectedKey: 0,
 			selectedKeyName: "",
+			selectionType: 'chord',
 			selectedInstruments: ['guitar', 'keyboard'],
 			selectedLabel: 'key',
 			settings: {
@@ -87,14 +90,15 @@ export default {
 					});
 					relativeParsedHalfSteps.sort(this.sortNumber).join(',');
 
-					for (var chordName in this.chords){
-						var is_same = this.chords[chordName].parsedHalfSteps.length == relativeParsedHalfSteps.length && this.chords[chordName].parsedHalfSteps.every(function(element, index){
+					let selection = this.getSelectedSelection();
+					for (var chordName in selection){
+						var is_same = selection[chordName].parsedHalfSteps.length == relativeParsedHalfSteps.length && selection[chordName].parsedHalfSteps.every(function(element, index){
 							return element === relativeParsedHalfSteps[index];
 						}.bind(this));
 						if (is_same){
 							let alternativeChord = {
 								note: this.notes[keyIndex],
-								chord: this.chords[chordName],
+								chord: this.getChord(chordName),
 								chordName: chordName
 							};
 							if (single) return alternativeChord;
@@ -113,7 +117,7 @@ export default {
 				this.selectedKeyName = alternativeChord.note.name;
 				this.selectedKey = alternativeChord.note.number;
 				this.selectedChordName = alternativeChord.chordName;
-				delete this.chords["custom"];
+				this.removeCustomChord();
 			}
 		},
 		setActiveNotes: function (event) {
@@ -134,37 +138,54 @@ export default {
 				note.interval = this.intervals[relativeNoteNumber % 12];
 				note.selected = false;
 			}.bind(this));
-			this.selectedChord.parsedHalfSteps.forEach(function (note, index) {
-				this.notes[(note + this.selectedKey) % 12].selected = true;
-			}.bind(this));
-			this.selectedHalfSteps = this.selectedChord.parsedHalfSteps;
+			if (this.selectedChord.parsedHalfSteps !== undefined){
+				this.selectedChord.parsedHalfSteps.forEach(function (note, index) {
+					this.notes[(note + this.selectedKey) % 12].selected = true;
+				}.bind(this));
+				this.selectedHalfSteps = this.selectedChord.parsedHalfSteps;
+			}
 			this.alternativeChords = this.getAlternativeChords();
 		},
 		updateSelectedChord: function () {
 			this.selectedHalfSteps.sort(this.sortNumber).join(',');
 			var isCustomChord = true;
-			for (var chordName in this.chords){
+			let selection = this.getSelectedSelection();
+			for (var chordName in selection){
 				if (chordName !== undefined){
-					var is_same = this.chords[chordName].parsedHalfSteps.length == this.selectedHalfSteps.length && this.chords[chordName].parsedHalfSteps.every(function(element, index){
+					var is_same = selection[chordName].parsedHalfSteps.length == this.selectedHalfSteps.length && selection[chordName].parsedHalfSteps.every(function(element, index){
 						return element === this.selectedHalfSteps[index];
 					}.bind(this));
 					if (is_same){
 						this.selectedChordName = chordName;
 						this.selectedKeyName = this.notes[this.selectedKey].name;
-						this.selectedChord = this.chords[chordName];
+						this.setSelectedChord(chordName);
 						isCustomChord = false;
-						delete this.chords["custom"];
+						this.removeCustomChord();
 						this.setActiveNotes();
 						return;
 					}
 				}
 			}
 			if(isCustomChord){
-				this.chords["custom"] = {halfSteps: this.selectedHalfSteps, parsedHalfSteps: this.selectedHalfSteps};
+				this.setCustomChord({halfSteps: this.selectedHalfSteps, parsedHalfSteps: this.selectedHalfSteps})
 				this.selectedChordName = "custom";
-				this.selectedChord = this.chords["custom"];
+				this.setSelectedChord("custom");
 			}
 			this.setActiveNotes();
+		},
+		setCustomChord: function(customChord){
+			if (this.selectionType == 'chord'){
+				this.chords["custom"] = customChord;
+			}else if (this.selectionType == 'scale'){
+				this.scales["custom"] = customChord;
+			}
+		},
+		removeCustomChord: function(){
+			if (this.selectionType == 'chord'){
+				delete this.chords["custom"];
+			}else if (this.selectionType == 'scale'){
+				delete this.scales["custom"];
+			}
 		},
 		isSelectedInstrument: function (instrumentName) {
 			let isSelectedInstrument = false;
@@ -174,6 +195,25 @@ export default {
 				}
 			});
 			return isSelectedInstrument;
+		},
+		setSelectedChord: function(chordName){
+			this.selectedChord = this.getChord(chordName);
+		},
+		getChord: function(chordName){
+			if (this.selectionType == 'chord'){
+				return this.chords[chordName];
+			}else if (this.selectionType == 'scale'){
+				return this.scales[chordName];
+			}
+		},
+		getSelectedSelection: function(){
+			let selectedSelection = {};
+			if (this.selectionType == 'chord'){
+				selectedSelection = this.chords;
+			}else if (this.selectionType == 'scale'){
+				selectedSelection = this.scales;
+			}
+			return selectedSelection;
 		}
 	}
 }

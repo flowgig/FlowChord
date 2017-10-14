@@ -1,0 +1,18 @@
+{
+	"major":              {"halfSteps": [0, 2, 4, 5, 7, 9, 11],     "parsedHalfSteps": [0, 2, 4, 5, 7, 9, 11]},
+	"natural minor":      {"halfSteps": [0, 2, 3, 5, 7, 8, 10],     "parsedHalfSteps": [0, 2, 3, 5, 7, 8, 10]},
+	"harmonic minor":     {"halfSteps": [0, 2, 3, 5, 7, 8, 11],     "parsedHalfSteps": [0, 2, 3, 5, 7, 8, 11]},
+	"melodic minor":      {"halfSteps": [0, 2, 3, 5, 7, 9, 11],     "parsedHalfSteps": [0, 2, 3, 5, 7, 9, 11]},
+	"blues":              {"halfSteps": [0, 3, 5, 6, 7, 10],        "parsedHalfSteps": [0, 3, 5, 6, 7, 10]},
+	"major pentatonic":   {"halfSteps": [0, 2, 4, 7, 9],            "parsedHalfSteps": [0, 2, 4, 7, 9]},
+	"minor pentatonic":   {"halfSteps": [0, 3, 5, 7, 10],           "parsedHalfSteps": [0, 3, 5, 7, 10]},
+	"neutral pentatonic": {"halfSteps": [0, 2, 5, 7, 10],           "parsedHalfSteps": [0, 2, 5, 7, 10]},
+	"bebop":              {"halfSteps": [0, 2, 4, 5, 7, 8, 9, 11],  "parsedHalfSteps": [0, 2, 4, 5, 7, 8, 9, 11]},
+	"bebop dorian":       {"halfSteps": [0, 2, 3, 5, 7, 9, 10, 11], "parsedHalfSteps": [0, 2, 3, 5, 7, 9, 10, 11]},
+	"dorian":             {"halfSteps": [0, 1, 3, 5, 7, 9, 10],     "parsedHalfSteps": [0, 1, 3, 5, 7, 9, 10]},
+	"phrygian":           {"halfSteps": [0, 1, 3, 5, 7, 8, 10],     "parsedHalfSteps": [0, 1, 3, 5, 7, 8, 10]},
+	"lydian":             {"halfSteps": [0, 2, 4, 6, 7, 9, 11],     "parsedHalfSteps": [0, 2, 4, 6, 7, 9, 11]},
+	"mixolydian":         {"halfSteps": [0, 2, 4, 5, 7, 9, 10],     "parsedHalfSteps": [0, 2, 4, 5, 7, 9, 10]},
+	"aeolian":            {"halfSteps": [0, 1, 3, 5, 6, 8, 10],     "parsedHalfSteps": [0, 1, 3, 5, 6, 8, 10]},
+	"locrian":            {"halfSteps": [0, 2, 4, 5, 7, 9, 10],     "parsedHalfSteps": [0, 2, 4, 5, 7, 9, 10]}
+}
