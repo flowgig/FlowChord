@@ -1,6 +1,7 @@
 <template>
 	<div id="app">
 		<main-navigation></main-navigation>
+		<settings></settings>
 		<main id="mainContent">
 			<div class="main-content">
 				<!--<interval-select></interval-select> -->
@@ -30,6 +31,7 @@ import ChordSelect from './options/ChordSelect.vue';
 import IntervalSelect from './options/IntervalSelect.vue';
 import Guitar from './instruments/Guitar.vue';
 import Keyboard from './instruments/Keyboard.vue';
+import Settings from './options/Settings.vue';
 
 export default {
 	name: 'app',
@@ -41,6 +43,7 @@ export default {
 		intervalSelect: IntervalSelect,
 		guitar: Guitar,
 		keyboard: Keyboard,
+		settings: Settings
 	},
 	data: function () {
 		return {

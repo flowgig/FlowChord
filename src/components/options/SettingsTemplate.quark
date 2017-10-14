@@ -1,0 +1,119 @@
+import * as quark from "quark-gui";
+
+let InputField = quark.Molecules.FormElements.InputField;
+let SelectList = quark.Molecules.FormElements.SelectList;
+let Modal = quark.Molecules.Messaging.Modal;
+let notes = require("../../json/notes.json");
+
+let noteOptions = [];
+notes.forEach(function(note){
+	noteOptions.push({
+		name: note.name,
+		value: note.number
+	});
+});
+
+let globalSettings = {
+	labelSelect: `
+		<div class="settings-select-container">
+			<label for="selectLabel">Label type</label>
+			<select v-model="$parent.selectedLabel" id="selectLabel">
+				<option value="key">Key</option>
+				<option value="interval">Interval</option>
+				<option value="halfSteps">Half steps</option>
+			</select>
+		</div>
+	`,
+	instrumentSelect: `
+		<div class="settings-select-container">
+			<label for="selectInstrument">Instrument</label>
+			<select v-model="$parent.selectedInstrument" id="selectInstrument">
+				<option value="guitar">Guitar</option>
+				<option value="keyboard">Keyboard</option>
+			</select>
+		</div>
+	`
+}
+
+
+let keyboardSettings = {
+	/*lowestNote: SelectList.getModule({
+		id: "keyboard-settings-lowestNote",
+		name: "keyboard-settings-lowestNote",
+		label: "Lowest note",
+		type: "number",
+		placeholder: "Select a key",
+		options: noteOptions,
+		attributes: [
+		"v-model.number='$parent.settings.keyboard.lowestNote'"
+		]
+	}),
+	keys: InputField.getModule({
+		id: "keyboard-settings-keys",
+		name: "keyboard-settings-keys",
+		label: "Keys",
+		type: "number",
+		placeholder: "61",
+		attributes: [
+		"min='1'",
+		"v-model.number='$parent.settings.keyboard.keys'"
+		]
+	}),*/
+	lowestNoteSelect: `
+		<div class="settings-select-container">
+			<label for="selectKeyboardLowestNote">Lowest note</label>
+			<select v-model="$parent.settings.keyboard.lowestNote" id="selectKeyboardLowestNote">
+				<option v-for="notes in $parent.notes" v-bind:value="notes.number">
+					{{ notes.name }}
+				</option>
+			</select>
+		</div>
+	`,
+	keysSelect: `
+		<div class="settings-select-container">
+			<label for="selectKeyboardKeys">Keys</label>
+			<input type="number" min="1" v-model.number="$parent.settings.keyboard.keys" id="selectKeyboardKeys" />
+		</div>
+	`
+};
+
+let globalSettingsTemplate = `
+<div>
+<h2>Global:</h2>
+${globalSettings.labelSelect}
+${globalSettings.instrumentSelect}
+</div>
+`;
+
+let keyboardSettingsTemplate = `
+<div>
+<h2>Keyboard:</h2>
+${keyboardSettings.keysSelect}
+${keyboardSettings.lowestNoteSelect}
+</div>
+`;
+
+
+let modalContent = `
+${globalSettingsTemplate}
+${keyboardSettingsTemplate}
+`;
+
+
+let modal = Modal.getModule({
+	id: 'SettingsModal',
+	triggerElement: '<span class="open-settings-button"></span>',
+	modalElement: {
+		content: modalContent,
+		scrollable: true,
+		fullscreen: true
+	}
+})
+
+let template = `
+<div>
+${modal}
+</div>
+`;
+
+export default template;
