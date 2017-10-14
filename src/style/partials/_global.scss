@@ -1,0 +1,15 @@
+main{
+	margin-top: 29px;
+	height: -moz-calc(100% - 29px);
+	height: -webkit-calc(100% - 29px);
+	height: calc(100% - 29px);
+	@media only screen and (min-width: 768px){
+		margin-top: 45px;
+		height: -moz-calc(100% - 29px);
+		height: -webkit-calc(100% - 29px);
+		height: calc(100% - 29px);
+	}
+	> .main-content {
+		padding: 0;
+	}
+}
