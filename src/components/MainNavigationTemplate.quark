@@ -42,7 +42,7 @@ let selectLists = {
 	`
 }
 
-let htmlContent = `<div class="navbar-html-content">${selectLists.keySelect}${selectLists.chordSelect}${selectLists.labelSelect}${selectLists.instrumentSelect}</div>`;
+let htmlContent = `<div class="navbar-html-content">${selectLists.keySelect}${selectLists.chordSelect}</div>`;
 
 let header = Header.getModule({
 	id: 'main-header',
