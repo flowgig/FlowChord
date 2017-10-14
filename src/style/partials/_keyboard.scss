@@ -1,11 +1,12 @@
 .keyboard {
     .keys {
-        padding-top: 12px;
         white-space: nowrap;
         overflow-x: auto;
         .key {
             display: inline-block;
-            border: 1px solid #CCC;
+            border: 1px solid #DDD;
+            border-top: none;
+            margin-left: -1px;
             text-align: center;
             height: 180px;
             vertical-align: top;

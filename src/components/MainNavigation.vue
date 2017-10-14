@@ -46,8 +46,6 @@ export default {
     border: none;
     cursor: pointer;
     height: 48px;
-    width: 48px;
-
 }
 .navbar-select option{
     background-color: #f9f9f9;
