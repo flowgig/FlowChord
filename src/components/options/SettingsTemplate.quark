@@ -26,11 +26,11 @@ let globalSettings = {
 	`,
 	instrumentSelect: `
 		<div class="settings-select-container">
-			<label for="selectInstrument">Instrument</label>
-			<select v-model="$parent.selectedInstrument" id="selectInstrument">
-				<option value="guitar">Guitar</option>
-				<option value="keyboard">Keyboard</option>
-			</select>
+			<span>Display instruments: </span>
+			<input id="selectInstrument-guitar" v-model="$parent.selectedInstruments" type="checkbox" value="guitar" />
+			<label for="selectInstrument-guitar">Guitar</label>
+			<input id="selectInstrument-keyboard" v-model="$parent.selectedInstruments" type="checkbox" value="keyboard" />
+			<label for="selectInstrument-keyboard">Keyboard</label>
 		</div>
 	`
 }

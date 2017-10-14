@@ -6,8 +6,12 @@
 			<div class="main-content">
 				<!--<interval-select></interval-select> -->
 				
-				<guitar v-show="selectedInstrument == 'guitar'" v-bind:settings="settings.guitar"></guitar>
-				<keyboard v-show="selectedInstrument == 'keyboard'" v-bind:settings="settings.keyboard"></keyboard>
+				<div class="instrument">
+					<guitar v-show="isSelectedInstrument('guitar')" v-bind:settings="settings.guitar"></guitar>
+				</div>
+				<div class="instrument">
+					<keyboard v-show="isSelectedInstrument('keyboard')" v-bind:settings="settings.keyboard"></keyboard>
+				</div>
 				<div v-show="alternativeChords.length">
 					<span>Similar chords:</span>
 					<ul style="margin: 0; padding: 0 0 0 20px">
@@ -56,7 +60,7 @@ export default {
 			alternativeChords: [],
 			selectedKey: 0,
 			selectedKeyName: "",
-			selectedInstrument: 'guitar',
+			selectedInstruments: ['guitar', 'keyboard'],
 			selectedLabel: 'key',
 			settings: {
 				chords: require("../json/settings-chords.json"),
@@ -161,7 +165,22 @@ export default {
 				this.selectedChord = this.chords["custom"];
 			}
 			this.setActiveNotes();
+		},
+		isSelectedInstrument: function (instrumentName) {
+			let isSelectedInstrument = false;
+			this.selectedInstruments.forEach(function(selectedInstrumentName){
+				if (instrumentName == selectedInstrumentName){
+					isSelectedInstrument = true;
+				}
+			});
+			return isSelectedInstrument;
 		}
 	}
 }
 </script>
+
+<style>
+.instrument{
+	margin-bottom: 25px;
+}
+</style>

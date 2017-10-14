@@ -7,6 +7,11 @@ export default {
 </script>
 
 <style>
+.settings-select-container input[type="checkbox"]  {
+	appearance: checkbox;
+	-moz-appearance: checkbox;
+	-webkit-appearance: checkbox;
+}
 .open-settings-button{
 	font-size: 20pt;
 	display: inline-block;
