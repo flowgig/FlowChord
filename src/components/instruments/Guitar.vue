@@ -1,8 +1,5 @@
 <template>
 	<div id="guitar" class="guitar active">
-		<div>
-			<!--<settings></settings>-->
-		</div>
 		<div class="instrument-view fretboard">
 			<div class="tuners">
 				<div class="fret fretnumber">
@@ -37,13 +34,11 @@
 
 <script>
 
-import Settings from './guitar/Settings.vue';
 import Fret from './guitar/Fret.vue';
 
 export default {
 	name: 'Guitar',
 	components: {
-		settings: Settings,
 		fret: Fret
 	},
 	props: ['settings']

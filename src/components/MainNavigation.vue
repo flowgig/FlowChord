@@ -1,20 +1,10 @@
-<!--<template>
-	<div v-html="htmlContent"></div>
-</template>
--->
 <script>
 import * as quark from 'quark-gui';
-import ChordSelect from './options/ChordSelect.vue';
 import MainNavigationTemplate from "./MainNavigationTemplate.quark";
-
 
 export default {
     name: 'MainNavigation',
     template: MainNavigationTemplate,
-    components: {
-        chordSelect: ChordSelect
-    }
-
 }
 </script>
 

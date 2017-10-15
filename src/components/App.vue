@@ -31,8 +31,6 @@
 import * as quark from 'quark-gui';
 import MainNavigation from './MainNavigation.vue';
 import MainFooter from './MainFooter.vue';
-import KeySelect from './options/KeySelect.vue';
-import ChordSelect from './options/ChordSelect.vue';
 import IntervalSelect from './options/IntervalSelect.vue';
 import Guitar from './instruments/Guitar.vue';
 import Keyboard from './instruments/Keyboard.vue';
@@ -43,8 +41,6 @@ export default {
 	components: {
 		mainNavigation: MainNavigation,
 		mainFooter: MainFooter,
-		keySelect: KeySelect,
-		chordSelect: ChordSelect,
 		intervalSelect: IntervalSelect,
 		guitar: Guitar,
 		keyboard: Keyboard,
@@ -66,7 +62,6 @@ export default {
 			selectedInstruments: ['guitar', 'keyboard'],
 			selectedLabel: 'key',
 			settings: {
-				chords: require("../json/settings-chords.json"),
 				guitar: require("../json/settings-guitar.json"),
 				keyboard: require("../json/settings-keyboard.json")
 			}
