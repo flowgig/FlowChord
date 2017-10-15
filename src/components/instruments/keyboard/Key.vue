@@ -40,7 +40,8 @@ export default {
 			return this.$parent.$parent.notes[this.parsedKeyNumber].name;
 		},
 		parsedKeyNumber: function (){
-			return (this.keyNumber + this.$parent.settings.lowestNote) % 12;
+			let lowestNote = parseInt(this.$parent.settings.lowestNote);
+			return (this.keyNumber + lowestNote) % 12;
 		}
 	},
 }

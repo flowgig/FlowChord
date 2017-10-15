@@ -2,6 +2,7 @@ import * as quark from "quark-gui";
 
 let InputField = quark.Molecules.FormElements.InputField;
 let SelectList = quark.Molecules.FormElements.SelectList;
+let Checkbox = quark.Molecules.FormElements.Checkbox;
 let Modal = quark.Molecules.Messaging.Modal;
 let notes = require("../../json/notes.json");
 
@@ -14,48 +15,68 @@ notes.forEach(function(note){
 });
 
 let globalSettings = {
-	selectionTypeSelect: `
-		<div class="settings-select-container">
-			<label for="selectLabel">Selection type</label>
-			<select v-model="$parent.selectionType" id="selectionTypeLabel">
-				<option value="chord">Chord</option>
-				<option value="scale">Scale</option>
-			</select>
-		</div>
-	`,
-	labelSelect: `
-		<div class="settings-select-container">
-			<label for="selectLabel">Label type</label>
-			<select v-model="$parent.selectedLabel" id="selectLabel">
-				<option value="key">Key</option>
-				<option value="interval">Interval</option>
-				<option value="halfSteps">Half steps</option>
-			</select>
-		</div>
-	`,
-	instrumentSelect: `
-		<div class="settings-select-container">
-			<span>Display instruments: </span>
-			<input id="selectInstrument-guitar" v-model="$parent.selectedInstruments" type="checkbox" value="guitar" />
-			<label for="selectInstrument-guitar">Guitar</label>
-			<input id="selectInstrument-keyboard" v-model="$parent.selectedInstruments" type="checkbox" value="keyboard" />
-			<label for="selectInstrument-keyboard">Keyboard</label>
-		</div>
-	`
+	selectionType: SelectList.getModule({
+		id: "global-settings-selectionType",
+		name: "global-settings-selectionType",
+		label: "Selection type",
+		placeholder: "Choose selection type",
+		options: [
+		{name: 'Chord', value: 'chord'},
+		{name: 'Scale', value: 'scale'}
+		],
+		vueBindings: {
+			value: '$parent.selectionType'
+		}
+	}),
+	labelType: SelectList.getModule({
+		id: "global-settings-labelType",
+		name: "global-settings-labelType",
+		label: "Label type",
+		placeholder: "Choose label type",
+		options: [
+		{name: 'Key', value: 'key'},
+		{name: 'Interval', value: 'interval'},
+		{name: 'Half steps', value: 'halfSteps'}
+		],
+		vueBindings: {
+			value: '$parent.selectedLabel'
+		}
+	}),
+	instrumentSelect: {
+		guitar: Checkbox.getModule({
+			id: 'selectInstrument-guitar',
+			name: 'selectIntstrument',
+			label: 'Guitar',
+			value: 'guitar',
+			vueBindings: {
+				value: '$parent.selectedInstruments'
+			}
+		}),
+		keyboard: Checkbox.getModule({
+			id: 'selectInstrument-keyboard',
+			name: 'selectIntstrument',
+			label: 'Keyboard',
+			value: 'keyboard',
+			vueBindings: {
+				value: '$parent.selectedInstruments'
+			}
+		})
+	}
 }
 
 
 let keyboardSettings = {
-	/*lowestNote: SelectList.getModule({
+	lowestNote: SelectList.getModule({
 		id: "keyboard-settings-lowestNote",
 		name: "keyboard-settings-lowestNote",
 		label: "Lowest note",
-		type: "number",
 		placeholder: "Select a key",
+		type: "text",
+		searchable: true,
 		options: noteOptions,
-		attributes: [
-		"v-model.number='$parent.settings.keyboard.lowestNote'"
-		]
+		vueBindings: {
+			value: '$parent.settings.keyboard.lowestNote'
+		}
 	}),
 	keys: InputField.getModule({
 		id: "keyboard-settings-keys",
@@ -65,48 +86,61 @@ let keyboardSettings = {
 		placeholder: "61",
 		attributes: [
 		"min='1'",
+		"max='96'",
 		"v-model.number='$parent.settings.keyboard.keys'"
 		]
-	}),*/
-	lowestNoteSelect: `
-		<div class="settings-select-container">
-			<label for="selectKeyboardLowestNote">Lowest note</label>
-			<select v-model="$parent.settings.keyboard.lowestNote" id="selectKeyboardLowestNote">
-				<option v-for="notes in $parent.notes" v-bind:value="notes.number">
-					{{ notes.name }}
-				</option>
-			</select>
-		</div>
-	`,
-	keysSelect: `
-		<div class="settings-select-container">
-			<label for="selectKeyboardKeys">Keys</label>
-			<input type="number" min="1" v-model.number="$parent.settings.keyboard.keys" id="selectKeyboardKeys" />
-		</div>
-	`
+	})
 };
+
+let guitarSettings = {
+	frets: InputField.getModule({
+		id: "guitar-settings-frets",
+		name: "guitar-settings-frets",
+		label: "Frets",
+		type: "number",
+		placeholder: "22",
+		attributes: [
+		"min='1'",
+		"max='50'",
+		"v-model.number='$parent.settings.guitar.frets'"
+		]
+	})
+};
+
 
 let globalSettingsTemplate = `
 <div>
 <h2>Global:</h2>
-${globalSettings.selectionTypeSelect}
-${globalSettings.labelSelect}
-${globalSettings.instrumentSelect}
+${globalSettings.selectionType}
+${globalSettings.labelType}
+<span>Show instrument:</span>
+${globalSettings.instrumentSelect.guitar}
+${globalSettings.instrumentSelect.keyboard}
 </div>
 `;
 
 let keyboardSettingsTemplate = `
 <div>
 <h2>Keyboard:</h2>
-${keyboardSettings.keysSelect}
-${keyboardSettings.lowestNoteSelect}
+${keyboardSettings.keys}
+${keyboardSettings.lowestNote}
+</div>
+`;
+
+let guitarSettingsTemplate = `
+<div>
+<h2>Guitar:</h2>
+${guitarSettings.frets}
 </div>
 `;
 
 
 let modalContent = `
+<div class="modal-content">
 ${globalSettingsTemplate}
 ${keyboardSettingsTemplate}
+${guitarSettingsTemplate}
+</div>
 `;
 
 

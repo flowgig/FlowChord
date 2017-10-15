@@ -21,7 +21,7 @@ export default {
 	position: fixed;
 	right: 0;
 	top: 0;
-	z-index: 2;
+	z-index: 3;
 }
 .open-settings-button:after{
 	line-height: 48px;
@@ -47,6 +47,10 @@ export default {
 	.open-settings-button{
 		padding: 0 33px;
 	}
+}
+
+.modal-content{
+	padding: 0 15px;
 }
 
 </style>
