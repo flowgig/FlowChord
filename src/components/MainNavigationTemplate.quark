@@ -26,25 +26,6 @@ let selectLists = {
 				<option v-for="(halfSteps, name) in $parent.scales" v-bind:value="halfSteps">{{name}}</option>
 			</select>
 		</div>
-	`,
-	labelSelect: `
-		<div class="navbar-select-container">
-			<label for="selectLabel" class="navbar-label">Label type</label>
-			<select v-model="$parent.selectedLabel" id="selectLabel" class="navbar-select">
-				<option value="key">Key</option>
-				<option value="interval">Interval</option>
-				<option value="halfSteps">Half steps</option>
-			</select>
-		</div>
-	`,
-	instrumentSelect: `
-		<div class="navbar-select-container">
-			<label for="selectInstrument" class="navbar-label">Instrument</label>
-			<select v-model="$parent.selectedInstrument" id="selectInstrument" class="navbar-select">
-				<option value="guitar">Guitar</option>
-				<option value="keyboard">Keyboard</option>
-			</select>
-		</div>
 	`
 }
 
