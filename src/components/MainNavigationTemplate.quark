@@ -33,7 +33,7 @@ let htmlContent = `<div class="navbar-html-content">${selectLists.keySelect}${se
 
 let header = Header.getModule({
 	id: 'main-header',
-	theme: 'primary',
+	theme: 'dark',
 	logo: {
 		image: {
             src: 'src/images/svg/flowchord-logo-white.svg',
