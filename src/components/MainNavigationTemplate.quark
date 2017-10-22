@@ -34,13 +34,13 @@ let htmlContent = `<div class="navbar-html-content">${selectLists.keySelect}${se
 let header = Header.getModule({
 	id: 'main-header',
 	theme: 'primary',
-	/*logo: {
+	logo: {
 		image: {
-            src: "", //require('../../images/svg/chord-finder-logo-white.svg'),
-            alt: 'ChordFinder logo'
+            src: 'src/images/svg/flowchord-logo-white.svg',
+            alt: 'FlowChord logo'
         },
-        url: "/dashboard"
-    },*/
+        url: "#"
+    },
     htmlContent: htmlContent,
     sidebar: {
     	sidebarNavigation: {
