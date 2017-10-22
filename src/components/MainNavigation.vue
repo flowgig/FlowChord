@@ -9,6 +9,10 @@ export default {
 </script>
 
 <style>
+header img {
+    padding: 7px 0;
+    display: none;
+}
 .navbar-html-content{
     margin: 0;
     display: inline-block;
@@ -80,6 +84,12 @@ export default {
     }
 }
 
+@media (min-width: 480px){
+    header img {
+        display: block;
+    }
+}
+
 @media (min-width: 768px){
     .navbar-html-content{
         padding: 7px 0;
@@ -94,4 +104,6 @@ export default {
         padding: 3px 10px;
     }
 }
+
+
 </style>
