@@ -20,6 +20,28 @@ export default {
     padding: 0;
 }
 
+.navbar-divider{
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    border-right: 1px solid rgba(0, 0, 0, 0.08);
+    width: 1px;
+    height: 34px;
+    display: inline-block;
+    margin: 7px 15px;
+}
+
+.navbar-select-container:after{
+    font-family: FontAwesome;
+    content: "\F078";
+    position: relative;
+    float: right;
+    top: -25px;
+    right: 8px;
+    -moz-transition: transform 0.2s ease-in-out, top 0.2s ease-in-out;
+    -o-transition: transform 0.2s ease-in-out, top 0.2s ease-in-out;
+    -webkit-transition: transform 0.2s ease-in-out, top 0.2s ease-in-out;
+    transition: transform 0.2s ease-in-out, top 0.2s ease-in-out;
+}
+
 .navbar-label{
     display: none;
     font-size: 12px;
