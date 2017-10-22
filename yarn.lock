@@ -1779,13 +1779,7 @@ faye-websocket@~0.11.0:
   dependencies:
     websocket-driver ">=0.5.1"
 
-file-loader@0.11.2:
-  version "0.11.2"
-  resolved "https://registry.yarnpkg.com/file-loader/-/file-loader-0.11.2.tgz#4ff1df28af38719a6098093b88c82c71d1794a34"
-  dependencies:
-    loader-utils "^1.0.2"
-
-file-loader@^1.1.4:
+file-loader@1.1.5, file-loader@^1.1.4:
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/file-loader/-/file-loader-1.1.5.tgz#91c25b6b6fbe56dae99f10a425fd64933b5c9daa"
   dependencies:
@@ -4266,10 +4260,10 @@ supports-color@^4.0.0, supports-color@^4.2.1, supports-color@^4.4.0:
     has-flag "^2.0.0"
 
 svg-url-loader@^2.0.2:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/svg-url-loader/-/svg-url-loader-2.2.0.tgz#107e02a3e5127c23e5a0a76ba32392df39f5ad98"
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/svg-url-loader/-/svg-url-loader-2.2.1.tgz#2ad8dc8d38652e4e21d579ed3ffc3d7d4091568d"
   dependencies:
-    file-loader "0.11.2"
+    file-loader "1.1.5"
     loader-utils "1.1.0"
 
 svgo@^0.7.0:
