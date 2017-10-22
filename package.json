@@ -12,7 +12,7 @@
     "url": "git+https://github.com/flowgig/FlowChord.git"
   },
   "author": "Benjamin Dehli <superelg@gmail.com>",
-  "license": "ISC",
+  "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/flowgig/FlowChord/issues"
   },
