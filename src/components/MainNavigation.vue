@@ -28,7 +28,7 @@ export default {
     display: inline-block;
     margin: 7px 15px;
 }
-
+/*
 .navbar-select-container:after{
     font-family: FontAwesome;
     content: "\F078";
@@ -40,7 +40,7 @@ export default {
     -o-transition: transform 0.2s ease-in-out, top 0.2s ease-in-out;
     -webkit-transition: transform 0.2s ease-in-out, top 0.2s ease-in-out;
     transition: transform 0.2s ease-in-out, top 0.2s ease-in-out;
-}
+}*/
 
 .navbar-label{
     display: none;
