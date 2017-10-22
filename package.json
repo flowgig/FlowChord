@@ -1,5 +1,5 @@
 {
-  "name": "chord-finder-app-test",
+  "name": "flow-chord",
   "version": "1.0.0",
   "description": "",
   "main": "Gulpfile.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/benjamindehli/chord-finder-app-test.git"
+    "url": "git+https://github.com/flowgig/FlowChord.git"
   },
   "author": "Benjamin Dehli <superelg@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/benjamindehli/chord-finder-app-test/issues"
+    "url": "https://github.com/flowgig/FlowChord/issues"
   },
-  "homepage": "https://github.com/benjamindehli/chord-finder-app-test#readme",
+  "homepage": "https://github.com/flowgig/FlowChord#readme",
   "dependencies": {
     "vue": "^2.2.1"
   },
