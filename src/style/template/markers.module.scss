@@ -1,75 +1,94 @@
-.marker {
+@import "../abstracts/_all.scss";
+
+:local(.marker) {
   border-radius: 6px;
   padding: 2px 4px;
   color: white;
   background-color: #272b2f;
-  &.marker-color-0 {
+
+  &:local(.markerColor-0) {
     background-color: $marker-color-0;
   }
-  &.marker-color-1 {
+
+  &:local(.markerColor-1) {
     background-color: $marker-color-1;
   }
-  &.marker-color-2 {
+
+  &:local(.markerColor-2) {
     background-color: $marker-color-2;
   }
-  &.marker-color-3 {
+
+  &:local(.markerColor-3) {
     background-color: $marker-color-3;
   }
-  &.marker-color-4 {
+
+  &:local(.markerColor-4) {
     background-color: $marker-color-4;
   }
-  &.marker-color-5 {
+
+  &:local(.markerColor-5) {
     background-color: $marker-color-5;
   }
-  &.marker-color-6 {
+
+  &:local(.markerColor-6) {
     background-color: $marker-color-6;
-  }  
-  &.marker-color-7 {
+  }
+
+  &:local(.markerColor-7) {
     background-color: $marker-color-7;
   }
-  &.marker-color-8 {
+
+  &:local(.markerColor-8) {
     background-color: $marker-color-8;
   }
-  &.marker-color-9 {
+
+  &:local(.markerColor-9) {
     background-color: $marker-color-9;
   }
-  &.marker-color-10 {
+
+  &:local(.markerColor-10) {
     background-color: $marker-color-10;
   }
-  &.marker-color-11 {
+
+  &:local(.markerColor-11) {
     background-color: $marker-color-11;
   }
-  &.no-marker{
+
+  &:local(.noMarker) {
     background-color: transparent;
     color: #333;
-    &:hover{
+
+    &:hover {
       background-color: #EEE;
     }
   }
 }
 
-.key {
-  &.keycolor-black {
-    .marker {
+:local(.key) {
+  &:local(.keycolorBlack) {
+    :local(.marker) {
       top: 15px;
-      &.no-marker{
+
+      &:local(.noMarker) {
         background-color: transparent;
         color: #FFF;
-        &:hover{
+
+        &:hover {
           background-color: #444;
         }
       }
     }
   }
-  &.keycolor-white {
+
+  &:local(.keycolorWhite) {
     .marker {
       top: 115px;
     }
   }
-  .marker {
+
+  :local(.marker) {
     position: relative;
     display: block;
     margin: auto;
   }
 }
-
