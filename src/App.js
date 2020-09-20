@@ -14,6 +14,7 @@ import NotFound from 'components/routes/NotFound';
 
 // Partials
 import NavigationBar from 'components/partials/NavigationBar';
+import SideBar from 'components/partials/SideBar';
 
 // Stylesheets
 import style from 'App.module.scss';
@@ -33,6 +34,7 @@ class App extends Component {
       <ConnectedRouter history={history}>
         <div className={style.app}>
           <NavigationBar />
+          <SideBar />
           <Switch>
             <Route exact={true} path="/" render={(props) => (<Home {...props}/>)}/>
             <Route render={() => (<NotFound/>)}/>
