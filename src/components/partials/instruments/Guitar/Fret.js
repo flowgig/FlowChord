@@ -4,7 +4,8 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
 // Actions
-import {selectNote, deSelectNote} from 'actions/NotesActions';
+import {toggleNote} from 'actions/NotesActions';
+import {updateSelectedChordNameFromNotes} from 'actions/SelectedChordNameActions';
 
 // Stylesheets
 import style from 'components/partials/instruments/Guitar/Fret.module.scss';
@@ -31,8 +32,9 @@ class Fret extends Component {
 		return this.props.notes[keyNumber].name;
 	}
 
-  handleFretOnChange(checked, noteNumber){
-    checked ? this.props.selectNote(noteNumber) : this.props.deSelectNote(noteNumber);
+  handleFretOnChange(checked, noteNumber, selectedKeyNumber){
+    const newNotes = this.props.toggleNote(noteNumber, checked);
+    this.props.updateSelectedChordNameFromNotes(newNotes, selectedKeyNumber);
   }
 
   render() {
@@ -63,7 +65,7 @@ class Fret extends Component {
 			</label>
 			<input id={inputId}
   			type="checkbox"
-  			onChange={event => this.handleFretOnChange(event.target.checked, keyNumber)}
+  			onChange={event => this.handleFretOnChange(event.target.checked, keyNumber, this.props.selectedKeyNumber)}
   			checked={note.selected}  />
 	</div>)
   }
@@ -83,8 +85,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-    selectNote,
-    deSelectNote
+    toggleNote,
+    updateSelectedChordNameFromNotes
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Fret);
