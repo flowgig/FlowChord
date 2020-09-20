@@ -63,7 +63,7 @@ class Fret extends Component {
 			</label>
 			<input id={inputId}
   			type="checkbox"
-  			onChange={event => this.handleFretOnChange(event.target.checked, halfSteps)}
+  			onChange={event => this.handleFretOnChange(event.target.checked, keyNumber)}
   			checked={note.selected}  />
 	</div>)
   }
