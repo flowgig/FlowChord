@@ -15,12 +15,12 @@ class Fret extends Component {
   componentDidUpdate(prevProps){
   }
 
-  getHalfSteps(fretNumber, tunerNumber, selectedKey){
+  getHalfSteps(fretNumber, tunerNumber, selectedKeyNumber){
 		let halfSteps = null;
-		if((fretNumber + tunerNumber - selectedKey.number - 1) % 12 >= 0){
-			halfSteps = (fretNumber + tunerNumber - selectedKey.number - 1) % 12;
+		if((fretNumber + tunerNumber - selectedKeyNumber - 1) % 12 >= 0){
+			halfSteps = (fretNumber + tunerNumber - selectedKeyNumber - 1) % 12;
 		}else{
-			halfSteps = (12 + fretNumber + tunerNumber - selectedKey.number - 1) % 12;
+			halfSteps = (12 + fretNumber + tunerNumber - selectedKeyNumber - 1) % 12;
 		}
 		return halfSteps;
 	}
@@ -40,7 +40,7 @@ class Fret extends Component {
     const keyNumber = this.getKeyNumber(this.props.fretNumber, this.props.tunerNumber);
     const keyName = this.getKeyName(keyNumber);
     const note = this.props.notes[keyNumber];
-    const halfSteps = this.getHalfSteps(this.props.fretNumber, this.props.tunerNumber, this.props.selectedKey);
+    const halfSteps = this.getHalfSteps(this.props.fretNumber, this.props.tunerNumber, this.props.selectedKeyNumber);
     const markerClass = note.selected ? `${markerStyle.marker} ${markerStyle.markerColor} ${markerStyle[halfSteps]}` : `${markerStyle.marker} ${markerStyle.noMarker}`;
     const label = () => {
       switch(this.props.selectedLabel) {
@@ -79,7 +79,7 @@ const mapStateToProps = state => ({
   notes: state.notes,
   selectedLabel: state.selectedLabel,
   selectedHalfSteps: state.selectedHalfSteps,
-  selectedKey: state.selectedKey
+  selectedKeyNumber: state.selectedKeyNumber
 });
 
 const mapDispatchToProps = {

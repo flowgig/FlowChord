@@ -8,7 +8,8 @@ import GuitarTunersReducer from 'reducers/GuitarTunersReducer';
 import IntervalsReducer from 'reducers/IntervalsReducer';
 import NotesReducer from 'reducers/NotesReducer';
 import ScalesReducer from 'reducers/ScalesReducer';
-import SelectedKeyReducer from 'reducers/SelectedKeyReducer';
+import SelectedChordNameReducer from 'reducers/SelectedChordNameReducer';
+import SelectedKeyNumberReducer from 'reducers/SelectedKeyNumberReducer';
 import SelectedLabelReducer from 'reducers/SelectedLabelReducer';
 import SelectionTypeReducer from 'reducers/SelectionTypeReducer';
 import SettingsGuitarReducer from 'reducers/SettingsGuitarReducer';
@@ -21,7 +22,8 @@ export default(history) => combineReducers({
   intervals: IntervalsReducer,
   notes: NotesReducer,
   scales: ScalesReducer,
-  selectedKey: SelectedKeyReducer,
+  selectedChordName: SelectedChordNameReducer,
+  selectedKeyNumber: SelectedKeyNumberReducer,
   selectedLabel: SelectedLabelReducer,
   selectionType: SelectionTypeReducer,
   settingsGuitar: SettingsGuitarReducer,
