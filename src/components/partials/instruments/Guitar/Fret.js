@@ -3,12 +3,18 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
+// Actions
+import {selectNote, deSelectNote} from 'actions/NotesActions';
+
 // Stylesheets
 import style from 'components/partials/instruments/Guitar/Fret.module.scss';
 import markerStyle from 'style/template/markers.module.scss';
 
 
 class Fret extends Component {
+  componentDidUpdate(prevProps){
+  }
+
   getHalfSteps(fretNumber, tunerNumber, selectedKey){
 		let halfSteps = null;
 		if((fretNumber + tunerNumber - selectedKey.number - 1) % 12 >= 0){
@@ -25,9 +31,8 @@ class Fret extends Component {
 		return this.props.notes[keyNumber].name;
 	}
 
-  handleFretOnChange(checked, value){
-    console.log("checked", checked)
-    console.log("value", value)
+  handleFretOnChange(checked, noteNumber){
+    checked ? this.props.selectNote(noteNumber) : this.props.deSelectNote(noteNumber);
   }
 
   render() {
@@ -36,7 +41,7 @@ class Fret extends Component {
     const keyName = this.getKeyName(keyNumber);
     const note = this.props.notes[keyNumber];
     const halfSteps = this.getHalfSteps(this.props.fretNumber, this.props.tunerNumber, this.props.selectedKey);
-    const markerClass = note.selected ? `${markerStyle.marker} ${markerStyle.markerColor-[halfSteps]}` : `${markerStyle.marker} ${markerStyle.noMarker}`;
+    const markerClass = note.selected ? `${markerStyle.marker} ${markerStyle.markerColor} ${markerStyle[halfSteps]}` : `${markerStyle.marker} ${markerStyle.noMarker}`;
     const label = () => {
       switch(this.props.selectedLabel) {
         case 'key':
@@ -50,8 +55,7 @@ class Fret extends Component {
       }
     }
 
-    return (<div>
-		<span>
+    return (<div className={style.fret}>
 			<label htmlFor={inputId}>
 				<span className={markerClass}>
   				{label()}
@@ -60,8 +64,7 @@ class Fret extends Component {
 			<input id={inputId}
   			type="checkbox"
   			onChange={event => this.handleFretOnChange(event.target.checked, halfSteps)}
-  			value={halfSteps}  />
-		</span>
+  			checked={note.selected}  />
 	</div>)
   }
 }
@@ -79,5 +82,9 @@ const mapStateToProps = state => ({
   selectedKey: state.selectedKey
 });
 
+const mapDispatchToProps = {
+    selectNote,
+    deSelectNote
+};
 
-export default connect(mapStateToProps, null)(Fret);
+export default connect(mapStateToProps, mapDispatchToProps)(Fret);
