@@ -1,0 +1,15 @@
+@import "../../../../style/abstracts/_all.scss";
+
+:local(.fret){
+  label {
+    display: block;
+    cursor: pointer;
+    span {
+      display: block;
+    }
+  }
+  input {
+    @include appearance(none);
+    position: absolute;
+  }
+}
