@@ -12,13 +12,6 @@ import { updateTunerNumber, updateGuitarTuners} from 'actions/GuitarTunersAction
 import style from 'components/partials/instruments/Guitar.module.scss';
 
 class Guitar extends Component {
-  componentDidUpdate(prevProps){
-    console.log("componentDidUpdate");
-  }
-
-  componentDidMount(){
-    console.log("componentDidMount");
-  }
 
   handleTunerChange(stringNumber, tunerNumber){
     this.props.updateTunerNumber(stringNumber, tunerNumber)
