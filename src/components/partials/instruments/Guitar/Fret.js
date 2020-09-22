@@ -32,9 +32,9 @@ class Fret extends Component {
 		return this.props.notes[keyNumber].name;
 	}
 
-  handleFretOnChange(checked, noteNumber, selectedKeyNumber){
+  handleFretOnChange(checked, noteNumber, selectedKeyNumber, chords){
     const newNotes = this.props.toggleNote(noteNumber, checked);
-    this.props.updateSelectedChordNameFromNotes(newNotes, selectedKeyNumber);
+    this.props.updateSelectedChordNameFromNotes(newNotes, selectedKeyNumber, chords);
   }
 
   render() {
@@ -56,6 +56,7 @@ class Fret extends Component {
           return '';
       }
     }
+    const noteSelection = this.props.selectionType === 'chord' ? this.props.chords : this.props.scales;
 
     return (<div className={style.fret}>
 			<label htmlFor={inputId}>
@@ -65,7 +66,7 @@ class Fret extends Component {
 			</label>
 			<input id={inputId}
   			type="checkbox"
-  			onChange={event => this.handleFretOnChange(event.target.checked, keyNumber, this.props.selectedKeyNumber)}
+  			onChange={event => this.handleFretOnChange(event.target.checked, keyNumber, this.props.selectedKeyNumber, noteSelection)}
   			checked={note.selected}  />
 	</div>)
   }
@@ -79,6 +80,9 @@ Fret.propTypes = {
 
 const mapStateToProps = state => ({
   notes: state.notes,
+  chords: state.chords,
+  scales: state.scales,
+  selectionType: state.selectionType,
   selectedLabel: state.selectedLabel,
   selectedHalfSteps: state.selectedHalfSteps,
   selectedKeyNumber: state.selectedKeyNumber
