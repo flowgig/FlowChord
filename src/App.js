@@ -4,6 +4,7 @@ import {Provider} from 'react-redux';
 import {Route, Switch} from 'react-router';
 import {ConnectedRouter} from 'connected-react-router';
 import WebFont from 'webfontloader';
+import { ThemeProvider } from '@material-ui/styles';
 
 // Utils
 import configureStore, {history} from 'utils/configureStore';
@@ -13,11 +14,12 @@ import Home from 'components/routes/Home';
 import NotFound from 'components/routes/NotFound';
 
 // Partials
-import NavigationBar from 'components/partials/NavigationBar';
+import MainAppBar from 'components/partials/MainAppBar';
 import SideBar from 'components/partials/SideBar';
 
 // Stylesheets
 import style from 'App.module.scss';
+import theme from 'theme';
 
 WebFont.load({
   google: {
@@ -32,14 +34,16 @@ class App extends Component {
   render() {
     return (<Provider store={store}>
       <ConnectedRouter history={history}>
+        <ThemeProvider theme={theme}>
         <div className={style.app}>
-          <NavigationBar />
+          <MainAppBar />
           <SideBar />
           <Switch>
             <Route exact={true} path="/" render={(props) => (<Home {...props}/>)}/>
             <Route render={() => (<NotFound/>)}/>
           </Switch>
         </div>
+        </ThemeProvider>
       </ConnectedRouter>
     </Provider>);
   }

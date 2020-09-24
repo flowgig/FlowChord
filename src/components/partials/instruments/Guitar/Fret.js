@@ -3,6 +3,10 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
+import Button from '@material-ui/core/Button';
+import { ThemeProvider } from '@material-ui/core/styles';
+
+
 // Actions
 import {toggleNote} from 'actions/NotesActions';
 import {updateSelectedChordNameFromNotes} from 'actions/SelectedChordNameActions';
@@ -10,6 +14,8 @@ import {updateSelectedChordNameFromNotes} from 'actions/SelectedChordNameActions
 // Stylesheets
 import style from 'components/partials/instruments/Guitar/Fret.module.scss';
 import markerStyle from 'style/template/markers.module.scss';
+
+import {markerColorThemes} from 'theme';
 
 
 class Fret extends Component {
@@ -44,6 +50,7 @@ class Fret extends Component {
     const note = this.props.notes[keyNumber];
     const halfSteps = this.getHalfSteps(this.props.fretNumber, this.props.tunerNumber, this.props.selectedKeyNumber);
     const markerClass = note.selected ? `${markerStyle.marker} ${markerStyle.markerColor} ${markerStyle[halfSteps]}` : `${markerStyle.marker} ${markerStyle.noMarker}`;
+    const markerColor = note.selected ? `palette.markerColor${halfSteps}` : `default`;
     const label = () => {
       switch(this.props.selectedLabel) {
         case 'key':
@@ -60,14 +67,14 @@ class Fret extends Component {
 
     return (<div className={style.fret}>
 			<label htmlFor={inputId}>
-				<span className={markerClass}>
-  				{label()}
+				<span>
+        <ThemeProvider theme={markerColorThemes[halfSteps]}>
+          <Button color="primary" disableElevation variant={note.selected ? 'contained' : 'text'} onClick={event => this.handleFretOnChange(!note.selected, keyNumber, this.props.selectedKeyNumber, noteSelection)}>{label()}</Button>
+        </ThemeProvider>
 				</span>
 			</label>
-			<input id={inputId}
-  			type="checkbox"
-  			onChange={event => this.handleFretOnChange(event.target.checked, keyNumber, this.props.selectedKeyNumber, noteSelection)}
-  			checked={note.selected}  />
+
+
 	</div>)
   }
 }
