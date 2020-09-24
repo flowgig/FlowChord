@@ -1,0 +1,70 @@
+.grow {
+  flex-grow: 1;
+  .appBar{
+    z-index: 1201;
+    transition: width 195ms cubic-bezier(0.4, 0, 0.6, 1) 0ms,margin 195ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+  }
+
+  .appBarShift{
+    width: calc(100% - 240px);
+    transition: width 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms,margin 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+    margin-left: 240px;
+  }
+
+
+  .menuButton{
+    margin-right: 36px;
+  }
+  .menuButtonHidden{
+    display: none;
+  }
+  .title{
+    display: none;
+    @media (min-width: 600px){
+      display: block;
+    }
+  }
+  .sectionDesktop{
+    display: none;
+    @media (min-width: 960px) {
+      display: flex;
+    }
+  }
+  .sectionMobile{
+    display: flex;
+    @media (min-width: 960px) {
+      display: none;
+    }
+  }
+
+
+  .drawerPaper{
+    width: 240px;
+    position: relative;
+    transition: width 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+    white-space: nowrap;
+  }
+
+  .drawerPaperClose{
+    width: 56px;
+    overflow-x: hidden;
+    transition: width 195ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+    @media (min-width: 600px){
+      width: 72px;
+    }
+  }
+
+  .toolbarIcon{
+    display: flex;
+    padding: 0 8px;
+    min-height: 56px;
+    align-items: center;
+    justify-content: flex-end;
+    @media (min-width: 0px) and (orientation: landscape) {
+      min-height: 48px;
+    }
+    @media (min-width: 600px){
+      min-height: 64px;
+    }
+  }
+}
