@@ -1,0 +1,29 @@
+:local(.selection) {
+  :local(.formControl) {
+    margin: 0 20px;
+    min-width: 120px;
+    color: #fff;
+
+    label {
+      color: #fff;
+    }
+
+    :local(.select) {
+      color: #fff;
+
+      &::before {
+        border-color: #fff;
+      }
+
+      &:hover {
+        &::before {
+          border-color: #fff;
+        }
+      }
+
+      svg {
+        color: #fff;
+      }
+    }
+  }
+}
