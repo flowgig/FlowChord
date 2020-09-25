@@ -15,7 +15,6 @@ import NotFound from 'components/routes/NotFound';
 
 // Partials
 import MainAppBar from 'components/partials/MainAppBar';
-import SideBar from 'components/partials/SideBar';
 
 // Stylesheets
 import style from 'App.module.scss';
@@ -37,7 +36,6 @@ class App extends Component {
         <ThemeProvider theme={theme}>
         <div className={style.app}>
           <MainAppBar />
-          <SideBar />
           <Switch>
             <Route exact={true} path="/" render={(props) => (<Home {...props}/>)}/>
             <Route render={() => (<NotFound/>)}/>
