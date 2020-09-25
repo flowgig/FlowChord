@@ -17,7 +17,7 @@ import style from 'components/partials/instruments/Guitar/Fret.module.scss';
 class Fret extends Component {
 
 	getKeyNumber(fretNumber, tunerNumber){
-		return (fretNumber + tunerNumber - 1) % 12;
+		return (fretNumber + tunerNumber) % 12;
 	}
 
   render() {

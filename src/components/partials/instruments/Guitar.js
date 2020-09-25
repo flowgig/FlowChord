@@ -28,7 +28,7 @@ class Guitar extends Component {
             {optionElements}
           </select>
           <div className={style.fret}>
-            <Fret fretNumber={1} tunerNumber={tuner.number} stringNumber={parseInt(stringNumber)} />
+            <Fret fretNumber={0} tunerNumber={tuner.number} stringNumber={parseInt(stringNumber)} />
           </div>
         </div>)
       })
@@ -41,7 +41,7 @@ class Guitar extends Component {
     if (numberOfFrets){
       let fretNumber = 1;
         while (fretNumber <= numberOfFrets){
-        fretNumbers.push(<div key={`fretNumber-${fretNumber}`} className={`${style.fret} ${style.fretnumber}`}>{fretNumber - 1}</div>);
+        fretNumbers.push(<div key={`fretNumber-${fretNumber}`} className={`${style.fret} ${style.fretnumber}`}>{fretNumber}</div>);
         fretNumber++;
       }
     }
