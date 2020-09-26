@@ -87,7 +87,7 @@ class Options extends Component {
 
   render() {
     return (<React.Fragment>
-      <List subheader={<ListSubheader>Settings</ListSubheader>} className={style.sideBar}>
+      <List subheader={<ListSubheader>Settings</ListSubheader>} className={style.options}>
         <ListItem>
           <FormControl fullWidth>
             <InputLabel id="selection-type-select-label">Selection type</InputLabel>
