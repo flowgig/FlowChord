@@ -8,7 +8,6 @@ import Note from 'components/partials/Note';
 
 // Actions
 import {toggleNote} from 'actions/NotesActions';
-import {updateSelectedChordNameFromNotes} from 'actions/SelectedChordNameActions';
 
 // Stylesheets
 import style from 'components/partials/instruments/Guitar/Fret.module.scss';
@@ -41,8 +40,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-    toggleNote,
-    updateSelectedChordNameFromNotes
+    toggleNote
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Fret);
