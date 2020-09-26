@@ -11,7 +11,6 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import IconButton from '@material-ui/core/IconButton';
-import List from '@material-ui/core/List';
 import MailIcon from '@material-ui/icons/Mail';
 import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -27,7 +26,7 @@ import Typography from '@material-ui/core/Typography';
 // Components
 //import { mainListItems, secondaryListItems } from 'components/ListItems';
 import Selection from 'components/partials/Selection';
-import SideBar from 'components/partials/SideBar';
+import Options from 'components/partials/Options';
 
 // Stylesheets
 import styles from 'components/partials/MainAppBar.module.scss';
@@ -191,11 +190,7 @@ class MainAppBar extends Component {
           </IconButton>
         </div>
         <Divider/>
-        <List>
-          <SideBar/>
-        </List>
-        <Divider/>
-        <List></List>
+          <Options/>
       </Drawer>
       {this.renderMobileMenu()}
       {this.renderMenu()}
