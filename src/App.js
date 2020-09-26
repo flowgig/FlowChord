@@ -15,6 +15,7 @@ import NotFound from 'components/routes/NotFound';
 
 // Partials
 import MainAppBar from 'components/partials/MainAppBar';
+import Footer from 'components/partials/Footer';
 
 // Stylesheets
 import style from 'App.module.scss';
@@ -34,13 +35,14 @@ class App extends Component {
     return (<Provider store={store}>
       <ConnectedRouter history={history}>
         <ThemeProvider theme={theme}>
-        <div className={style.app}>
           <MainAppBar />
-          <Switch>
-            <Route exact={true} path="/" render={(props) => (<Home {...props}/>)}/>
-            <Route render={() => (<NotFound/>)}/>
-          </Switch>
-        </div>
+          <div className={style.app}>
+            <Switch>
+              <Route exact={true} path="/" render={(props) => (<Home {...props}/>)}/>
+              <Route render={() => (<NotFound/>)}/>
+            </Switch>
+            <Footer />
+          </div>
         </ThemeProvider>
       </ConnectedRouter>
     </Provider>);
