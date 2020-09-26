@@ -1,4 +1,10 @@
 [
-  "chord",
-  "scale"
+  {
+    "label": "Chord",
+    "value": "chord"
+  },
+  {
+    "label": "Scale",
+    "value": "scale"
+  }
 ]
