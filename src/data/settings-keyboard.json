@@ -1,5 +1,6 @@
 {
+	"show": true,
 	"edit": false,
-	"keys": 49,
+	"numberOfKeys": 49,
 	"lowestNote": 0
 }
