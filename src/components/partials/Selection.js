@@ -56,18 +56,21 @@ class Selection extends Component {
         {this.renderKeyOptions(this.props.keys)}
         </Select>
       </FormControl>
-      <FormControl className={style.formControl}>
-        <InputLabel id="chord-select-label">Chord</InputLabel>
-        <Select className={style.select} labelId="chord-select-label" id="chord-select" value={this.props.selectedChordName} onChange={event => this.handleChordChange(event.target.value)}>
-        {this.renderChordOptions(this.props.chords)}
-        </Select>
-      </FormControl>
-      <FormControl className={style.formControl}>
-        <InputLabel id="scale-select-label">Scale</InputLabel>
-        <Select className={style.select} labelId="scale-select-label" id="scale-select" value={this.props.selectedScaleName} onChange={event => this.handleScaleChange(event.target.value)}>
-        {this.renderScaleOptions(this.props.scales)}
-        </Select>
-      </FormControl>
+      {
+        this.props.selectedSelectionType === 'chord'
+          ? (<FormControl className={style.formControl}>
+            <InputLabel id="chord-select-label">Chord</InputLabel>
+            <Select className={style.select} labelId="chord-select-label" id="chord-select" value={this.props.selectedChordName} onChange={event => this.handleChordChange(event.target.value)}>
+            {this.renderChordOptions(this.props.chords)}
+            </Select>
+          </FormControl>)
+          : (<FormControl className={style.formControl}>
+            <InputLabel id="scale-select-label">Scale</InputLabel>
+            <Select className={style.select} labelId="scale-select-label" id="scale-select" value={this.props.selectedScaleName} onChange={event => this.handleScaleChange(event.target.value)}>
+            {this.renderScaleOptions(this.props.scales)}
+            </Select>
+          </FormControl>)
+      }
     </div>)
   }
 }
@@ -78,7 +81,8 @@ const mapStateToProps = state => ({
   scales: state.scales,
   selectedKeyNumber: state.selectedKeyNumber,
   selectedChordName: state.selectedChordName,
-  selectedScaleName: state.selectedScaleName
+  selectedScaleName: state.selectedScaleName,
+  selectedSelectionType: state.selectedSelectionType
 });
 
 const mapDispatchToProps = {
