@@ -19,7 +19,7 @@ export const updateSelectedChordNameFromNotes = (notes, selectedKeyNumber, noteS
 
   const matchedSelection = Object.keys(noteSelections).find(noteSelectionName => {
     const noteSelection = noteSelections[noteSelectionName];
-    return noteSelection.parsedHalfSteps.length == selectedHalfSteps.length && noteSelection.parsedHalfSteps.every((element, index) => {
+    return noteSelection.parsedHalfSteps.length === selectedHalfSteps.length && noteSelection.parsedHalfSteps.every((element, index) => {
   		return element === selectedHalfSteps[index];
   	});
   });
