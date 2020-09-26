@@ -12,7 +12,8 @@ import SelectedChordNameReducer from 'reducers/SelectedChordNameReducer';
 import SelectedKeyNumberReducer from 'reducers/SelectedKeyNumberReducer';
 import SelectedLabelReducer from 'reducers/SelectedLabelReducer';
 import SelectedScaleNameReducer from 'reducers/SelectedScaleNameReducer';
-import SelectionTypeReducer from 'reducers/SelectionTypeReducer';
+import SelectedSelectionTypeReducer from 'reducers/SelectedSelectionTypeReducer';
+import SelectionTypesReducer from 'reducers/SelectionTypesReducer';
 import SettingsGuitarReducer from 'reducers/SettingsGuitarReducer';
 import SettingsKeyboardReducer from 'reducers/SettingsKeyboardReducer';
 
@@ -27,7 +28,8 @@ export default(history) => combineReducers({
   selectedKeyNumber: SelectedKeyNumberReducer,
   selectedLabel: SelectedLabelReducer,
   selectedScaleName: SelectedScaleNameReducer,
-  selectionType: SelectionTypeReducer,
+  selectedSelectionType: SelectedSelectionTypeReducer,
+  selectionTypes: SelectionTypesReducer,
   settingsGuitar: SettingsGuitarReducer,
   settingsKeyboard: SettingsKeyboardReducer
 });
