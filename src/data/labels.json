@@ -1,0 +1,14 @@
+[
+  {
+    "label": "Key",
+    "value": "key"
+  },
+  {
+    "label": "Interval",
+    "value": "interval"
+  },
+  {
+    "label": "Half steps",
+    "value": "halfSteps"
+  }
+]

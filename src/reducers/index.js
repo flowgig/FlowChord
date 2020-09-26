@@ -6,6 +6,7 @@ import {connectRouter} from 'connected-react-router';
 import ChordsReducer from 'reducers/ChordsReducer';
 import GuitarTunersReducer from 'reducers/GuitarTunersReducer';
 import IntervalsReducer from 'reducers/IntervalsReducer';
+import LabelsReducer from 'reducers/LabelsReducer';
 import NotesReducer from 'reducers/NotesReducer';
 import ScalesReducer from 'reducers/ScalesReducer';
 import SelectedChordNameReducer from 'reducers/SelectedChordNameReducer';
@@ -22,6 +23,7 @@ export default(history) => combineReducers({
   chords: ChordsReducer,
   guitarTuners: GuitarTunersReducer,
   intervals: IntervalsReducer,
+  labels: LabelsReducer,
   notes: NotesReducer,
   scales: ScalesReducer,
   selectedChordName: SelectedChordNameReducer,
