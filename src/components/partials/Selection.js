@@ -10,8 +10,8 @@ import Select from '@material-ui/core/Select';
 
 // Actions
 import {updateSelectedKeyNumber} from 'actions/SelectedKeyNumberActions';
-import {updateSelectedChordName} from 'actions/SelectedChordNameActions';
-import {updateSelectedScaleName} from 'actions/SelectedScaleNameActions';
+import {updateSelectedChordName} from 'actions/SelectedSelectionNameActions';
+import {updateSelectedScaleName} from 'actions/SelectedSelectionNameActions';
 
 // Stylesheets
 import style from 'components/partials/Selection.module.scss';

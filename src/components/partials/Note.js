@@ -9,7 +9,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 
 // Actions
 import {toggleNote} from 'actions/NotesActions';
-import {updateSelectedChordNameFromNotes} from 'actions/SelectedChordNameActions';
+import {updateSelectedSelectionNameFromNotes} from 'actions/SelectedSelectionNameActions';
 
 // Stylesheets
 import style from 'components/partials/Note.module.scss';
@@ -31,9 +31,9 @@ class Note extends Component {
 		return this.props.notes[keyNumber].name;
 	}
 
-  handleNoteOnClick(checked, noteNumber, selectedKeyNumber, chords){
+  handleNoteOnClick(checked, noteNumber, selectedKeyNumber, noteSelections, selectedSelectionType){
     const newNotes = this.props.toggleNote(noteNumber, checked);
-    this.props.updateSelectedChordNameFromNotes(newNotes, selectedKeyNumber, chords);
+    this.props.updateSelectedSelectionNameFromNotes(newNotes, selectedKeyNumber, noteSelections, selectedSelectionType);
   }
 
   render() {
@@ -54,11 +54,11 @@ class Note extends Component {
           return '';
       }
     }
-    const noteSelection = this.props.selectionType === 'chord' ? this.props.chords : this.props.scales;
+    const noteSelections = this.props.selectedSelectionType === 'scale' ? this.props.scales : this.props.chords;
 
     return (<div className={style.note}>
         <ThemeProvider theme={markerColorThemes[halfSteps]}>
-          <Button color="primary" disableElevation variant={note.selected ? 'contained' : 'text'} onClick={event => this.handleNoteOnClick(!note.selected, keyNumber, this.props.selectedKeyNumber, noteSelection)}>{label()}</Button>
+          <Button color="primary" disableElevation variant={note.selected ? 'contained' : 'text'} onClick={event => this.handleNoteOnClick(!note.selected, keyNumber, this.props.selectedKeyNumber, noteSelections, this.props.selectedSelectionType)}>{label()}</Button>
         </ThemeProvider>
 	</div>)
   }
@@ -73,14 +73,14 @@ const mapStateToProps = state => ({
   notes: state.notes,
   chords: state.chords,
   scales: state.scales,
-  selectionType: state.selectionType,
+  selectedSelectionType: state.selectedSelectionType,
   selectedLabel: state.selectedLabel,
   selectedKeyNumber: state.selectedKeyNumber
 });
 
 const mapDispatchToProps = {
     toggleNote,
-    updateSelectedChordNameFromNotes
+    updateSelectedSelectionNameFromNotes
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Note);
