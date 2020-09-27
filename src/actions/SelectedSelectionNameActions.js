@@ -70,16 +70,19 @@ export const updateSelectedScaleName = selectedScaleName => dispatch => {
 
 
 export const updateSelectedSelectionSelectList = (notes, selectedKeyNumber, selectedSelectionName, noteSelections, selectedSelectionType) => dispatch => {
-	const halfSteps = noteSelections[selectedSelectionName].parsedHalfSteps;
-	const relativeHalfSteps = halfStepsToNoteNumbers(halfSteps, selectedKeyNumber);
-	relativeHalfSteps.sort(sortNumber).join(',');
-	const newNotes = notes.map(note => {
-		return {...note, selected: relativeHalfSteps.includes(note.number)}
-	});
-	dispatch({
-		type: TOGGLE_SELECTED_NOTES,
-		payload: newNotes
-	});
+  if (selectedSelectionName && selectedSelectionName.length){
+    const halfSteps = noteSelections[selectedSelectionName].parsedHalfSteps;
+  	const relativeHalfSteps = halfStepsToNoteNumbers(halfSteps, selectedKeyNumber);
+  	relativeHalfSteps.sort(sortNumber).join(',');
+  	const newNotes = notes.map(note => {
+  		return {...note, selected: relativeHalfSteps.includes(note.number)}
+  	});
+  	dispatch({
+  		type: TOGGLE_SELECTED_NOTES,
+  		payload: newNotes
+  	});
+  }
+
 	if (selectedSelectionType === 'key'){
 		dispatch({
 			type: UPDATE_SELECTED_KEY_NUMBER,
