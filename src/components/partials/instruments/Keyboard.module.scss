@@ -1,4 +1,8 @@
+@import "../../../style/abstracts/_all.scss";
+
 :local(.keyboard) {
+  max-width: $main-container-width;
+  margin: auto;
   white-space: nowrap;
   overflow-x: auto;
 }

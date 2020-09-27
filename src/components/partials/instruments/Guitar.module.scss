@@ -1,3 +1,8 @@
+@import "../../../style/abstracts/_all.scss";
+
+:local(.guitar){
+  max-width: $main-container-width;
+  margin: auto;
 :local(.fretboard) {
   position: relative;
 
@@ -78,4 +83,5 @@
       border-left: 1px solid transparent;
     }
   }
+}
 }
