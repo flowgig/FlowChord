@@ -3,6 +3,7 @@ import {combineReducers} from 'redux';
 import {connectRouter} from 'connected-react-router';
 
 // Reducers
+import AlternativeSelectionsReducer from 'reducers/AlternativeSelectionsReducer';
 import ChordsReducer from 'reducers/ChordsReducer';
 import GuitarTunersReducer from 'reducers/GuitarTunersReducer';
 import IntervalsReducer from 'reducers/IntervalsReducer';
@@ -20,6 +21,7 @@ import SettingsKeyboardReducer from 'reducers/SettingsKeyboardReducer';
 
 export default(history) => combineReducers({
   router: connectRouter(history),
+  alternativeSelections: AlternativeSelectionsReducer,
   chords: ChordsReducer,
   guitarTuners: GuitarTunersReducer,
   intervals: IntervalsReducer,

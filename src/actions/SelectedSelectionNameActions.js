@@ -1,6 +1,7 @@
 import {
   UPDATE_SELECTED_CHORD_NAME,
 	UPDATE_SELECTED_SCALE_NAME
+	UPDATE_ALTERNATIVE_SELECTIONS,
 } from 'constants/types';
 
 
@@ -50,7 +51,7 @@ const getAlternativeSelections = (single = false, notes, noteSelections, selecte
       }
     }
   }
-  return alternativeSelections;
+  return single ? null : alternativeSelections;
 }
 
 export const updateSelectedChordName = selectedChordName => dispatch => {
@@ -73,13 +74,31 @@ export const updateSelectedSelectionNameFromNotes = (notes, selectedKeyNumber, n
   const matchedSelection = getMatchedSelection(noteSelections, selectedHalfSteps);
 
   if (matchedSelection) {
+		const alternativeSelections = getAlternativeSelections(false, notes, noteSelections, selectedKeyNumber, selectedHalfSteps);
     dispatch({
       type: selectedSelectionType === 'scale' ? UPDATE_SELECTED_SCALE_NAME : UPDATE_SELECTED_CHORD_NAME,
       payload: matchedSelection
-    })
-  }
-
-  const alternativeSelections = getAlternativeSelections(false, notes, noteSelections, selectedKeyNumber, selectedHalfSteps);
-  console.log("alternativeSelections", alternativeSelections);
-
+    });
+		dispatch({
+			type: UPDATE_ALTERNATIVE_SELECTIONS,
+			payload: alternativeSelections
+		});
+  }else {
+		const alternativeSelection = getAlternativeSelections(true, notes, noteSelections, selectedKeyNumber, selectedHalfSteps);
+		if (alternativeSelection){
+			const alternativeSelectionsToAlternativeSelection = getAlternativeSelections(false, notes, noteSelections, alternativeSelection.note.number, alternativeSelection.selection.parsedHalfSteps);
+			dispatch({
+	      type: selectedSelectionType === 'scale' ? UPDATE_SELECTED_SCALE_NAME : UPDATE_SELECTED_CHORD_NAME,
+	      payload: alternativeSelection.selectionName
+	    });
+			dispatch({
+	      type: UPDATE_SELECTED_KEY_NUMBER,
+	      payload: alternativeSelection.note.number
+	    });
+			dispatch({
+	      type: UPDATE_ALTERNATIVE_SELECTIONS,
+	      payload: alternativeSelectionsToAlternativeSelection
+	    });
+		}
+	}
 }
