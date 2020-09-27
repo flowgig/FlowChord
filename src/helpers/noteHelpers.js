@@ -14,6 +14,16 @@ export const noteNumbersToHalfSteps = (noteNumbers, selectedKeyNumber) => {
   });
 }
 
+export const halfStepsToNoteNumber = (halfStep, selectedKeyNumber) => {
+  return (halfStep + selectedKeyNumber) % 12;
+}
+
+export const halfStepsToNoteNumbers = (halfSteps, selectedKeyNumber) => {
+  return halfSteps.map(halfStep => {
+    return halfStepsToNoteNumber(halfStep, selectedKeyNumber);
+  });
+}
+
 export const getSelectedNoteNumbersFromNotes = notes => {
   return notes.filter(note => {
     return note.selected;
