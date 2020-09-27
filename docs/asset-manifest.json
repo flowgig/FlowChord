@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/static/css/main.22b9380f.chunk.css",
-    "main.js": "/static/js/main.4d0d8bc1.chunk.js",
-    "main.js.map": "/static/js/main.4d0d8bc1.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.9d011cd6.js",
-    "runtime-main.js.map": "/static/js/runtime-main.9d011cd6.js.map",
-    "static/js/2.51ade638.chunk.js": "/static/js/2.51ade638.chunk.js",
-    "static/js/2.51ade638.chunk.js.map": "/static/js/2.51ade638.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.618d58d59113b0d9c8f26b50efdd95dc.js": "/precache-manifest.618d58d59113b0d9c8f26b50efdd95dc.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/main.22b9380f.chunk.css.map": "/static/css/main.22b9380f.chunk.css.map",
-    "static/js/2.51ade638.chunk.js.LICENSE.txt": "/static/js/2.51ade638.chunk.js.LICENSE.txt",
-    "static/media/flowchord-logo-gray-vertical.svg": "/static/media/flowchord-logo-gray-vertical.be6822f1.svg"
+    "main.css": "/FlowChord/static/css/main.22b9380f.chunk.css",
+    "main.js": "/FlowChord/static/js/main.25c45c0f.chunk.js",
+    "main.js.map": "/FlowChord/static/js/main.25c45c0f.chunk.js.map",
+    "runtime-main.js": "/FlowChord/static/js/runtime-main.eb77657a.js",
+    "runtime-main.js.map": "/FlowChord/static/js/runtime-main.eb77657a.js.map",
+    "static/js/2.51ade638.chunk.js": "/FlowChord/static/js/2.51ade638.chunk.js",
+    "static/js/2.51ade638.chunk.js.map": "/FlowChord/static/js/2.51ade638.chunk.js.map",
+    "index.html": "/FlowChord/index.html",
+    "precache-manifest.cd0429e2ca62b104d8defe5cf2a89a3a.js": "/FlowChord/precache-manifest.cd0429e2ca62b104d8defe5cf2a89a3a.js",
+    "service-worker.js": "/FlowChord/service-worker.js",
+    "static/css/main.22b9380f.chunk.css.map": "/FlowChord/static/css/main.22b9380f.chunk.css.map",
+    "static/js/2.51ade638.chunk.js.LICENSE.txt": "/FlowChord/static/js/2.51ade638.chunk.js.LICENSE.txt",
+    "static/media/flowchord-logo-gray-vertical.svg": "/FlowChord/static/media/flowchord-logo-gray-vertical.be6822f1.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.9d011cd6.js",
+    "static/js/runtime-main.eb77657a.js",
     "static/js/2.51ade638.chunk.js",
     "static/css/main.22b9380f.chunk.css",
-    "static/js/main.4d0d8bc1.chunk.js"
+    "static/js/main.25c45c0f.chunk.js"
   ]
 }
