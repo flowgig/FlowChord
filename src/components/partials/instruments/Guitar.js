@@ -2,6 +2,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
+// Material UI
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+
 // Components
 import Fret from 'components/partials/instruments/Guitar/Fret';
 
@@ -20,13 +24,12 @@ class Guitar extends Component {
     return guitarTuners && guitarTuners.length
       ? guitarTuners.map((tuner, stringNumber) => {
         const optionElements = notes.map(note => {
-          return <option key={`noteNumber-${note.number}`} value={note.number}>{note.name}</option>
+          return <MenuItem key={`noteNumber-${note.number}`} value={note.number}>{note.name}</MenuItem>
         });
         return (<div key={`${stringNumber}-${tuner.number}`} className={style.tuner}>
-          <span className={style.selectListIcon}></span>
-          <select value={tuner.number} className={style.string} onChange={(event) => this.handleTunerChange(stringNumber, parseInt(event.target.value))}>
+          <Select value={tuner.number} className={style.tunerSelect} onChange={(event) => this.handleTunerChange(stringNumber, parseInt(event.target.value))}>
             {optionElements}
-          </select>
+          </Select>
           <div className={style.fret}>
             <Fret fretNumber={0} tunerNumber={tuner.number} stringNumber={parseInt(stringNumber)} />
           </div>
@@ -35,8 +38,8 @@ class Guitar extends Component {
       : '';
   }
 
-  renderFretNumbers(guitarSettings){
-    const numberOfFrets = guitarSettings && guitarSettings.numberOfFrets ? guitarSettings.numberOfFrets : null;
+  renderFretNumbers(settingsGuitar){
+    const numberOfFrets = settingsGuitar && settingsGuitar.numberOfFrets ? settingsGuitar.numberOfFrets : null;
     let fretNumbers = [];
     if (numberOfFrets){
       let fretNumber = 1;
@@ -48,8 +51,8 @@ class Guitar extends Component {
     return fretNumbers;
   }
 
-  renderFrets(guitarSettings, tuner, stringNumber){
-    const numberOfFrets = guitarSettings && guitarSettings.numberOfFrets ? guitarSettings.numberOfFrets : null;
+  renderFrets(settingsGuitar, tuner, stringNumber){
+    const numberOfFrets = settingsGuitar && settingsGuitar.numberOfFrets ? settingsGuitar.numberOfFrets : null;
     let frets = [];
     if (numberOfFrets){
       let fretNumber = 1;
@@ -63,34 +66,35 @@ class Guitar extends Component {
     return frets;
   }
 
-  renderGuitarNeck(guitarSettings, guitarTuners){
+  renderGuitarNeck(settingsGuitar, guitarTuners){
     return guitarTuners && guitarTuners.length
       ? guitarTuners.map((tuner, stringNumber) => {
-          return (<div key={`${tuner.number}-${stringNumber}`} className={style.string}>{this.renderFrets(guitarSettings, tuner, parseInt(stringNumber))}</div>)
+          return (<div key={`${tuner.number}-${stringNumber}`} className={style.string}>{this.renderFrets(settingsGuitar, tuner, parseInt(stringNumber))}</div>)
         })
       : '';
   }
 
   render() {
-    return (<div id="guitar" className={`${style.guitar} ${style.active}`}>
-		<div className={`${style.instrumentView} ${style.fretboard}`}>
-			<div className={style.tuners}>
-				<div className={`${style.fret} ${style.fretnumber}`}>
-					Fretno.
-				</div>
-        {this.renderTunerElements(this.props.guitarTuners, this.props.notes)}
-			</div>
-			<div className={style.frets}>
-        {this.renderFretNumbers(this.props.guitarSettings)}
-        {this.renderGuitarNeck(this.props.guitarSettings, this.props.guitarTuners)}
-			</div>
-		</div>
-	</div>)
+    return this.props.settingsGuitar && this.props.settingsGuitar.show
+      ? (<div id="guitar" className={`${style.guitar} ${style.active}`}>
+  		<div className={`${style.instrumentView} ${style.fretboard}`}>
+  			<div className={style.tuners}>
+  				<div className={`${style.fret} ${style.fretnumber}`}>
+  					Fretno.
+  				</div>
+          {this.renderTunerElements(this.props.guitarTuners, this.props.notes)}
+  			</div>
+  			<div className={style.frets}>
+          {this.renderFretNumbers(this.props.settingsGuitar)}
+          {this.renderGuitarNeck(this.props.settingsGuitar, this.props.guitarTuners)}
+  			</div>
+  		</div>
+  	</div>) : ''
   }
 }
 
 const mapStateToProps = state => ({
-  guitarSettings: state.settingsGuitar,
+  settingsGuitar: state.settingsGuitar,
   guitarTuners: state.guitarTuners,
   notes: state.notes
 });

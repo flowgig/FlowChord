@@ -24,9 +24,10 @@ class Keyboard extends Component {
   }
 
   render() {
-    return (<div id="keyboard" className={`${style.keyboard} ${style.active}`}>
+    return this.props.settingsKeyboard && this.props.settingsKeyboard.show
+      ? (<div id="keyboard" className={`${style.keyboard} ${style.active}`}>
         {this.renderKeys(this.props.settingsKeyboard)}
-	</div>)
+	</div>) : ''
   }
 }
 

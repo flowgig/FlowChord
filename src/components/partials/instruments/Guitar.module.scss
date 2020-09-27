@@ -3,7 +3,7 @@
 
   :local(.tuners) {
     position: absolute;
-    width: 86px;
+    width: 100px;
 
     :local(.fretnumber) {
       border: none;
@@ -23,8 +23,18 @@
       display: inline-block;
     }
 
-    select {
-      display: inline-block;
+    :local(.tunerSelect) {
+      &:before {
+        display: none;
+      }
+      &:after {
+        display: none;
+      }
+      > div {
+        color: transparent;
+        display: inline-block;
+        width: 15px;
+      }
     }
 
     :local(.selectListIcon) {
@@ -51,7 +61,7 @@
   }
 
   :local(.frets) {
-    margin-left: 86px;
+    margin-left: 100px;
     white-space: nowrap;
     overflow-x: auto;
   }
