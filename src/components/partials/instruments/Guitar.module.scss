@@ -3,7 +3,7 @@
 
   :local(.tuners) {
     position: absolute;
-    width: 110px;
+    width: 86px;
 
     :local(.fretnumber) {
       border: none;
@@ -15,7 +15,7 @@
   }
 
   :local(.tuner) {
-    height: 35px;
+    height: 40px;
     border: none;
 
     :local(.fret) {
@@ -51,13 +51,14 @@
   }
 
   :local(.frets) {
-    margin-left: 110px;
+    margin-left: 86px;
     white-space: nowrap;
     overflow-x: auto;
   }
 
   :local(.fret) {
-    width: 70px;
+    width: 60px;
+    height: 40px;
     display: inline-block;
     border-left: 1px solid #CCC;
     text-align: center;
