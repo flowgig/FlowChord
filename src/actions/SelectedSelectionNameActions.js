@@ -1,4 +1,6 @@
 import {
+  UPDATE_CHORDS,
+  UPDATE_SCALES,
   UPDATE_SELECTED_CHORD_NAME,
 	UPDATE_SELECTED_SCALE_NAME,
 	UPDATE_SELECTED_KEY_NUMBER,
@@ -96,6 +98,16 @@ export const updateSelectedSelectionSelectList = (notes, selectedKeyNumber, sele
 	}
 }
 
+const addCustomSelection = (noteSelections, selectedHalfSteps) =>{
+  return {
+    ...noteSelections,
+    custom: {
+      halfSteps: selectedHalfSteps,
+      parsedHalfSteps: selectedHalfSteps
+    }
+  };
+}
+
 
 export const updateSelectedSelectionNameFromNotes = (notes, selectedKeyNumber, noteSelections, selectedSelectionType) => dispatch => {
   const selectedNoteNumbers = getSelectedNoteNumbersFromNotes(notes);
@@ -129,6 +141,16 @@ export const updateSelectedSelectionNameFromNotes = (notes, selectedKeyNumber, n
 	      type: UPDATE_ALTERNATIVE_SELECTIONS,
 	      payload: alternativeSelectionsToAlternativeSelection
 	    });
-		}
+		} else {
+      const newNoteSelections = addCustomSelection(noteSelections, selectedHalfSteps, selectedSelectionType);
+      dispatch({
+        type: selectedSelectionType === 'scale' ? UPDATE_SCALES : UPDATE_CHORDS,
+        payload: newNoteSelections
+      });
+      dispatch({
+        type: selectedSelectionType === 'scale' ? UPDATE_SELECTED_SCALE_NAME : UPDATE_SELECTED_CHORD_NAME,
+        payload: 'custom'
+      });
+    }
 	}
 }
