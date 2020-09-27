@@ -1,23 +1,24 @@
 {
   "files": {
-    "main.css": "/FlowChord/static/css/main.22b9380f.chunk.css",
-    "main.js": "/FlowChord/static/js/main.25c45c0f.chunk.js",
-    "main.js.map": "/FlowChord/static/js/main.25c45c0f.chunk.js.map",
+    "main.css": "/FlowChord/static/css/main.a48cb35d.chunk.css",
+    "main.js": "/FlowChord/static/js/main.a030fe67.chunk.js",
+    "main.js.map": "/FlowChord/static/js/main.a030fe67.chunk.js.map",
     "runtime-main.js": "/FlowChord/static/js/runtime-main.eb77657a.js",
     "runtime-main.js.map": "/FlowChord/static/js/runtime-main.eb77657a.js.map",
-    "static/js/2.51ade638.chunk.js": "/FlowChord/static/js/2.51ade638.chunk.js",
-    "static/js/2.51ade638.chunk.js.map": "/FlowChord/static/js/2.51ade638.chunk.js.map",
+    "static/js/2.adc7246e.chunk.js": "/FlowChord/static/js/2.adc7246e.chunk.js",
+    "static/js/2.adc7246e.chunk.js.map": "/FlowChord/static/js/2.adc7246e.chunk.js.map",
     "index.html": "/FlowChord/index.html",
-    "precache-manifest.cd0429e2ca62b104d8defe5cf2a89a3a.js": "/FlowChord/precache-manifest.cd0429e2ca62b104d8defe5cf2a89a3a.js",
+    "precache-manifest.26581a6017b8b658be6be530b0e98b0b.js": "/FlowChord/precache-manifest.26581a6017b8b658be6be530b0e98b0b.js",
     "service-worker.js": "/FlowChord/service-worker.js",
-    "static/css/main.22b9380f.chunk.css.map": "/FlowChord/static/css/main.22b9380f.chunk.css.map",
-    "static/js/2.51ade638.chunk.js.LICENSE.txt": "/FlowChord/static/js/2.51ade638.chunk.js.LICENSE.txt",
-    "static/media/flowchord-logo-gray-vertical.svg": "/FlowChord/static/media/flowchord-logo-gray-vertical.be6822f1.svg"
+    "static/css/main.a48cb35d.chunk.css.map": "/FlowChord/static/css/main.a48cb35d.chunk.css.map",
+    "static/js/2.adc7246e.chunk.js.LICENSE.txt": "/FlowChord/static/js/2.adc7246e.chunk.js.LICENSE.txt",
+    "static/media/flowchord-logo-gray-vertical.svg": "/FlowChord/static/media/flowchord-logo-gray-vertical.be6822f1.svg",
+    "static/media/flowchord-logo-white.svg": "/FlowChord/static/media/flowchord-logo-white.2d297776.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.eb77657a.js",
-    "static/js/2.51ade638.chunk.js",
-    "static/css/main.22b9380f.chunk.css",
-    "static/js/main.25c45c0f.chunk.js"
+    "static/js/2.adc7246e.chunk.js",
+    "static/css/main.a48cb35d.chunk.css",
+    "static/js/main.a030fe67.chunk.js"
   ]
 }
