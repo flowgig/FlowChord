@@ -1,0 +1,65 @@
+@import "../../style/abstracts/_all.scss";
+
+:local(.note) {
+  :local(.button) {
+    text-transform: none;
+    padding: 6px;
+    min-width: 53px;
+    color: white;
+    &:local(.notSelected){
+      color: rgba(0, 0, 0, 0.87);
+    }
+    &:local(.black){
+      color: white;
+      min-width: 34px;
+    }
+    &:local(.white){
+      min-width: 42px;
+    }
+    &:local(.0){
+      background-color: $marker-color-0;
+    }
+    &:local(.1) {
+      background-color: $marker-color-1;
+    }
+
+    &:local(.2) {
+      background-color: $marker-color-2;
+    }
+    &:local(.3) {
+      background-color: $marker-color-3;
+    }
+
+    &:local(.4) {
+      background-color: $marker-color-4;
+    }
+
+    &:local(.5) {
+      background-color: $marker-color-5;
+    }
+
+    &:local(.6) {
+      background-color: $marker-color-6;
+    }
+
+    &:local(.7) {
+      background-color: $marker-color-7;
+    }
+
+    &:local(.8) {
+      background-color: $marker-color-8;
+    }
+
+    &:local(.9) {
+      background-color: $marker-color-9;
+    }
+
+    &:local(.10) {
+      background-color: $marker-color-10;
+    }
+
+    &:local(.11) {
+      background-color: $marker-color-11;
+    }
+  }
+}
