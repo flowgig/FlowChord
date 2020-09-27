@@ -39,6 +39,7 @@ class App extends Component {
           <div className={style.app}>
             <Switch>
               <Route exact={true} path="/" render={(props) => (<Home {...props}/>)}/>
+              <Route exact={true} path="/FlowChord" render={(props) => (<Home {...props}/>)}/>
               <Route render={() => (<NotFound/>)}/>
             </Switch>
             <Footer />
