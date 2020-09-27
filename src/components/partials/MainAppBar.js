@@ -10,15 +10,16 @@ import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-
 
 // Components
 import Selection from 'components/partials/Selection';
 import Options from 'components/partials/Options';
 
+// Assets
+import FlowChordLogo from 'assets/svg/flowchord-logo-white.svg';
+
 // Stylesheets
-import styles from 'components/partials/MainAppBar.module.scss';
+import style from 'components/partials/MainAppBar.module.scss';
 
 class MainAppBar extends Component {
   constructor(props) {
@@ -44,9 +45,7 @@ class MainAppBar extends Component {
           <IconButton edge="start" color="inherit" aria-label="Open drawer" onClick={this.handleDrawerOpen}>
             <MenuIcon/>
           </IconButton>
-          <Typography className={styles.title} variant="h6" noWrap={true}>
-            FlowChord
-          </Typography>
+          <img src={FlowChordLogo} alt="FlowChord logo" className={style.appBarLogo} />
           <Selection/>
         </Toolbar>
       </AppBar>
