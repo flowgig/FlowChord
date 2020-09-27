@@ -10,8 +10,7 @@ import Select from '@material-ui/core/Select';
 
 // Actions
 import {updateSelectedKeyNumber} from 'actions/SelectedKeyNumberActions';
-import {updateSelectedChordName} from 'actions/SelectedSelectionNameActions';
-import {updateSelectedScaleName} from 'actions/SelectedSelectionNameActions';
+import {updateSelectedChordName, updateSelectedScaleName, updateSelectedSelectionSelectList} from 'actions/SelectedSelectionNameActions';
 
 // Stylesheets
 import style from 'components/partials/Selection.module.scss';
@@ -19,15 +18,33 @@ import style from 'components/partials/Selection.module.scss';
 class Selection extends Component {
 
   handleKeyChange(keyNumber){
-    this.props.updateSelectedKeyNumber(keyNumber);
+    this.props.updateSelectedSelectionSelectList(
+      this.props.notes,
+      keyNumber,
+      this.props.selectedSelectionType === 'scale' ? this.props.selectedScaleName : this.props.selectedChordName,
+      this.props.selectedSelectionType === 'scale' ? this.props.scales : this.props.chords,
+      'key'
+    );
   }
 
   handleChordChange(chordName){
-    this.props.updateSelectedChordName(chordName);
+    this.props.updateSelectedSelectionSelectList(
+      this.props.notes,
+      this.props.selectedKeyNumber,
+      chordName,
+      this.props.chords,
+      'chord'
+    );
   }
 
   handleScaleChange(scaleName){
-    this.props.updateSelectedScaleName(scaleName);
+    this.props.updateSelectedSelectionSelectList(
+      this.props.notes,
+      this.props.selectedKeyNumber,
+      scaleName,
+      this.props.scales,
+      'scale'
+    );
   }
 
   renderKeyOptions(notes){
@@ -53,14 +70,18 @@ class Selection extends Component {
       <FormControl className={style.formControl}>
         <InputLabel id="key-select-label">Key</InputLabel>
         <Select className={style.select} labelId="key-select-label" id="key-select" value={this.props.selectedKeyNumber} onChange={event => this.handleKeyChange(parseInt(event.target.value))}>
-        {this.renderKeyOptions(this.props.keys)}
+        {this.renderKeyOptions(this.props.notes)}
         </Select>
       </FormControl>
       {
         this.props.selectedSelectionType === 'chord'
           ? (<FormControl className={style.formControl}>
             <InputLabel id="chord-select-label">Chord</InputLabel>
-            <Select className={style.select} labelId="chord-select-label" id="chord-select" value={this.props.selectedChordName} onChange={event => this.handleChordChange(event.target.value)}>
+            <Select className={style.select}
+                    labelId="chord-select-label"
+                    id="chord-select"
+                    value={this.props.selectedChordName}
+                    onChange={event => this.handleChordChange(event.target.value)}>
             {this.renderChordOptions(this.props.chords)}
             </Select>
           </FormControl>)
@@ -76,7 +97,7 @@ class Selection extends Component {
 }
 
 const mapStateToProps = state => ({
-  keys: state.notes,
+  notes: state.notes,
   chords: state.chords,
   scales: state.scales,
   selectedKeyNumber: state.selectedKeyNumber,
@@ -88,7 +109,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   updateSelectedKeyNumber,
   updateSelectedChordName,
-  updateSelectedScaleName
+  updateSelectedScaleName,
+  updateSelectedSelectionSelectList
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Selection);

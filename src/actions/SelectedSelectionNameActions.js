@@ -1,14 +1,17 @@
 import {
   UPDATE_SELECTED_CHORD_NAME,
-	UPDATE_SELECTED_SCALE_NAME
+	UPDATE_SELECTED_SCALE_NAME,
+	UPDATE_SELECTED_KEY_NUMBER,
 	UPDATE_ALTERNATIVE_SELECTIONS,
+	TOGGLE_SELECTED_NOTES
 } from 'constants/types';
 
 
 // Helpers
 import {
   getSelectedNoteNumbersFromNotes,
-  noteNumbersToHalfSteps
+  noteNumbersToHalfSteps,
+	halfStepsToNoteNumbers
 } from 'helpers/noteHelpers.js';
 
 const sortNumber = (a, b) => {
@@ -65,6 +68,30 @@ export const updateSelectedScaleName = selectedScaleName => dispatch => {
   dispatch({type: UPDATE_SELECTED_SCALE_NAME, payload: selectedScaleName})
 }
 
+
+export const updateSelectedSelectionSelectList = (notes, selectedKeyNumber, selectedSelectionName, noteSelections, selectedSelectionType) => dispatch => {
+	const halfSteps = noteSelections[selectedSelectionName].parsedHalfSteps;
+	const relativeHalfSteps = halfStepsToNoteNumbers(halfSteps, selectedKeyNumber);
+	relativeHalfSteps.sort(sortNumber).join(',');
+	const newNotes = notes.map(note => {
+		return {...note, selected: relativeHalfSteps.includes(note.number)}
+	});
+	dispatch({
+		type: TOGGLE_SELECTED_NOTES,
+		payload: newNotes
+	});
+	if (selectedSelectionType === 'key'){
+		dispatch({
+			type: UPDATE_SELECTED_KEY_NUMBER,
+			payload: selectedKeyNumber
+		});
+	}else {
+		dispatch({
+			type: selectedSelectionType === 'scale' ? UPDATE_SELECTED_SCALE_NAME : UPDATE_SELECTED_CHORD_NAME,
+			payload: selectedSelectionName
+		});
+	}
+}
 
 
 export const updateSelectedSelectionNameFromNotes = (notes, selectedKeyNumber, noteSelections, selectedSelectionType) => dispatch => {
