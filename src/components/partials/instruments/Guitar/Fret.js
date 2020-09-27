@@ -6,9 +6,6 @@ import PropTypes from 'prop-types';
 // Components
 import Note from 'components/partials/Note';
 
-// Actions
-import {toggleNote} from 'actions/NotesActions';
-
 // Stylesheets
 import style from 'components/partials/instruments/Guitar/Fret.module.scss';
 
@@ -39,8 +36,4 @@ const mapStateToProps = state => ({
   notes: state.notes,
 });
 
-const mapDispatchToProps = {
-    toggleNote
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Fret);
+export default connect(mapStateToProps, null)(Fret);

@@ -2,8 +2,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-// Stylesheets
-import style from 'components/routes/NotFound.module.scss';
 
 class NotFound extends Component {
 

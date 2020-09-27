@@ -4,15 +4,15 @@ import { connect } from 'react-redux';
 
 // Components
 import Guitar from 'components/partials/instruments/Guitar';
+import Keyboard from 'components/partials/instruments/Keyboard';
 
-// Stylesheets
-import style from 'components/routes/Home.module.scss';
 
 class Home extends Component {
 
     render() {
         return (<div>
             <Guitar />
+            <Keyboard />
         </div>)
     }
 }
