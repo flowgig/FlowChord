@@ -81,14 +81,23 @@ class AlternativeSelections extends Component {
     return (
       <Menu
         anchorEl={this.state.anchorEl}
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         id={this.state.listId}
+        getContentAnchorEl={null}
         keepMounted
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
         open={this.state.isListOpen}
         onClose={this.handleListClose}
         >
-        {alternativeSelections.length ? this.renderAlternativeSelectionsListItems(alternativeSelections, selectedSelectionType, selectedKeyNumber, selectedSelectionName, noteSelections, notes) : ''}
+        {
+          alternativeSelections.length
+            ? this.renderAlternativeSelectionsListItems(alternativeSelections, selectedSelectionType, selectedKeyNumber, selectedSelectionName, noteSelections, notes)
+            : (
+              <MenuItem>
+                No alternative {selectedSelectionType}s available
+              </MenuItem>
+            )
+        }
       </Menu>
     );
   }
@@ -101,7 +110,7 @@ class AlternativeSelections extends Component {
     const noteSelections = selectedSelectionType === 'scale' ? this.props.scales : this.props.chords;
     const notes = this.props.notes;
 
-    return (<div className={style.selection}>
+    return (<div className={style.alternativeSelection}>
 
       <IconButton aria-label="Show more"
                   aria-controls={this.state.listId}
@@ -119,7 +128,7 @@ class AlternativeSelections extends Component {
         message={
           <React.Fragment>
             <QueueMusicIcon fontSize="small"/>
-            {alternativeSelections.length} alternative {selectedSelectionType}{alternativeSelections.length > 1 ? 's' : ''} available
+            {alternativeSelections.length} alternative {selectedSelectionType}{alternativeSelections.length === 1 ? '' : 's'} available
           </React.Fragment>}
         action={
             <React.Fragment>
