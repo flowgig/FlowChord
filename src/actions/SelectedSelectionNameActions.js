@@ -113,6 +113,12 @@ export const updateSelectedSelectionSelectList = (notes, selectedKeyNumber, sele
   		type: TOGGLE_SELECTED_NOTES,
   		payload: newNotes
   	});
+
+    const alternativeSelections = getAlternativeSelections(false, notes, noteSelections, selectedKeyNumber, relativeHalfSteps);
+    dispatch({
+      type: UPDATE_ALTERNATIVE_SELECTIONS,
+      payload: alternativeSelections
+    });
   }
 
 	if (selectedSelectionType === 'key'){
