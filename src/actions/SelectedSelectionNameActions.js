@@ -12,6 +12,7 @@ import {
 // Helpers
 import {
   getSelectedNoteNumbersFromNotes,
+  getNoteByNoteNumber,
   noteNumbersToHalfSteps,
 	halfStepsToNoteNumbers
 } from 'helpers/noteHelpers.js';
@@ -70,6 +71,34 @@ export const updateSelectedScaleName = selectedScaleName => dispatch => {
   dispatch({type: UPDATE_SELECTED_SCALE_NAME, payload: selectedScaleName})
 }
 
+export const updateSelectedSelectionFromAlternativeSelectionList = (alternativeSelections, selectedAlternativeSelection, selectedSelectionType, prevSelectedKeyNumber, prevSelectedSelectionName, noteSelections, notes) => dispatch => {
+  const prevSelection = {
+    note: getNoteByNoteNumber(notes, prevSelectedKeyNumber),
+    selection: getSelectionFromName(noteSelections, prevSelectedSelectionName),
+    selectionName: prevSelectedSelectionName
+  };
+
+  const selectedKeyNumber = selectedAlternativeSelection.note.number;
+  const selectedSelectionName = selectedAlternativeSelection.selectionName;
+
+  let newAlternativeSelections = alternativeSelections.filter(alternativeSelection => {
+    return alternativeSelection.note.name !== selectedSelectionName && alternativeSelection.selectionName !== selectedSelectionName;
+  });
+  newAlternativeSelections.push(prevSelection);
+
+	dispatch({
+		type: UPDATE_SELECTED_KEY_NUMBER,
+		payload: selectedKeyNumber
+	});
+	dispatch({
+		type: selectedSelectionType === 'scale' ? UPDATE_SELECTED_SCALE_NAME : UPDATE_SELECTED_CHORD_NAME,
+		payload: selectedSelectionName
+	});
+  dispatch({
+    type: UPDATE_ALTERNATIVE_SELECTIONS,
+    payload: newAlternativeSelections
+  });
+}
 
 export const updateSelectedSelectionSelectList = (notes, selectedKeyNumber, selectedSelectionName, noteSelections, selectedSelectionType) => dispatch => {
   if (selectedSelectionName && selectedSelectionName.length){
