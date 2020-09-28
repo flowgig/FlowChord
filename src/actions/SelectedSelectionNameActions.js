@@ -208,6 +208,10 @@ export const updateSelectedSelectionNameFromNotes = (notes, selectedKeyNumber, n
         payload: newNoteSelections
       });
       dispatch({
+	      type: UPDATE_ALTERNATIVE_SELECTIONS,
+	      payload: []
+	    });
+      dispatch({
         type: selectedSelectionType === 'scale' ? UPDATE_SELECTED_SCALE_NAME : UPDATE_SELECTED_CHORD_NAME,
         payload: 'custom'
       });
