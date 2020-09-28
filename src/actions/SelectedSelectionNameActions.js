@@ -114,7 +114,7 @@ export const updateSelectedSelectionSelectList = (notes, selectedKeyNumber, sele
   		payload: newNotes
   	});
 
-    const alternativeSelections = getAlternativeSelections(false, notes, noteSelections, selectedKeyNumber, relativeHalfSteps);
+    const alternativeSelections = getAlternativeSelections(false, notes, noteSelections, selectedKeyNumber, halfSteps);
     dispatch({
       type: UPDATE_ALTERNATIVE_SELECTIONS,
       payload: alternativeSelections
