@@ -1,8 +1,18 @@
 :local(.selection) {
+  flex: 1;
+  @media (min-width: 450px) {
+    min-width: 327px;
+  }
+
   :local(.formControl) {
-    margin: 0 15px;
-    min-width: 80px;
+    margin: 5px;
+    min-width: 65px;
     color: #fff;
+    display: flex;
+    @media (min-width: 450px) {
+      display: inline-flex;
+      margin: 0 15px;
+    }
 
     label {
       color: #fff;
