@@ -124,6 +124,13 @@ export const updateSelectedSelectionSelectList = (notes, selectedKeyNumber, sele
 			type: selectedSelectionType === 'scale' ? UPDATE_SELECTED_SCALE_NAME : UPDATE_SELECTED_CHORD_NAME,
 			payload: selectedSelectionName
 		});
+    if(noteSelections.custom){
+      const newNoteSelections = removeCustomSelection(noteSelections);
+      dispatch({
+        type: selectedSelectionType === 'scale' ? UPDATE_SCALES : UPDATE_CHORDS,
+        payload: newNoteSelections
+      });
+    }
 	}
 }
 
@@ -135,6 +142,16 @@ const addCustomSelection = (noteSelections, selectedHalfSteps) =>{
       parsedHalfSteps: selectedHalfSteps
     }
   };
+}
+
+const removeCustomSelection = noteSelections =>{
+  if (noteSelections.custom){
+      let newNoteSelections = {...noteSelections};
+      delete newNoteSelections["custom"];
+    	return newNoteSelections;
+  }else {
+    return noteSelections;
+  }
 }
 
 
@@ -154,6 +171,13 @@ export const updateSelectedSelectionNameFromNotes = (notes, selectedKeyNumber, n
 			type: UPDATE_ALTERNATIVE_SELECTIONS,
 			payload: alternativeSelections
 		});
+    if(noteSelections.custom){
+      const newNoteSelections = removeCustomSelection(noteSelections);
+      dispatch({
+        type: selectedSelectionType === 'scale' ? UPDATE_SCALES : UPDATE_CHORDS,
+        payload: newNoteSelections
+      });
+    }
   }else {
 		const alternativeSelection = getAlternativeSelections(true, notes, noteSelections, selectedKeyNumber, selectedHalfSteps);
 		if (alternativeSelection){
@@ -170,6 +194,13 @@ export const updateSelectedSelectionNameFromNotes = (notes, selectedKeyNumber, n
 	      type: UPDATE_ALTERNATIVE_SELECTIONS,
 	      payload: alternativeSelectionsToAlternativeSelection
 	    });
+      if(noteSelections.custom){
+        const newNoteSelections = removeCustomSelection(noteSelections);
+        dispatch({
+          type: selectedSelectionType === 'scale' ? UPDATE_SCALES : UPDATE_CHORDS,
+          payload: newNoteSelections
+        });
+      }
 		} else {
       const newNoteSelections = addCustomSelection(noteSelections, selectedHalfSteps, selectedSelectionType);
       dispatch({
