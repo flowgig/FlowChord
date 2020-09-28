@@ -11,9 +11,13 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 
+import Badge from '@material-ui/core/Badge';
+
+
 // Components
 import Selection from 'components/partials/Selection';
 import Options from 'components/partials/Options';
+import AlternativeSelections from 'components/partials/AlternativeSelections';
 
 // Assets
 import FlowChordLogo from 'assets/svg/flowchord-logo-white.svg';
@@ -47,6 +51,7 @@ class MainAppBar extends Component {
           </IconButton>
           <img src={FlowChordLogo} alt="FlowChord logo" className={style.appBarLogo} />
           <Selection/>
+          <AlternativeSelections />
         </Toolbar>
       </AppBar>
       <SwipeableDrawer anchor='left' open={this.state.isDrawerOpen} onClose={this.handleDrawerClose} onOpen={this.handleDrawerOpen}>
@@ -61,5 +66,7 @@ class MainAppBar extends Component {
     </React.Fragment>);
   }
 }
+
+
 
 export default connect(null, null)(MainAppBar);
