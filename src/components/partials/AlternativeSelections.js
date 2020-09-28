@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 
 // Material UI
 import Badge from '@material-ui/core/Badge';
-import Button from '@material-ui/core/Button';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
@@ -13,7 +12,6 @@ import Snackbar from '@material-ui/core/Snackbar';
 import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 
 // Actions
-import {updateSelectedKeyNumber} from 'actions/SelectedKeyNumberActions';
 import {updateSelectedSelectionFromAlternativeSelectionList} from 'actions/SelectedSelectionNameActions';
 
 // Stylesheets

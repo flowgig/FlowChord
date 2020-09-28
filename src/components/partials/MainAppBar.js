@@ -11,8 +11,6 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 
-import Badge from '@material-ui/core/Badge';
-
 
 // Components
 import Selection from 'components/partials/Selection';
