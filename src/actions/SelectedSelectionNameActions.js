@@ -82,7 +82,8 @@ export const updateSelectedSelectionFromAlternativeSelectionList = (alternativeS
   const selectedSelectionName = selectedAlternativeSelection.selectionName;
 
   let newAlternativeSelections = alternativeSelections.filter(alternativeSelection => {
-    return alternativeSelection.note.name !== selectedSelectionName && alternativeSelection.selectionName !== selectedSelectionName;
+    const isSelectedSelection = alternativeSelection.note.number === selectedKeyNumber && alternativeSelection.selectionName === selectedSelectionName;
+    return !isSelectedSelection;
   });
   newAlternativeSelections.push(prevSelection);
 
