@@ -80,7 +80,7 @@ class Guitar extends Component {
   		<div className={`${style.instrumentView} ${style.fretboard}`}>
   			<div className={style.tuners}>
   				<div className={`${style.fret} ${style.fretnumber}`}>
-  					Fretno.
+  					Tuners
   				</div>
           {this.renderTunerElements(this.props.guitarTuners, this.props.notes)}
   			</div>
