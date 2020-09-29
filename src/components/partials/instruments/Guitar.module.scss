@@ -1,87 +1,102 @@
 @import "../../../style/abstracts/_all.scss";
 
-:local(.guitar){
+:local(.guitar) {
   max-width: $main-container-width;
   margin: auto;
-:local(.fretboard) {
-  position: relative;
+  background: white;
 
-  :local(.tuners) {
-    position: absolute;
-    width: 100px;
+  :local(.fretboard) {
+    position: relative;
 
-    :local(.fretnumber) {
+    :local(.tuners) {
+      position: absolute;
+      width: 100px;
+
+      :local(.fretnumber) {
+        border: none;
+        width: 100%;
+      }
+
+      select {
+        width: 16px;
+      }
+    }
+
+    :local(.tuner) {
+      height: 40px;
       border: none;
+
+      :local(.fret) {
+        border: none;
+        display: inline-block;
+      }
+
+      :local(.tunerSelect) {
+        &:before {
+          display: none;
+        }
+
+        &:after {
+          display: none;
+        }
+
+        > div {
+          color: transparent;
+          display: inline-block;
+          width: 15px;
+        }
+
+        > svg {
+          width: 36px;
+        }
+      }
+
+      :local(.selectListIcon) {
+        &:before {
+          display: inline-block;
+          font-family: FontAwesome;
+          content: "\F078";
+          width: 35px;
+          height: 35px;
+          text-align: center;
+        }
+
+        + select {
+          appearance: none;
+          -moz-appearance: none;
+          -webkit-appearance: none;
+          width: 35px;
+          height: 35px;
+          margin-left: -40px;
+          margin-right: -5px;
+          opacity: 0;
+        }
+      }
     }
 
-    select {
-      width: 16px;
+    :local(.frets) {
+      margin-left: 100px;
+      white-space: nowrap;
+      overflow-x: auto;
+      @include box-shadow(inset 7px 0 5px -5px rgba(0, 0, 0, .05))
     }
-  }
-
-  :local(.tuner) {
-    height: 40px;
-    border: none;
 
     :local(.fret) {
-      border: none;
+      width: 60px;
+      height: 40px;
       display: inline-block;
-    }
+      border-left: 1px solid #CCC;
+      text-align: center;
+      line-height: 35px;
 
-    :local(.tunerSelect) {
-      &:before {
-        display: none;
-      }
-      &:after {
-        display: none;
-      }
-      > div {
-        color: transparent;
-        display: inline-block;
-        width: 15px;
-      }
-    }
-
-    :local(.selectListIcon) {
-      &:before {
-        display: inline-block;
-        font-family: FontAwesome;
-        content: "\F078";
-        width: 35px;
-        height: 35px;
-        text-align: center;
+      &:first-child {
+        border-left: none;
       }
 
-      + select {
-        appearance: none;
-        -moz-appearance: none;
-        -webkit-appearance: none;
-        width: 35px;
-        height: 35px;
-        margin-left: -40px;
-        margin-right: -5px;
-        opacity: 0;
+      &:local(.fretnumber) {
+        border-left: 1px solid transparent;
+        font-weight: bold;
       }
     }
   }
-
-  :local(.frets) {
-    margin-left: 100px;
-    white-space: nowrap;
-    overflow-x: auto;
-  }
-
-  :local(.fret) {
-    width: 60px;
-    height: 40px;
-    display: inline-block;
-    border-left: 1px solid #CCC;
-    text-align: center;
-    line-height: 35px;
-
-    &:local(.fretnumber) {
-      border-left: 1px solid transparent;
-    }
-  }
-}
 }

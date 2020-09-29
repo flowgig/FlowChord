@@ -6,6 +6,10 @@ import {ConnectedRouter} from 'connected-react-router';
 import WebFont from 'webfontloader';
 import { ThemeProvider } from '@material-ui/styles';
 
+// Material UI
+import CssBaseline from '@material-ui/core/CssBaseline';
+
+
 // Utils
 import configureStore, {history} from 'utils/configureStore';
 
@@ -34,6 +38,7 @@ class App extends Component {
   render() {
     return (<Provider store={store}>
       <ConnectedRouter history={history}>
+        <CssBaseline />
         <ThemeProvider theme={theme}>
           <MainAppBar />
           <div className={style.app}>

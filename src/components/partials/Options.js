@@ -114,6 +114,7 @@ class Options extends Component {
               edge="end"
               onChange={event => this.handleToggleGuitar(event.target.checked)}
               checked={this.props.settingsGuitar.show}
+              color="primary"
               inputProps={{ 'aria-labelledby': 'switch-list-label-guitar' }}
             />
           </ListItemSecondaryAction>
@@ -135,6 +136,7 @@ class Options extends Component {
               edge="end"
               onChange={event => this.handleToggleKeyboard(event.target.checked)}
               checked={this.props.settingsKeyboard.show}
+              color="primary"
               inputProps={{ 'aria-labelledby': 'switch-list-label-keyboard' }}
             />
           </ListItemSecondaryAction>
