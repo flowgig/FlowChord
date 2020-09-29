@@ -65,11 +65,16 @@ class AlternativeSelections extends Component {
     this.setState({showSnackbar: false});
   };
 
+  handleListMenuItemClick(alternativeSelections, selection, selectedSelectionType, selectedKeyNumber, selectedSelectionName, noteSelections, notes){
+    this.handleListClose();
+    this.props.updateSelectedSelectionFromAlternativeSelectionList(alternativeSelections, selection, selectedSelectionType, selectedKeyNumber, selectedSelectionName, noteSelections, notes);
+  }
+
   renderAlternativeSelectionsListItems(alternativeSelections, selectedSelectionType, selectedKeyNumber, selectedSelectionName, noteSelections, notes){
     return alternativeSelections.map(selection => {
       return (<MenuItem
                 key={`${selection.note.name}${selection.selectionName}`}
-                onClick={() => this.props.updateSelectedSelectionFromAlternativeSelectionList(alternativeSelections, selection, selectedSelectionType, selectedKeyNumber, selectedSelectionName, noteSelections, notes)}>
+                onClick={() => this.handleListMenuItemClick(alternativeSelections, selection, selectedSelectionType, selectedKeyNumber, selectedSelectionName, noteSelections, notes)}>
                 {selection.note.name} {selection.selectionName}
              </MenuItem>)
     })
@@ -125,7 +130,7 @@ class AlternativeSelections extends Component {
         onClose={this.handleSnackbarClose}
         message={
           <React.Fragment>
-            <QueueMusicIcon fontSize="small"/>
+            <QueueMusicIcon/>
             {alternativeSelections.length} alternative {selectedSelectionType}{alternativeSelections.length === 1 ? '' : 's'} available
           </React.Fragment>}
         action={
