@@ -129,16 +129,16 @@ class AlternativeSelections extends Component {
         autoHideDuration={6000}
         onClose={this.handleSnackbarClose}
         message={
-          <React.Fragment>
-            <QueueMusicIcon/>
+          <div className={style.snackbarMessage}>
+            <QueueMusicIcon size="small"/>
             {alternativeSelections.length} alternative {selectedSelectionType}{alternativeSelections.length === 1 ? '' : 's'} available
-          </React.Fragment>}
+          </div>}
         action={
             <React.Fragment>
-            <IconButton size="small" aria-label="close" color="inherit" onClick={this.handleSnackbarClose}>
-          <CloseIcon fontSize="small"/>
-        </IconButton>
-      </React.Fragment>}
+              <IconButton size="small" aria-label="close" color="inherit" onClick={this.handleSnackbarClose}>
+                <CloseIcon fontSize="small"/>
+              </IconButton>
+            </React.Fragment>}
     />
       {this.renderAlternativeSelectionsList(alternativeSelections, selectedSelectionType, selectedKeyNumber, selectedSelectionName, noteSelections, notes)}
     </div>)

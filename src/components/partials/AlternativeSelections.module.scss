@@ -3,4 +3,10 @@
   :local(.selectionListMessage){
     padding: 4px;
   }
+  :local(.snackbarMessage){
+    svg {
+      vertical-align: bottom;
+      margin-right: 4px;
+    }
+  }
 }
