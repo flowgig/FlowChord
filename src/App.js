@@ -21,6 +21,9 @@ import NotFound from 'components/routes/NotFound';
 import MainAppBar from 'components/partials/MainAppBar';
 import Footer from 'components/partials/Footer';
 
+//InputControllers
+import ComputerKeyboardInput from 'components/inputControllers/ComputerKeyboardInput';
+
 // Stylesheets
 import style from 'App.module.scss';
 import theme from 'theme';
@@ -40,6 +43,7 @@ class App extends Component {
       <ConnectedRouter history={history}>
         <CssBaseline />
         <ThemeProvider theme={theme}>
+          <ComputerKeyboardInput />
           <MainAppBar />
           <div className={style.app}>
             <Switch>

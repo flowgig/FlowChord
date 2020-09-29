@@ -7,6 +7,7 @@ import AlternativeSelectionsReducer from 'reducers/AlternativeSelectionsReducer'
 import ChordsReducer from 'reducers/ChordsReducer';
 import GuitarTunersReducer from 'reducers/GuitarTunersReducer';
 import IntervalsReducer from 'reducers/IntervalsReducer';
+import KeyCodeNoteNumbersReducer from 'reducers/KeyCodeNoteNumbersReducer';
 import LabelsReducer from 'reducers/LabelsReducer';
 import NotesReducer from 'reducers/NotesReducer';
 import ScalesReducer from 'reducers/ScalesReducer';
@@ -25,6 +26,7 @@ export default(history) => combineReducers({
   chords: ChordsReducer,
   guitarTuners: GuitarTunersReducer,
   intervals: IntervalsReducer,
+  keyCodeNoteNumbers: KeyCodeNoteNumbersReducer,
   labels: LabelsReducer,
   notes: NotesReducer,
   scales: ScalesReducer,
