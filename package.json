@@ -16,11 +16,13 @@
     "react-scripts": "^3.4.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "tone": "^14.7.58",
     "webfontloader": "^1.6.28"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "PUBLIC_URL=/FlowChord react-scripts build && rimraf docs && mv build docs || move build docs",
+    "build-local": "react-scripts build && rimraf docs && mv build docs || move build docs",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
