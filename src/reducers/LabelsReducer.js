@@ -2,9 +2,11 @@ import labels from 'data/labels.json';
 
 const initialState = labels;
 
-export default function(state = initialState, action) {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     default:
       return state;
   }
 }
+
+export default reducer;

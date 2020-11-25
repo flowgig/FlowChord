@@ -20,7 +20,7 @@ import SelectionTypesReducer from 'reducers/SelectionTypesReducer';
 import SettingsGuitarReducer from 'reducers/SettingsGuitarReducer';
 import SettingsKeyboardReducer from 'reducers/SettingsKeyboardReducer';
 
-export default(history) => combineReducers({
+const reducers = history => combineReducers({
   router: connectRouter(history),
   alternativeSelections: AlternativeSelectionsReducer,
   chords: ChordsReducer,
@@ -39,3 +39,5 @@ export default(history) => combineReducers({
   settingsGuitar: SettingsGuitarReducer,
   settingsKeyboard: SettingsKeyboardReducer
 });
+
+export default reducers;

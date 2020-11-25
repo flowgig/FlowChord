@@ -4,7 +4,7 @@ import chords from 'data/chords.json';
 
 const initialState = chords;
 
-export default function(state = initialState, action) {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_CHORDS:
 			return action.payload;
@@ -12,3 +12,5 @@ export default function(state = initialState, action) {
       return state;
   }
 }
+
+export default reducer;

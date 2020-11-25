@@ -2,7 +2,7 @@ import { UPDATE_SELECTED_KEY_NUMBER } from 'constants/types';
 
 const initialState = 0;
 
-export default function(state = initialState, action) {
+const reducer = (state = initialState, action) => {
 	switch(action.type) {
 		case UPDATE_SELECTED_KEY_NUMBER:
 			return action.payload;
@@ -10,3 +10,5 @@ export default function(state = initialState, action) {
 			return state;
 	}
 }
+
+export default reducer;

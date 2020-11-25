@@ -3,7 +3,7 @@ import guitarTuners from 'data/guitar-tuners.json';
 
 const initialState = guitarTuners;
 
-export default function(state = initialState, action) {
+const reducer = (state = initialState, action) => {
 	switch(action.type) {
 		case UPDATE_TUNER_NUMBER:
 			return action.payload;
@@ -11,3 +11,5 @@ export default function(state = initialState, action) {
 			return state;
 	}
 }
+
+export default reducer;

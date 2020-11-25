@@ -2,7 +2,7 @@ import { UPDATE_SELECTED_SCALE_NAME } from 'constants/types';
 
 const initialState = '';
 
-export default function(state = initialState, action) {
+const reducer = (state = initialState, action) => {
 	switch(action.type) {
 		case UPDATE_SELECTED_SCALE_NAME:
 			return action.payload;
@@ -10,3 +10,5 @@ export default function(state = initialState, action) {
 			return state;
 	}
 }
+
+export default reducer;
