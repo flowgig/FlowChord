@@ -1,4 +1,6 @@
 {
+  "3":            {"halfSteps": [0, 4],                    "parsedHalfSteps": [0, 4]},
+  "5":            {"halfSteps": [0, 7],                    "parsedHalfSteps": [0, 7]},
   "sus2":         {"halfSteps": [0, 2, 7],                 "parsedHalfSteps": [0, 2, 7]},
   "9sus2":        {"halfSteps": [0, 2, 7, 10],             "parsedHalfSteps": [0, 2, 7, 10]},
   "maj9sus2":     {"halfSteps": [0, 2, 7, 11],             "parsedHalfSteps": [0, 2, 7, 11]},
