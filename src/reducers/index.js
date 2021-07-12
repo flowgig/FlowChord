@@ -5,6 +5,7 @@ import {connectRouter} from 'connected-react-router';
 // Reducers
 import AlternativeSelectionsReducer from 'reducers/AlternativeSelectionsReducer';
 import ChordsReducer from 'reducers/ChordsReducer';
+import ComputerKeyboardInputEnabledReducer from 'reducers/ComputerKeyboardInputEnabledReducer';
 import GuitarTunersReducer from 'reducers/GuitarTunersReducer';
 import IntervalsReducer from 'reducers/IntervalsReducer';
 import KeyCodeNoteNumbersReducer from 'reducers/KeyCodeNoteNumbersReducer';
@@ -24,6 +25,7 @@ const reducers = history => combineReducers({
   router: connectRouter(history),
   alternativeSelections: AlternativeSelectionsReducer,
   chords: ChordsReducer,
+  computerKeyboardInputEnabled: ComputerKeyboardInputEnabledReducer,
   guitarTuners: GuitarTunersReducer,
   intervals: IntervalsReducer,
   keyCodeNoteNumbers: KeyCodeNoteNumbersReducer,
