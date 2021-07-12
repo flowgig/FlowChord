@@ -121,7 +121,7 @@ class AlternativeSelections extends Component {
                   onClick={this.handleListOpen}
                   color="inherit">
         <Badge badgeContent={alternativeSelections.length} color="primary">
-          <QueueMusicIcon fontSize="default"/>
+          <QueueMusicIcon fontSize="medium"/>
         </Badge>
       </IconButton>
       <Snackbar anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
