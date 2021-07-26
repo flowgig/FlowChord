@@ -9,6 +9,9 @@
     min-width: 65px;
     color: #fff;
     display: flex;
+    &:local(.wide) {
+      min-width: 202px;
+    }
     @media (min-width: 450px) {
       display: inline-flex;
       margin: 0 15px;
@@ -32,6 +35,15 @@
       }
 
       svg {
+        color: #fff;
+      }
+    }
+    :local(.input) {
+      color: #fff;
+      label {
+        color: #fff;
+      }
+      input {
         color: #fff;
       }
     }
