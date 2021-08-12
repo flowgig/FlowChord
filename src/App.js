@@ -24,9 +24,6 @@ import Footer from 'components/partials/Footer';
 // InputControllers
 import ComputerKeyboardInput from 'components/inputControllers/ComputerKeyboardInput';
 
-// OutputAudio
-import Synthesizer from 'components/outputAudio/Synthesizer';
-
 // Stylesheets
 import style from 'App.module.scss';
 import theme from 'theme';
@@ -47,9 +44,9 @@ class App extends Component {
         <CssBaseline />
         <ThemeProvider theme={theme}>
           <ComputerKeyboardInput />
-          <Synthesizer />
           <MainAppBar />
           <div className={style.app}>
+
             <Switch>
               <Route exact={true} path="/" render={(props) => (<Home {...props}/>)}/>
               <Route exact={true} path="/FlowChord" render={(props) => (<Home {...props}/>)}/>

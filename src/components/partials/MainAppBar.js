@@ -17,6 +17,9 @@ import Selection from 'components/partials/Selection';
 import Options from 'components/partials/Options';
 import AlternativeSelections from 'components/partials/AlternativeSelections';
 
+// OutputAudio
+import Synthesizer from 'components/outputAudio/Synthesizer';
+
 // Assets
 import FlowChordLogo from 'assets/svg/flowchord-logo-white.svg';
 
@@ -49,6 +52,7 @@ class MainAppBar extends Component {
           </IconButton>
           <img src={FlowChordLogo} alt="FlowChord logo" className={style.appBarLogo} />
           <Selection/>
+          <Synthesizer />
           <AlternativeSelections />
         </Toolbar>
       </AppBar>
