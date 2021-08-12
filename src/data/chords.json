@@ -34,6 +34,7 @@
   "7":            {"halfSteps": [0, 4, 7, 10],             "parsedHalfSteps": [0, 4, 7, 10]},
   "b9":           {"halfSteps": [0, 4, 7, 10, 13],         "parsedHalfSteps": [0, 1, 4, 7, 10]},
   "9":            {"halfSteps": [0, 4, 7, 10, 14],         "parsedHalfSteps": [0, 2, 4, 7, 10]},
+  "7(#9)":        {"halfSteps": [0, 4, 7, 10, 15],         "parsedHalfSteps": [0, 3, 4, 7, 10]},
   "11":           {"halfSteps": [0, 4, 7, 10, 14, 17],     "parsedHalfSteps": [0, 2, 4, 5, 7, 10]},
   "13":           {"halfSteps": [0, 4, 7, 10, 14, 21],     "parsedHalfSteps": [0, 2, 4, 7, 9, 10]},
   "maj7":         {"halfSteps": [0, 4, 7, 11],             "parsedHalfSteps": [0, 4, 7, 11]},
