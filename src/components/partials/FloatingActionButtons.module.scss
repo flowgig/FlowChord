@@ -1,0 +1,11 @@
+@import "../../style/abstracts/_all.scss";
+
+:local(.floatingActionButtons) {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    @media (min-width: $screen-sm) {
+        right: 20px;
+        bottom: 20px;
+    }
+}
