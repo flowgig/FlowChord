@@ -10,7 +10,6 @@ import Select from '@material-ui/core/Select';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 
-
 // Actions
 import { updateSelectedKeyNumber } from 'actions/SelectedKeyNumberActions';
 import { updateSelectedChordName, updateSelectedScaleName, updateSelectedSelectionSelectList } from 'actions/SelectedSelectionNameActions';
@@ -112,36 +111,6 @@ class Selection extends Component {
       </div>
     )
   }
-
-  /*render() {
-    return (<div className={style.selection}>
-      <FormControl className={style.formControl}>
-        <InputLabel id="key-select-label">Key</InputLabel>
-        <Select className={style.select} labelId="key-select-label" id="key-select" value={this.props.selectedKeyNumber} onChange={event => this.handleKeyChange(parseInt(event.target.value))}>
-        {this.renderKeyOptions(this.props.notes)}
-        </Select>
-      </FormControl>
-      {
-        this.props.selectedSelectionType === 'chord'
-          ? (<FormControl className={style.formControl}>
-            <InputLabel id="chord-select-label">Chord</InputLabel>
-            <Select className={style.select}
-                    labelId="chord-select-label"
-                    id="chord-select"
-                    value={this.props.selectedChordName}
-                    onChange={event => this.handleChordChange(event.target.value)}>
-            {this.renderChordOptions(this.props.chords)}
-            </Select>
-          </FormControl>)
-          : (<FormControl className={style.formControl}>
-            <InputLabel id="scale-select-label">Scale</InputLabel>
-            <Select className={style.select} labelId="scale-select-label" id="scale-select" value={this.props.selectedScaleName} onChange={event => this.handleScaleChange(event.target.value)}>
-            {this.renderScaleOptions(this.props.scales)}
-            </Select>
-          </FormControl>)
-      }
-    </div>)
-  }*/
 }
 
 const mapStateToProps = state => ({
