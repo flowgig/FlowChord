@@ -20,6 +20,7 @@ import NotFound from 'components/routes/NotFound';
 // Partials
 import MainAppBar from 'components/partials/MainAppBar';
 import Footer from 'components/partials/Footer';
+import FloatingActionButtons from 'components/partials/FloatingActionButtons';
 
 // InputControllers
 import ComputerKeyboardInput from 'components/inputControllers/ComputerKeyboardInput';
@@ -46,13 +47,13 @@ class App extends Component {
           <ComputerKeyboardInput />
           <MainAppBar />
           <div className={style.app}>
-
             <Switch>
               <Route exact={true} path="/" render={(props) => (<Home {...props}/>)}/>
               <Route exact={true} path="/FlowChord" render={(props) => (<Home {...props}/>)}/>
               <Route render={() => (<NotFound/>)}/>
             </Switch>
             <Footer />
+            <FloatingActionButtons />
           </div>
         </ThemeProvider>
       </ConnectedRouter>
