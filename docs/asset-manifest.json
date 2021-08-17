@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/FlowChord/static/css/main.98fe83c7.chunk.css",
-    "main.js": "/FlowChord/static/js/main.e93b5ebc.chunk.js",
-    "main.js.map": "/FlowChord/static/js/main.e93b5ebc.chunk.js.map",
+    "main.css": "/FlowChord/static/css/main.987ea373.chunk.css",
+    "main.js": "/FlowChord/static/js/main.d119d330.chunk.js",
+    "main.js.map": "/FlowChord/static/js/main.d119d330.chunk.js.map",
     "runtime-main.js": "/FlowChord/static/js/runtime-main.6f55b453.js",
     "runtime-main.js.map": "/FlowChord/static/js/runtime-main.6f55b453.js.map",
-    "static/js/2.a74be6b3.chunk.js": "/FlowChord/static/js/2.a74be6b3.chunk.js",
-    "static/js/2.a74be6b3.chunk.js.map": "/FlowChord/static/js/2.a74be6b3.chunk.js.map",
+    "static/js/2.2c0e33ba.chunk.js": "/FlowChord/static/js/2.2c0e33ba.chunk.js",
+    "static/js/2.2c0e33ba.chunk.js.map": "/FlowChord/static/js/2.2c0e33ba.chunk.js.map",
     "index.html": "/FlowChord/index.html",
-    "static/css/main.98fe83c7.chunk.css.map": "/FlowChord/static/css/main.98fe83c7.chunk.css.map",
-    "static/js/2.a74be6b3.chunk.js.LICENSE.txt": "/FlowChord/static/js/2.a74be6b3.chunk.js.LICENSE.txt",
+    "static/css/main.987ea373.chunk.css.map": "/FlowChord/static/css/main.987ea373.chunk.css.map",
+    "static/js/2.2c0e33ba.chunk.js.LICENSE.txt": "/FlowChord/static/js/2.2c0e33ba.chunk.js.LICENSE.txt",
     "static/media/flowchord-logo-gray-vertical.c53b6bac.svg": "/FlowChord/static/media/flowchord-logo-gray-vertical.c53b6bac.svg",
     "static/media/flowchord-logo-white.2e1b96e5.svg": "/FlowChord/static/media/flowchord-logo-white.2e1b96e5.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.6f55b453.js",
-    "static/js/2.a74be6b3.chunk.js",
-    "static/css/main.98fe83c7.chunk.css",
-    "static/js/main.e93b5ebc.chunk.js"
+    "static/js/2.2c0e33ba.chunk.js",
+    "static/css/main.987ea373.chunk.css",
+    "static/js/main.d119d330.chunk.js"
   ]
 }

@@ -66,6 +66,7 @@ class Synthesizer extends Component {
     return (
       <Fab color="primary" aria-label={`Listen to ${this.props.selectedSelectionType}`} onClick={this.playSelection}>
         <PlayArrowIcon />
+        {this.props.selectedScaleName} - {this.props.selectedChordName}
       </Fab>
     )
   }

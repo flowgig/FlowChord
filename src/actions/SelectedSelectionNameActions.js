@@ -163,10 +163,24 @@ const removeCustomSelection = noteSelections =>{
 
 
 export const updateSelectedSelectionNameFromNotes = (notes, selectedKeyNumber, noteSelections, selectedSelectionType) => dispatch => {
+  console.log("hoyhoy", {notes, selectedKeyNumber, noteSelections, selectedSelectionType})
   const selectedNoteNumbers = getSelectedNoteNumbersFromNotes(notes);
   let selectedHalfSteps = noteNumbersToHalfSteps(selectedNoteNumbers, selectedKeyNumber);
   selectedHalfSteps.sort(sortNumber).join(',');
   const matchedSelection = getMatchedSelection(noteSelections, selectedHalfSteps);
+
+  const hasSelectedNotes = notes.some(note => {
+    return note.selected;
+  })
+
+  if(!hasSelectedNotes){
+    console.log("hakke no")
+    dispatch({
+      type: selectedSelectionType === 'scale' ? UPDATE_SELECTED_SCALE_NAME : UPDATE_SELECTED_CHORD_NAME,
+      payload: ''
+    });
+    return
+  }
 
   if (matchedSelection) {
 		const alternativeSelections = getAlternativeSelections(false, notes, noteSelections, selectedKeyNumber, selectedHalfSteps);

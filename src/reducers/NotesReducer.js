@@ -1,7 +1,8 @@
 import {
   SELECT_NOTE,
   DESELECT_NOTE,
-  TOGGLE_SELECTED_NOTES
+  TOGGLE_SELECTED_NOTES,
+  RESET_SELECTED_NOTES
 } from 'constants/types';
 
 import notes from 'data/notes.json';
@@ -15,6 +16,8 @@ const reducer = (state = initialState, action) => {
     case DESELECT_NOTE:
       return action.payload;
     case TOGGLE_SELECTED_NOTES:
+      return action.payload;
+    case RESET_SELECTED_NOTES:
       return action.payload;
     default:
       return state;

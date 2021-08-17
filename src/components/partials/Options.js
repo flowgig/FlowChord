@@ -1,6 +1,6 @@
 // Dependencies
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 // Material UI
 import Collapse from '@material-ui/core/Collapse';
@@ -19,67 +19,72 @@ import TextField from '@material-ui/core/TextField';
 
 
 // Actions
-import {updateSelectedSelectionType} from 'actions/SelectedSelectionTypeActions';
-import {updateSelectedLabel} from 'actions/SelectedLabelActions';
-import {updateSettingsGuitar} from 'actions/SettingsGuitarActions';
-import {updateSettingsKeyboard} from 'actions/SettingsKeyboardActions';
+import { updateSelectedSelectionType } from 'actions/SelectedSelectionTypeActions';
+import { updateSelectedLabel } from 'actions/SelectedLabelActions';
+import { updateSettingsGuitar } from 'actions/SettingsGuitarActions';
+import { updateSettingsKeyboard } from 'actions/SettingsKeyboardActions';
+import { updateSelectedSelectionNameFromNotes } from 'actions/SelectedSelectionNameActions';
+import { resetSelectedNotes } from 'actions/NotesActions';
 
 // Stylesheets
 import style from 'components/partials/Options.module.scss';
 
 class Options extends Component {
 
-  handleSelectionTypeChange(selectionType){
+  handleSelectionTypeChange(selectionType) {
+    const noteSelections = selectionType === 'scale' ? this.props.scales : this.props.chords;
     this.props.updateSelectedSelectionType(selectionType);
+    const newNotes = this.props.resetSelectedNotes();
+    this.props.updateSelectedSelectionNameFromNotes(newNotes, 0, noteSelections, selectionType);
   }
 
-  handleLabelChange(label){
+  handleLabelChange(label) {
     this.props.updateSelectedLabel(label);
   }
 
-  handleToggleGuitar(show){
-    const newSettingsGuitar = {...this.props.settingsGuitar};
+  handleToggleGuitar(show) {
+    const newSettingsGuitar = { ...this.props.settingsGuitar };
     newSettingsGuitar.show = show;
     this.props.updateSettingsGuitar(newSettingsGuitar)
   }
 
-  handleNumberOfFretsChange(numberOfFrets){
-    const newSettingsGuitar = {...this.props.settingsGuitar};
+  handleNumberOfFretsChange(numberOfFrets) {
+    const newSettingsGuitar = { ...this.props.settingsGuitar };
     newSettingsGuitar.numberOfFrets = numberOfFrets;
     this.props.updateSettingsGuitar(newSettingsGuitar)
   }
 
-  handleToggleKeyboard(show){
-    const newSettingsKeyboard = {...this.props.settingsKeyboard};
+  handleToggleKeyboard(show) {
+    const newSettingsKeyboard = { ...this.props.settingsKeyboard };
     newSettingsKeyboard.show = show;
     this.props.updateSettingsKeyboard(newSettingsKeyboard)
   }
 
-  handleNumberOfKeysChange(numberOfKeys){
-    const newSettingsKeyboard = {...this.props.settingsKeyboard};
+  handleNumberOfKeysChange(numberOfKeys) {
+    const newSettingsKeyboard = { ...this.props.settingsKeyboard };
     newSettingsKeyboard.numberOfKeys = numberOfKeys;
     this.props.updateSettingsKeyboard(newSettingsKeyboard)
   }
 
-  handleLowestNoteChange(lowestNote){
-    const newSettingsKeyboard = {...this.props.settingsKeyboard};
+  handleLowestNoteChange(lowestNote) {
+    const newSettingsKeyboard = { ...this.props.settingsKeyboard };
     newSettingsKeyboard.lowestNote = lowestNote;
     this.props.updateSettingsKeyboard(newSettingsKeyboard)
   }
 
-  renderSelectionTypeOptions(selectionTypes){
+  renderSelectionTypeOptions(selectionTypes) {
     return selectionTypes.map(selectionType => {
       return <MenuItem key={selectionType.value} value={selectionType.value}>{selectionType.label}</MenuItem>;
     })
   }
 
-  renderLabelOptions(labels){
+  renderLabelOptions(labels) {
     return labels.map(label => {
       return <MenuItem key={label.value} value={label.value}>{label.label}</MenuItem>;
     })
   }
 
-  renderLowestNoteOptions(notes){
+  renderLowestNoteOptions(notes) {
     return notes.map(note => {
       return <MenuItem key={note.number} value={note.number}>{note.name}</MenuItem>;
     })
@@ -92,7 +97,7 @@ class Options extends Component {
           <FormControl fullWidth>
             <InputLabel id="selection-type-select-label">Selection type</InputLabel>
             <Select labelId="selection-type-select-label" id="selection-type-select" value={this.props.selectedSelectionType} onChange={event => this.handleSelectionTypeChange(event.target.value)}>
-            {this.renderSelectionTypeOptions(this.props.selectionTypes)}
+              {this.renderSelectionTypeOptions(this.props.selectionTypes)}
             </Select>
           </FormControl>
         </ListItem>
@@ -100,7 +105,7 @@ class Options extends Component {
           <FormControl fullWidth>
             <InputLabel id="label-select-label">Label</InputLabel>
             <Select labelId="label-select-label" id="label-select" value={this.props.selectedLabel} onChange={event => this.handleLabelChange(event.target.value)}>
-            {this.renderLabelOptions(this.props.labels)}
+              {this.renderLabelOptions(this.props.labels)}
             </Select>
           </FormControl>
         </ListItem>
@@ -122,7 +127,7 @@ class Options extends Component {
         <Collapse in={this.props.settingsGuitar.show} timeout="auto" unmountOnExit>
           <List>
             <ListItem>
-              <TextField value={this.props.settingsGuitar.numberOfFrets} onChange={event => this.handleNumberOfFretsChange(event.target.value)} fullWidth id="number-of-frets" label="Number of frets" type="number" inputProps={{min: 0, max: 50}} InputLabelProps={{shrink: true}} />
+              <TextField value={this.props.settingsGuitar.numberOfFrets} onChange={event => this.handleNumberOfFretsChange(event.target.value)} fullWidth id="number-of-frets" label="Number of frets" type="number" inputProps={{ min: 0, max: 50 }} InputLabelProps={{ shrink: true }} />
             </ListItem>
           </List>
         </Collapse>
@@ -144,13 +149,13 @@ class Options extends Component {
         <Collapse in={this.props.settingsKeyboard.show} timeout="auto" unmountOnExit>
           <List>
             <ListItem>
-              <TextField value={this.props.settingsKeyboard.numberOfKeys} onChange={event => this.handleNumberOfKeysChange(event.target.value)} fullWidth id="number-of-keys" label="Number of keys" type="number" inputProps={{min: 0, max: 120}} InputLabelProps={{shrink: true}} />
+              <TextField value={this.props.settingsKeyboard.numberOfKeys} onChange={event => this.handleNumberOfKeysChange(event.target.value)} fullWidth id="number-of-keys" label="Number of keys" type="number" inputProps={{ min: 0, max: 120 }} InputLabelProps={{ shrink: true }} />
             </ListItem>
             <ListItem>
               <FormControl fullWidth>
                 <InputLabel id="lowestNote-select-label">Lowest note</InputLabel>
                 <Select labelId="lowestNote-select-label" id="lowestNote-select" value={this.props.settingsKeyboard.lowestNote} onChange={event => this.handleLowestNoteChange(event.target.value)}>
-                {this.renderLowestNoteOptions(this.props.notes)}
+                  {this.renderLowestNoteOptions(this.props.notes)}
                 </Select>
               </FormControl>
             </ListItem>
@@ -165,6 +170,7 @@ const mapStateToProps = state => ({
   selectionTypes: state.selectionTypes,
   labels: state.labels,
   scales: state.scales,
+  chords: state.chords,
   notes: state.notes,
   selectedSelectionType: state.selectedSelectionType,
   selectedLabel: state.selectedLabel,
@@ -176,7 +182,9 @@ const mapDispatchToProps = {
   updateSelectedSelectionType,
   updateSelectedLabel,
   updateSettingsGuitar,
-  updateSettingsKeyboard
+  updateSettingsKeyboard,
+  updateSelectedSelectionNameFromNotes,
+  resetSelectedNotes
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Options);
