@@ -30,32 +30,45 @@ const getMatchedSelection = (noteSelections, selectedHalfSteps) => {
   });
 }
 
+const getMatchedSelections = (noteSelections, relativeParsedHalfSteps, isSelectedKey, selectedSelectionName) => {
+  return Object.keys(noteSelections).filter(noteSelectionName => {
+    const noteSelection = noteSelections[noteSelectionName];
+    const isEqualSelection = isSelectedKey && selectedSelectionName === noteSelectionName;
+    const isMatchedSelection = noteSelection.parsedHalfSteps.length === relativeParsedHalfSteps.length && noteSelection.parsedHalfSteps.every((parsedHalfStep, index) => {
+      return parsedHalfStep === relativeParsedHalfSteps[index];
+    });
+    const isSelectedChord = isSelectedKey && isEqualSelection;
+    return isMatchedSelection && !isSelectedChord;
+  });
+}
+
 const getSelectionFromName = (selection, selectionName) => {
   return selection[selectionName];
 }
 
-const getAlternativeSelections = (single = false, notes, noteSelections, selectedKeyNumber, selectedHalfSteps) => {
+const getAlternativeSelections = (single = false, notes, noteSelections, selectedKeyNumber, selectedHalfSteps, selectedSelectionName) => {
   let alternativeSelections = [];
   for (var keyIndex in notes) {
-    if (parseInt(keyIndex) !== selectedKeyNumber) {
-      let relativeKeyIndex = keyIndex - selectedKeyNumber;
-      let relativeParsedHalfSteps = selectedHalfSteps.map(parsedHalfStep => {
-        let relativeParsedHalfStep = parsedHalfStep - relativeKeyIndex;
-        relativeParsedHalfStep = relativeParsedHalfStep >= 0 ? relativeParsedHalfStep : relativeParsedHalfStep + 12;
-        return relativeParsedHalfStep % 12;
-      });
-      relativeParsedHalfSteps.sort(sortNumber).join(',');
-      const matchedSelection = getMatchedSelection(noteSelections, relativeParsedHalfSteps);
-      if (matchedSelection) {
-        const alternativeSelection = {
-          note: notes[keyIndex],
-          selection: getSelectionFromName(noteSelections, matchedSelection),
-          selectionName: matchedSelection
-        };
-        if (single) return alternativeSelection;
-        else alternativeSelections.push(alternativeSelection);
+    let relativeKeyIndex = keyIndex - selectedKeyNumber;
+    let relativeParsedHalfSteps = selectedHalfSteps.map(parsedHalfStep => {
+      let relativeParsedHalfStep = parsedHalfStep - relativeKeyIndex;
+      relativeParsedHalfStep = relativeParsedHalfStep >= 0 ? relativeParsedHalfStep : relativeParsedHalfStep + 12;
+      return relativeParsedHalfStep % 12;
+    });
+    relativeParsedHalfSteps.sort(sortNumber).join(',');
+      const isSelectedKey = parseInt(keyIndex) === selectedKeyNumber
+      const matchedSelections = getMatchedSelections(noteSelections, relativeParsedHalfSteps, isSelectedKey, selectedSelectionName);
+      for (const matchedSelection of matchedSelections) {
+        if (matchedSelections) {
+          const alternativeSelection = {
+            note: notes[keyIndex],
+            selection: getSelectionFromName(noteSelections, matchedSelection),
+            selectionName: matchedSelection
+          };
+          if (single) return alternativeSelection;
+          else alternativeSelections.push(alternativeSelection);
+        }
       }
-    }
   }
   return single ? null : alternativeSelections;
 }
@@ -114,7 +127,7 @@ export const updateSelectedSelectionSelectList = (notes, selectedKeyNumber, sele
   		payload: newNotes
   	});
 
-    const alternativeSelections = getAlternativeSelections(false, notes, noteSelections, selectedKeyNumber, halfSteps);
+    const alternativeSelections = getAlternativeSelections(false, notes, noteSelections, selectedKeyNumber, halfSteps, selectedSelectionName);
     dispatch({
       type: UPDATE_ALTERNATIVE_SELECTIONS,
       payload: alternativeSelections
@@ -167,9 +180,9 @@ export const updateSelectedSelectionNameFromNotes = (notes, selectedKeyNumber, n
   let selectedHalfSteps = noteNumbersToHalfSteps(selectedNoteNumbers, selectedKeyNumber);
   selectedHalfSteps.sort(sortNumber).join(',');
   const matchedSelection = getMatchedSelection(noteSelections, selectedHalfSteps);
-
   if (matchedSelection) {
-		const alternativeSelections = getAlternativeSelections(false, notes, noteSelections, selectedKeyNumber, selectedHalfSteps);
+    const selectedSelectionName = matchedSelection;
+		const alternativeSelections = getAlternativeSelections(false, notes, noteSelections, selectedKeyNumber, selectedHalfSteps, selectedSelectionName);
     dispatch({
       type: selectedSelectionType === 'scale' ? UPDATE_SELECTED_SCALE_NAME : UPDATE_SELECTED_CHORD_NAME,
       payload: matchedSelection
@@ -188,7 +201,8 @@ export const updateSelectedSelectionNameFromNotes = (notes, selectedKeyNumber, n
   }else {
 		const alternativeSelection = getAlternativeSelections(true, notes, noteSelections, selectedKeyNumber, selectedHalfSteps);
 		if (alternativeSelection){
-			const alternativeSelectionsToAlternativeSelection = getAlternativeSelections(false, notes, noteSelections, alternativeSelection.note.number, alternativeSelection.selection.parsedHalfSteps);
+      const selectedSelectionName = alternativeSelection.selectionName;
+			const alternativeSelectionsToAlternativeSelection = getAlternativeSelections(false, notes, noteSelections, alternativeSelection.note.number, alternativeSelection.selection.parsedHalfSteps, selectedSelectionName);
 			dispatch({
 	      type: selectedSelectionType === 'scale' ? UPDATE_SELECTED_SCALE_NAME : UPDATE_SELECTED_CHORD_NAME,
 	      payload: alternativeSelection.selectionName
