@@ -37,7 +37,6 @@ class Synthesizer extends Component {
       const selectedSelection = selectedSelections[selectedSelectionName];
       const selectedHalfSteps = selectedSelection.halfSteps;
       const selectedNotesTriggerNames = this.getSelectedNotesTriggerNames(selectedHalfSteps, this.props.selectedKeyNumber, notes);
-      console.log(selectedNotesTriggerNames)
       const now = Tone.now()
 
       if (this.props.selectedSelectionType === 'chord') {

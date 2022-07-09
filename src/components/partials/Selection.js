@@ -31,7 +31,6 @@ class Selection extends Component {
   }
 
   handleChordChange(chordName) {
-    console.log("chord name", chordName)
     this.props.updateSelectedSelectionSelectList(
       this.props.notes,
       this.props.selectedKeyNumber,
