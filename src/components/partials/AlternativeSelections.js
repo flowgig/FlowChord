@@ -120,7 +120,7 @@ class AlternativeSelections extends Component {
                   aria-haspopup="true"
                   onClick={this.handleListOpen}
                   color="inherit">
-        <Badge badgeContent={alternativeSelections.length} color="primary">
+        <Badge badgeContent={alternativeSelections.length} overlap="rectangular" color="primary">
           <QueueMusicIcon fontSize="medium"/>
         </Badge>
       </IconButton>
