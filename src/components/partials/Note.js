@@ -31,10 +31,14 @@ class Note extends Component {
   }
 
   render() {
+    const noteSelections = this.props.selectedSelectionType === 'scale' ? this.props.scales : this.props.chords;
+    const selectedSelectionName = this.props.selectedSelectionType === 'scale' ? this.props.selectedScaleName : this.props.selectedChordName;
+    const selectedNoteSelection = noteSelections[selectedSelectionName];
+
     const keyNumber = this.props.keyNumber;
     const keyName = this.getKeyName(keyNumber);
     const note = this.props.note;
-    const halfSteps = noteNumberToHalfSteps(keyNumber, this.props.selectedKeyNumber);
+    const halfSteps = noteNumberToHalfSteps(keyNumber, this.props.selectedKeyNumber, selectedNoteSelection);
     const interval = this.getInterval(halfSteps);
 
     const label = () => {
@@ -49,7 +53,8 @@ class Note extends Component {
           return '';
       }
     }
-    const noteSelections = this.props.selectedSelectionType === 'scale' ? this.props.scales : this.props.chords;
+   
+    
 
     return (<div className={style.note}>
           <Button color="default"
@@ -77,7 +82,9 @@ const mapStateToProps = state => ({
   intervals: state.intervals,
   selectedSelectionType: state.selectedSelectionType,
   selectedLabel: state.selectedLabel,
-  selectedKeyNumber: state.selectedKeyNumber
+  selectedKeyNumber: state.selectedKeyNumber,
+  selectedChordName: state.selectedChordName,
+  selectedScaleName: state.selectedScaleName
 });
 
 const mapDispatchToProps = {

@@ -3,7 +3,7 @@
 :local(.note) {
   :local(.button) {
     text-transform: none;
-    padding: 6px;
+    padding: 6px 0;
     min-width: 53px;
     color: white;
     &:local(.notSelected){
@@ -22,44 +22,101 @@
     &:local(.1) {
       background-color: $marker-color-1;
     }
-
     &:local(.2) {
       background-color: $marker-color-2;
     }
     &:local(.3) {
       background-color: $marker-color-3;
     }
-
     &:local(.4) {
       background-color: $marker-color-4;
     }
-
     &:local(.5) {
       background-color: $marker-color-5;
     }
-
     &:local(.6) {
       background-color: $marker-color-6;
     }
-
     &:local(.7) {
       background-color: $marker-color-7;
     }
-
     &:local(.8) {
       background-color: $marker-color-8;
     }
-
     &:local(.9) {
       background-color: $marker-color-9;
     }
-
     &:local(.10) {
       background-color: $marker-color-10;
     }
-
     &:local(.11) {
       background-color: $marker-color-11;
+    }
+    &:local(.12) {
+      background-color: $marker-color-12;
+    }
+    &:local(.13) {
+      background-color: $marker-color-13;
+    }
+    &:local(.14) {
+      background-color: $marker-color-14;
+    }
+    &:local(.15) {
+      background-color: $marker-color-15;
+    }
+    &:local(.16) {
+      background-color: $marker-color-16;
+    }
+    &:local(.17) {
+      background-color: $marker-color-17;
+    }
+    &:local(.18) {
+      background-color: $marker-color-18;
+    }
+    &:local(.19) {
+      background-color: $marker-color-19;
+    }
+    &:local(.20){
+      background-color: $marker-color-20;
+    }
+    &:local(.21) {
+      background-color: $marker-color-21;
+    }
+    &:local(.22) {
+      background-color: $marker-color-22;
+    }
+    &:local(.23) {
+      background-color: $marker-color-23;
+    }
+    &:local(.24) {
+      background-color: $marker-color-24;
+    }
+    &:local(.25) {
+      background-color: $marker-color-25;
+    }
+    &:local(.26) {
+      background-color: $marker-color-26;
+    }
+    &:local(.27) {
+      background-color: $marker-color-27;
+    }
+    &:local(.28) {
+      background-color: $marker-color-28;
+    }
+    &:local(.29) {
+      background-color: $marker-color-29;
+    }
+    &:local(.30){
+      background-color: $marker-color-30;
+    }
+    &:local(.31) {
+      background-color: $marker-color-31;
+    }
+    &:local(.32) {
+      background-color: $marker-color-32;
+    }
+    &:local(.33) {
+      background-color: $marker-color-33;
     }
   }
 }

@@ -4,9 +4,14 @@ export const getNoteByNoteNumber = (notes, noteNumber) => {
   })
 }
 
-export const noteNumberToHalfSteps = (noteNumber, selectedKeyNumber) => {
-  return (noteNumber - selectedKeyNumber) % 12 >= 0 ? (noteNumber - selectedKeyNumber) % 12 : (12 + noteNumber - selectedKeyNumber) % 12;
-}
+export const noteNumberToHalfSteps = (noteNumber, selectedKeyNumber, selectedNoteSelection) => {
+  const relativeNoteNumber =  (noteNumber - selectedKeyNumber) % 12 >= 0 ? (noteNumber - selectedKeyNumber) % 12 : (12 + noteNumber - selectedKeyNumber) % 12;
+  const relativeNoteNumberInSelection = selectedNoteSelection && Object.keys(selectedNoteSelection)?.length 
+  ? selectedNoteSelection.halfSteps.find(halfStep => {
+    return halfStep % 12 === relativeNoteNumber;
+  }) : null;
+  return relativeNoteNumberInSelection || relativeNoteNumber;
+} 
 
 export const noteNumbersToHalfSteps = (noteNumbers, selectedKeyNumber) => {
   return noteNumbers.map(noteNumber => {
