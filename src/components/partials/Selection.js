@@ -83,7 +83,7 @@ class Selection extends Component {
             ? (<FormControl className={`${style.formControl} ${style.wide}`}>
               <Autocomplete
                 id="chord-select"
-                value={this.props.selectedChordName}
+                value={!!this.props.selectedChordName?.length ? this.props.selectedChordName : null}
                 onChange={(event, newValue) => this.handleChordChange(newValue)}
                 onFocus={() => this.props.updateComputerKeyboardInputEnabled(false)}
                 onBlur={() => this.props.updateComputerKeyboardInputEnabled(true)}
@@ -97,7 +97,7 @@ class Selection extends Component {
             : (<FormControl className={`${style.formControl} ${style.wide}`}>
               <Autocomplete
                 id="scale-select"
-                value={this.props.selectedScaleName}
+                value={!!this.props.selectedScaleName?.length ? this.props.selectedScaleName : null}
                 onChange={(event, newValue) => this.handleScaleChange(newValue)}
                 onFocus={() => this.props.updateComputerKeyboardInputEnabled(false)}
                 onBlur={() => this.props.updateComputerKeyboardInputEnabled(true)}
