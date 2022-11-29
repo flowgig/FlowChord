@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/FlowChord/static/css/main.dfd82f00.css",
-    "main.js": "/FlowChord/static/js/main.d5782bcf.js",
+    "main.css": "/FlowChord/static/css/main.223f7f94.css",
+    "main.js": "/FlowChord/static/js/main.2da55d5f.js",
     "static/media/flowchord-logo-gray-vertical.svg": "/FlowChord/static/media/flowchord-logo-gray-vertical.c53b6bacc0d1e4a5ce886a63f066141b.svg",
     "static/media/flowchord-logo-white.svg": "/FlowChord/static/media/flowchord-logo-white.2e1b96e5c4f684a485c672928fcd4e07.svg",
     "index.html": "/FlowChord/index.html",
-    "main.dfd82f00.css.map": "/FlowChord/static/css/main.dfd82f00.css.map",
-    "main.d5782bcf.js.map": "/FlowChord/static/js/main.d5782bcf.js.map"
+    "main.223f7f94.css.map": "/FlowChord/static/css/main.223f7f94.css.map",
+    "main.2da55d5f.js.map": "/FlowChord/static/js/main.2da55d5f.js.map"
   },
   "entrypoints": [
-    "static/css/main.dfd82f00.css",
-    "static/js/main.d5782bcf.js"
+    "static/css/main.223f7f94.css",
+    "static/js/main.2da55d5f.js"
   ]
 }
