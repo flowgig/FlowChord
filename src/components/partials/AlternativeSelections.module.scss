@@ -3,7 +3,38 @@
   :local(.selectionListMessage){
     padding: 4px;
   }
+  :local(.snackbar){
+    top: 105px;
+    @media (min-width: 328px) {
+      left: auto;
+      top: 80px;
+    }
+    @media (min-width: 450px) {
+      top: 56px;
+    }
+    > div {
+      background: #fff;
+      color: #212121;
+    }
+  }
   :local(.snackbarMessage){
+    &:before{
+      @media (min-width: 328px) {
+        display: block;
+        content: "";
+        width: 18px;
+        height: 18px;
+        background: #fff;
+        position: absolute;
+        top: -18px;
+        right: 29px;
+        transform: rotate(45deg);
+        transform-origin: 0 100%;
+      }
+      @media (min-width: 600px) {
+        right: 20px;
+      }
+    }
     svg {
       vertical-align: bottom;
       margin-right: 4px;

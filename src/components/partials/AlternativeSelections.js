@@ -17,6 +17,7 @@ import {updateSelectedSelectionFromAlternativeSelectionList} from 'actions/Selec
 // Stylesheets
 import style from 'components/partials/AlternativeSelections.module.scss';
 
+
 class AlternativeSelections extends Component {
   constructor(props) {
     super(props);
@@ -113,7 +114,7 @@ class AlternativeSelections extends Component {
     const noteSelections = selectedSelectionType === 'scale' ? this.props.scales : this.props.chords;
     const notes = this.props.notes;
 
-    return (<div className={style.alternativeSelection}>
+    return (<div className={[style.alternativeSelection, this.state.showSnackbar && style.activeSnackbar].filter(classname => classname).join(" ")}>
 
       <IconButton aria-label="Show more"
                   aria-controls={this.state.listId}
@@ -124,9 +125,10 @@ class AlternativeSelections extends Component {
           <QueueMusicIcon fontSize="medium"/>
         </Badge>
       </IconButton>
-      <Snackbar anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
+      <Snackbar anchorOrigin={{vertical: 'top', horizontal: 'right'}}
+        className={[style.snackbar, this.state.showSnackbar && style.active].filter(classname => classname).join(" ")}
         open={this.state.showSnackbar}
-        autoHideDuration={6000}
+        autoHideDuration={3000}
         onClose={this.handleSnackbarClose}
         message={
           <div className={style.snackbarMessage}>
