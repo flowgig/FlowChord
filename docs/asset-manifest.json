@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/FlowChord/static/css/main.223f7f94.css",
-    "main.js": "/FlowChord/static/js/main.b18ce9be.js",
+    "main.js": "/FlowChord/static/js/main.18bcb60c.js",
     "static/media/flowchord-logo-gray-vertical.svg": "/FlowChord/static/media/flowchord-logo-gray-vertical.c53b6bacc0d1e4a5ce886a63f066141b.svg",
     "static/media/flowchord-logo-white.svg": "/FlowChord/static/media/flowchord-logo-white.2e1b96e5c4f684a485c672928fcd4e07.svg",
     "index.html": "/FlowChord/index.html",
     "main.223f7f94.css.map": "/FlowChord/static/css/main.223f7f94.css.map",
-    "main.b18ce9be.js.map": "/FlowChord/static/js/main.b18ce9be.js.map"
+    "main.18bcb60c.js.map": "/FlowChord/static/js/main.18bcb60c.js.map"
   },
   "entrypoints": [
     "static/css/main.223f7f94.css",
-    "static/js/main.b18ce9be.js"
+    "static/js/main.18bcb60c.js"
   ]
 }
