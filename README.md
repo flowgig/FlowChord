@@ -2,7 +2,7 @@
 
 A web app for exploring musical chords and scales. Select notes on a piano keyboard or guitar fretboard, and FlowChord identifies the matching chord or scale, lists alternative interpretations (including slash chords), and plays the result back through a synthesizer.
 
-**Live demo:** [https://flowgig.github.io/FlowChord/](https://flowgig.github.io/FlowChord/)
+**Live demo:** [flowgig.github.io/FlowChord/](https://flowgig.github.io/FlowChord/)
 
 ## Features
 
