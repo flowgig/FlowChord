@@ -10,7 +10,7 @@ import { ThemeProvider } from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
 // Utils
-import configureStore, { history } from "utils/configureStore";
+import store, { history } from "utils/configureStore";
 
 // Routes
 import Home from "components/routes/Home";
@@ -33,9 +33,6 @@ WebFont.load({
         families: ["Roboto:400,700&display=swap"]
     }
 });
-
-const initialState = {};
-const store = configureStore(initialState);
 
 const App = () => {
     return (

@@ -1,32 +1,23 @@
 // Dependencies
-import {createBrowserHistory} from 'history';
-import {routerMiddleware} from 'connected-react-router';
-import {createStore, applyMiddleware} from 'redux';
-import {composeWithDevTools} from 'redux-devtools-extension/developmentOnly';
+import { createBrowserHistory } from 'history';
+import { createReduxHistoryContext } from 'redux-first-history';
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import thunk from 'redux-thunk';
 
 // Reducers
 import createRootReducer from 'reducers';
 
-
-export const history = createBrowserHistory()
-
-const composeEnhancers = composeWithDevTools({
-  // options like actionSanitizer, stateSanitizer
+const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHistoryContext({
+  history: createBrowserHistory()
 });
 
-export default function configureStore(preloadedState) {
-  const middleware = [thunk];
-  const history = createBrowserHistory();
-  const store = createStore(
-		createRootReducer(history),
-		preloadedState,
-		composeEnhancers(
-			applyMiddleware(
-				...middleware,
-				routerMiddleware(history)
-			)
-		)
-	);
-  return store;
-}
+const composeEnhancers = composeWithDevTools({});
+
+const store = createStore(
+  createRootReducer(routerReducer),
+  composeEnhancers(applyMiddleware(thunk, routerMiddleware))
+);
+
+export const history = createReduxHistory(store);
+export default store;

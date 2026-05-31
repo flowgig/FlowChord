@@ -1,6 +1,5 @@
 // Dependencies
-import {combineReducers} from 'redux';
-import {connectRouter} from 'connected-react-router';
+import { combineReducers } from 'redux';
 
 // Reducers
 import AlternativeSelectionsReducer from 'reducers/AlternativeSelectionsReducer';
@@ -22,8 +21,8 @@ import SettingsGuitarReducer from 'reducers/SettingsGuitarReducer';
 import SettingsKeyboardReducer from 'reducers/SettingsKeyboardReducer';
 import SynthesizerReducer from 'reducers/SynthesizerReducer';
 
-const reducers = history => combineReducers({
-  router: connectRouter(history),
+const reducers = routerReducer => combineReducers({
+  router: routerReducer,
   alternativeSelections: AlternativeSelectionsReducer,
   chords: ChordsReducer,
   computerKeyboardInputEnabled: ComputerKeyboardInputEnabledReducer,
