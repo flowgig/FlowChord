@@ -66,22 +66,27 @@ class AlternativeSelections extends Component {
     this.setState({showSnackbar: false});
   };
 
-  handleListMenuItemClick(alternativeSelections, selection, selectedSelectionType, selectedKeyNumber, selectedSelectionName, noteSelections, notes){
+  handleListMenuItemClick(alternativeSelections, selection, selectedSelectionType, selectedKeyNumber, selectedSelectionName, notes){
     this.handleListClose();
-    this.props.updateSelectedSelectionFromAlternativeSelectionList(alternativeSelections, selection, selectedSelectionType, selectedKeyNumber, selectedSelectionName, noteSelections, notes);
+    this.props.updateSelectedSelectionFromAlternativeSelectionList(alternativeSelections, selection, selectedSelectionType, selectedKeyNumber, selectedSelectionName, notes);
   }
 
-  renderAlternativeSelectionsListItems(alternativeSelections, selectedSelectionType, selectedKeyNumber, selectedSelectionName, noteSelections, notes){
+  getSelectionLabel(selection) {
+    const label = `${selection.note.name} ${selection.selectionName}`;
+    return selection.bassNote ? `${label}/${selection.bassNote.name}` : label;
+  }
+
+  renderAlternativeSelectionsListItems(alternativeSelections, selectedSelectionType, selectedKeyNumber, selectedSelectionName, notes){
     return alternativeSelections.map(selection => {
       return (<MenuItem
-                key={`${selection.note.name}${selection.selectionName}`}
-                onClick={() => this.handleListMenuItemClick(alternativeSelections, selection, selectedSelectionType, selectedKeyNumber, selectedSelectionName, noteSelections, notes)}>
-                {selection.note.name} {selection.selectionName}
+                key={`${selection.note.name}${selection.selectionName}${selection.bassNote?.name ?? ''}`}
+                onClick={() => this.handleListMenuItemClick(alternativeSelections, selection, selectedSelectionType, selectedKeyNumber, selectedSelectionName, notes)}>
+                {this.getSelectionLabel(selection)}
              </MenuItem>)
     })
   }
 
-  renderAlternativeSelectionsList(alternativeSelections, selectedSelectionType, selectedKeyNumber, selectedSelectionName, noteSelections, notes){
+  renderAlternativeSelectionsList(alternativeSelections, selectedSelectionType, selectedKeyNumber, selectedSelectionName, notes){
     return (
       <Menu
         anchorEl={this.state.anchorEl}
@@ -94,7 +99,7 @@ class AlternativeSelections extends Component {
         >
         {
           alternativeSelections.length
-            ? this.renderAlternativeSelectionsListItems(alternativeSelections, selectedSelectionType, selectedKeyNumber, selectedSelectionName, noteSelections, notes)
+            ? this.renderAlternativeSelectionsListItems(alternativeSelections, selectedSelectionType, selectedKeyNumber, selectedSelectionName, notes)
             : (
               <MenuItem>
                 No alternative {selectedSelectionType}s available
@@ -110,7 +115,6 @@ class AlternativeSelections extends Component {
     const selectedSelectionType = this.props.selectedSelectionType;
     const selectedKeyNumber = this.props.selectedKeyNumber;
     const selectedSelectionName = selectedSelectionType === 'scale' ? this.props.selectedScaleName : this.props.selectedChordName;
-    const noteSelections = selectedSelectionType === 'scale' ? this.props.scales : this.props.chords;
     const notes = this.props.notes;
 
     return (<div className={[style.alternativeSelection, this.state.showSnackbar && style.activeSnackbar].filter(classname => classname).join(" ")}>
@@ -141,15 +145,13 @@ class AlternativeSelections extends Component {
               </IconButton>
             </React.Fragment>}
     />
-      {this.renderAlternativeSelectionsList(alternativeSelections, selectedSelectionType, selectedKeyNumber, selectedSelectionName, noteSelections, notes)}
+      {this.renderAlternativeSelectionsList(alternativeSelections, selectedSelectionType, selectedKeyNumber, selectedSelectionName, notes)}
     </div>)
   }
 }
 
 const mapStateToProps = state => ({
   notes: state.notes,
-  chords: state.chords,
-  scales: state.scales,
   selectedKeyNumber: state.selectedKeyNumber,
   selectedChordName: state.selectedChordName,
   selectedScaleName: state.selectedScaleName,

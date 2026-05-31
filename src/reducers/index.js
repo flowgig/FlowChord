@@ -11,6 +11,7 @@ import KeyCodeNoteNumbersReducer from 'reducers/KeyCodeNoteNumbersReducer';
 import LabelsReducer from 'reducers/LabelsReducer';
 import NotesReducer from 'reducers/NotesReducer';
 import ScalesReducer from 'reducers/ScalesReducer';
+import SelectedChordBassNoteNumberReducer from 'reducers/SelectedChordBassNoteNumberReducer';
 import SelectedChordNameReducer from 'reducers/SelectedChordNameReducer';
 import SelectedKeyNumberReducer from 'reducers/SelectedKeyNumberReducer';
 import SelectedLabelReducer from 'reducers/SelectedLabelReducer';
@@ -32,6 +33,7 @@ const reducers = routerReducer => combineReducers({
   labels: LabelsReducer,
   notes: NotesReducer,
   scales: ScalesReducer,
+  selectedChordBassNoteNumber: SelectedChordBassNoteNumberReducer,
   selectedChordName: SelectedChordNameReducer,
   selectedKeyNumber: SelectedKeyNumberReducer,
   selectedLabel: SelectedLabelReducer,

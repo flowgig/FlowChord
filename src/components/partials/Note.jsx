@@ -27,7 +27,7 @@ class Note extends Component {
 
   handleNoteOnClick(checked, noteNumber, selectedKeyNumber, noteSelections, selectedSelectionType){
     const newNotes = this.props.toggleNote(noteNumber, checked);
-    this.props.updateSelectedSelectionNameFromNotes(newNotes, selectedKeyNumber, noteSelections, selectedSelectionType);
+    this.props.updateSelectedSelectionNameFromNotes(newNotes, selectedKeyNumber, selectedSelectionType);
   }
 
   render() {

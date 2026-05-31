@@ -1,241 +1,165 @@
 import {
-  UPDATE_CHORDS,
-  UPDATE_SCALES,
+  UPDATE_SELECTED_CHORD_BASS_NOTE_NUMBER,
   UPDATE_SELECTED_CHORD_NAME,
-	UPDATE_SELECTED_SCALE_NAME,
-	UPDATE_SELECTED_KEY_NUMBER,
-	UPDATE_ALTERNATIVE_SELECTIONS,
-	TOGGLE_SELECTED_NOTES
+  UPDATE_SELECTED_SCALE_NAME,
+  UPDATE_SELECTED_KEY_NUMBER,
+  UPDATE_ALTERNATIVE_SELECTIONS,
+  TOGGLE_SELECTED_NOTES
 } from 'constants/types';
 
+import { getChordsFromSelectedNotes, getScalesFromSelectedNotes } from '@benjamindehli/music-utils';
 
-// Helpers
 import {
   getSelectedNoteNumbersFromNotes,
   getNoteByNoteNumber,
-  noteNumbersToHalfSteps,
-	halfStepsToNoteNumbers
+  halfStepsToNoteNumbers
 } from 'helpers/noteHelpers';
 
-const sortNumber = (a, b) => {
-  return a - b;
-}
+const sortNumber = (a, b) => a - b;
 
-const getMatchedSelection = (noteSelections, selectedHalfSteps) => {
-  return Object.keys(noteSelections).find(noteSelectionName => {
-    const noteSelection = noteSelections[noteSelectionName];
-    return noteSelection.parsedHalfSteps.length === selectedHalfSteps.length && noteSelection.parsedHalfSteps.every((element, index) => {
-      return element === selectedHalfSteps[index];
-    });
-  });
-}
+const chordMatchToAlternative = (match) => ({
+  note: match.chord.rootNote,
+  selectionName: match.chord.chordType.name,
+  matchType: match.matchType,
+  ...(match.chord.bassNote ? { bassNote: match.chord.bassNote } : {})
+});
 
-const getMatchedSelections = (noteSelections, relativeParsedHalfSteps, isSelectedKey, selectedSelectionName) => {
-  return Object.keys(noteSelections).filter(noteSelectionName => {
-    const noteSelection = noteSelections[noteSelectionName];
-    const isEqualSelection = isSelectedKey && selectedSelectionName === noteSelectionName;
-    const isMatchedSelection = noteSelection.parsedHalfSteps.length === relativeParsedHalfSteps.length && noteSelection.parsedHalfSteps.every((parsedHalfStep, index) => {
-      return parsedHalfStep === relativeParsedHalfSteps[index];
-    });
-    const isSelectedChord = isSelectedKey && isEqualSelection;
-    return isMatchedSelection && !isSelectedChord;
-  });
-}
+const scaleMatchToAlternative = (match) => ({
+  note: match.scale.rootNote,
+  selectionName: match.scale.scaleType.name,
+  matchType: match.matchType
+});
 
-const getSelectionFromName = (selection, selectionName) => {
-  return selection[selectionName];
-}
+const findPrimaryChordMatch = (matches, selectedKeyNumber) => {
+  return (
+    matches.find(m => m.matchType === 'exactRoot' && m.chord.rootNote.number === selectedKeyNumber) ||
+    matches.find(m => m.matchType === 'invertedRoot' && m.chord.rootNote.number === selectedKeyNumber) ||
+    matches.find(m => m.matchType === 'exactRoot') ||
+    matches.find(m => m.matchType === 'invertedRoot') ||
+    matches.find(m => m.matchType === 'nonRoot') ||
+    null
+  );
+};
 
-const getAlternativeSelections = (single = false, notes, noteSelections, selectedKeyNumber, selectedHalfSteps, selectedSelectionName) => {
-  let alternativeSelections = [];
-  for (var keyIndex in notes) {
-    let relativeKeyIndex = keyIndex - selectedKeyNumber;
-    let relativeParsedHalfSteps = selectedHalfSteps.map(parsedHalfStep => {
-      let relativeParsedHalfStep = parsedHalfStep - relativeKeyIndex;
-      relativeParsedHalfStep = relativeParsedHalfStep >= 0 ? relativeParsedHalfStep : relativeParsedHalfStep + 12;
-      return relativeParsedHalfStep % 12;
-    });
-    relativeParsedHalfSteps.sort(sortNumber).join(',');
-      const isSelectedKey = parseInt(keyIndex) === selectedKeyNumber
-      const matchedSelections = getMatchedSelections(noteSelections, relativeParsedHalfSteps, isSelectedKey, selectedSelectionName);
-      for (const matchedSelection of matchedSelections) {
-        if (matchedSelections) {
-          const alternativeSelection = {
-            note: notes[keyIndex],
-            selection: getSelectionFromName(noteSelections, matchedSelection),
-            selectionName: matchedSelection
-          };
-          if (single) return alternativeSelection;
-          else alternativeSelections.push(alternativeSelection);
-        }
-      }
-  }
-  return single ? null : alternativeSelections;
-}
+const findPrimaryScaleMatch = (matches, selectedKeyNumber) => {
+  return (
+    matches.find(m => m.matchType === 'exactRoot' && m.scale.rootNote.number === selectedKeyNumber) ||
+    matches.find(m => m.matchType === 'exactRoot') ||
+    matches.find(m => m.matchType === 'nonRoot') ||
+    null
+  );
+};
+
+const isPrimaryChord = (match, primary) =>
+  match.chord.rootNote.number === primary.chord.rootNote.number &&
+  match.chord.chordType.name === primary.chord.chordType.name &&
+  !match.chord.bassNote;
+
+const isPrimaryScale = (match, primary) =>
+  match.scale.rootNote.number === primary.scale.rootNote.number &&
+  match.scale.scaleType.name === primary.scale.scaleType.name;
 
 export const updateSelectedChordName = selectedChordName => dispatch => {
-  dispatch({
-    type: UPDATE_SELECTED_CHORD_NAME,
-    payload: selectedChordName
-  })
-}
+  dispatch({ type: UPDATE_SELECTED_CHORD_NAME, payload: selectedChordName });
+  dispatch({ type: UPDATE_SELECTED_CHORD_BASS_NOTE_NUMBER, payload: null });
+};
 
 export const updateSelectedScaleName = selectedScaleName => dispatch => {
-  dispatch({type: UPDATE_SELECTED_SCALE_NAME, payload: selectedScaleName})
-}
+  dispatch({ type: UPDATE_SELECTED_SCALE_NAME, payload: selectedScaleName });
+};
 
-export const updateSelectedSelectionFromAlternativeSelectionList = (alternativeSelections, selectedAlternativeSelection, selectedSelectionType, prevSelectedKeyNumber, prevSelectedSelectionName, noteSelections, notes) => dispatch => {
+export const updateSelectedSelectionFromAlternativeSelectionList = (alternativeSelections, selectedAlternativeSelection, selectedSelectionType, prevSelectedKeyNumber, prevSelectedSelectionName, notes) => dispatch => {
   const prevSelection = {
     note: getNoteByNoteNumber(notes, prevSelectedKeyNumber),
-    selection: getSelectionFromName(noteSelections, prevSelectedSelectionName),
-    selectionName: prevSelectedSelectionName
+    selectionName: prevSelectedSelectionName,
+    matchType: 'exactRoot'
   };
 
-  const selectedKeyNumber = selectedAlternativeSelection.note.number;
-  const selectedSelectionName = selectedAlternativeSelection.selectionName;
+  const { note, selectionName, bassNote } = selectedAlternativeSelection;
 
-  let newAlternativeSelections = alternativeSelections.filter(alternativeSelection => {
-    const isSelectedSelection = alternativeSelection.note.number === selectedKeyNumber && alternativeSelection.selectionName === selectedSelectionName;
-    return !isSelectedSelection;
+  const newAlternativeSelections = alternativeSelections.filter(alt => {
+    const sameRoot = alt.note.number === note.number;
+    const sameName = alt.selectionName === selectionName;
+    const sameBass = bassNote ? alt.bassNote?.number === bassNote.number : !alt.bassNote;
+    return !(sameRoot && sameName && sameBass);
   });
   newAlternativeSelections.push(prevSelection);
 
-	dispatch({
-		type: UPDATE_SELECTED_KEY_NUMBER,
-		payload: selectedKeyNumber
-	});
-	dispatch({
-		type: selectedSelectionType === 'scale' ? UPDATE_SELECTED_SCALE_NAME : UPDATE_SELECTED_CHORD_NAME,
-		payload: selectedSelectionName
-	});
-  dispatch({
-    type: UPDATE_ALTERNATIVE_SELECTIONS,
-    payload: newAlternativeSelections
-  });
-}
+  dispatch({ type: UPDATE_SELECTED_KEY_NUMBER, payload: note.number });
+  dispatch({ type: selectedSelectionType === 'scale' ? UPDATE_SELECTED_SCALE_NAME : UPDATE_SELECTED_CHORD_NAME, payload: selectionName });
+  dispatch({ type: UPDATE_SELECTED_CHORD_BASS_NOTE_NUMBER, payload: bassNote?.number ?? null });
+  dispatch({ type: UPDATE_ALTERNATIVE_SELECTIONS, payload: newAlternativeSelections });
+};
 
 export const updateSelectedSelectionSelectList = (notes, selectedKeyNumber, selectedSelectionName, noteSelections, selectedSelectionType) => dispatch => {
-  if (selectedSelectionName && selectedSelectionName.length){
+  if (selectedSelectionName && selectedSelectionName.length && noteSelections[selectedSelectionName]) {
     const halfSteps = noteSelections[selectedSelectionName].parsedHalfSteps;
-  	const relativeHalfSteps = halfStepsToNoteNumbers(halfSteps, selectedKeyNumber);
-  	relativeHalfSteps.sort(sortNumber).join(',');
-  	const newNotes = notes.map(note => {
-  		return {...note, selected: relativeHalfSteps.includes(note.number)}
-  	});
-  	dispatch({
-  		type: TOGGLE_SELECTED_NOTES,
-  		payload: newNotes
-  	});
+    const relativeHalfSteps = halfStepsToNoteNumbers(halfSteps, selectedKeyNumber);
+    relativeHalfSteps.sort(sortNumber);
+    const newNotes = notes.map(note => ({ ...note, selected: relativeHalfSteps.includes(note.number) }));
+    dispatch({ type: TOGGLE_SELECTED_NOTES, payload: newNotes });
 
-    const alternativeSelections = getAlternativeSelections(false, notes, noteSelections, selectedKeyNumber, halfSteps, selectedSelectionName);
-    dispatch({
-      type: UPDATE_ALTERNATIVE_SELECTIONS,
-      payload: alternativeSelections
-    });
+    const matches = selectedSelectionType === 'scale'
+      ? getScalesFromSelectedNotes(relativeHalfSteps)
+      : getChordsFromSelectedNotes(relativeHalfSteps);
+
+    const alternativeSelections = selectedSelectionType === 'scale'
+      ? matches
+          .filter(m => !(m.scale.rootNote.number === selectedKeyNumber && m.scale.scaleType.name === selectedSelectionName))
+          .map(scaleMatchToAlternative)
+      : matches
+          .filter(m => !(m.chord.rootNote.number === selectedKeyNumber && m.chord.chordType.name === selectedSelectionName && !m.chord.bassNote))
+          .map(chordMatchToAlternative);
+
+    dispatch({ type: UPDATE_ALTERNATIVE_SELECTIONS, payload: alternativeSelections });
   }
 
-	if (selectedSelectionType === 'key'){
-		dispatch({
-			type: UPDATE_SELECTED_KEY_NUMBER,
-			payload: selectedKeyNumber
-		});
-	}else {
-		dispatch({
-			type: selectedSelectionType === 'scale' ? UPDATE_SELECTED_SCALE_NAME : UPDATE_SELECTED_CHORD_NAME,
-			payload: selectedSelectionName
-		});
-    if(noteSelections.custom){
-      const newNoteSelections = removeCustomSelection(noteSelections);
-      dispatch({
-        type: selectedSelectionType === 'scale' ? UPDATE_SCALES : UPDATE_CHORDS,
-        payload: newNoteSelections
-      });
-    }
-	}
-}
-
-const addCustomSelection = (noteSelections, selectedHalfSteps) =>{
-  return {
-    ...noteSelections,
-    custom: {
-      halfSteps: selectedHalfSteps,
-      parsedHalfSteps: selectedHalfSteps
-    }
-  };
-}
-
-const removeCustomSelection = noteSelections =>{
-  if (noteSelections.custom){
-      let newNoteSelections = {...noteSelections};
-      delete newNoteSelections["custom"];
-    	return newNoteSelections;
-  }else {
-    return noteSelections;
+  if (selectedSelectionType === 'key') {
+    dispatch({ type: UPDATE_SELECTED_KEY_NUMBER, payload: selectedKeyNumber });
+  } else {
+    dispatch({ type: selectedSelectionType === 'scale' ? UPDATE_SELECTED_SCALE_NAME : UPDATE_SELECTED_CHORD_NAME, payload: selectedSelectionName });
+    dispatch({ type: UPDATE_SELECTED_CHORD_BASS_NOTE_NUMBER, payload: null });
   }
-}
+};
 
-
-export const updateSelectedSelectionNameFromNotes = (notes, selectedKeyNumber, noteSelections, selectedSelectionType) => dispatch => {
+export const updateSelectedSelectionNameFromNotes = (notes, selectedKeyNumber, selectedSelectionType) => dispatch => {
   const selectedNoteNumbers = getSelectedNoteNumbersFromNotes(notes);
-  let selectedHalfSteps = noteNumbersToHalfSteps(selectedNoteNumbers, selectedKeyNumber);
-  selectedHalfSteps.sort(sortNumber).join(',');
-  const matchedSelection = getMatchedSelection(noteSelections, selectedHalfSteps);
-  if (matchedSelection) {
-    const selectedSelectionName = matchedSelection;
-		const alternativeSelections = getAlternativeSelections(false, notes, noteSelections, selectedKeyNumber, selectedHalfSteps, selectedSelectionName);
-    dispatch({
-      type: selectedSelectionType === 'scale' ? UPDATE_SELECTED_SCALE_NAME : UPDATE_SELECTED_CHORD_NAME,
-      payload: matchedSelection
-    });
-		dispatch({
-			type: UPDATE_ALTERNATIVE_SELECTIONS,
-			payload: alternativeSelections
-		});
-    if(noteSelections.custom){
-      const newNoteSelections = removeCustomSelection(noteSelections);
-      dispatch({
-        type: selectedSelectionType === 'scale' ? UPDATE_SCALES : UPDATE_CHORDS,
-        payload: newNoteSelections
-      });
+
+  if (!selectedNoteNumbers.length) return;
+
+  if (selectedSelectionType === 'chord') {
+    const matches = getChordsFromSelectedNotes(selectedNoteNumbers);
+    const primary = findPrimaryChordMatch(matches, selectedKeyNumber);
+
+    if (primary) {
+      const alternatives = matches
+        .filter(m => !isPrimaryChord(m, primary))
+        .map(chordMatchToAlternative);
+
+      dispatch({ type: UPDATE_SELECTED_CHORD_NAME, payload: primary.chord.chordType.name });
+      dispatch({ type: UPDATE_SELECTED_KEY_NUMBER, payload: primary.chord.rootNote.number });
+      dispatch({ type: UPDATE_SELECTED_CHORD_BASS_NOTE_NUMBER, payload: null });
+      dispatch({ type: UPDATE_ALTERNATIVE_SELECTIONS, payload: alternatives });
+    } else {
+      dispatch({ type: UPDATE_SELECTED_CHORD_NAME, payload: 'custom' });
+      dispatch({ type: UPDATE_SELECTED_CHORD_BASS_NOTE_NUMBER, payload: null });
+      dispatch({ type: UPDATE_ALTERNATIVE_SELECTIONS, payload: [] });
     }
-  }else {
-		const alternativeSelection = getAlternativeSelections(true, notes, noteSelections, selectedKeyNumber, selectedHalfSteps);
-		if (alternativeSelection){
-      const selectedSelectionName = alternativeSelection.selectionName;
-			const alternativeSelectionsToAlternativeSelection = getAlternativeSelections(false, notes, noteSelections, alternativeSelection.note.number, alternativeSelection.selection.parsedHalfSteps, selectedSelectionName);
-			dispatch({
-	      type: selectedSelectionType === 'scale' ? UPDATE_SELECTED_SCALE_NAME : UPDATE_SELECTED_CHORD_NAME,
-	      payload: alternativeSelection.selectionName
-	    });
-			dispatch({
-	      type: UPDATE_SELECTED_KEY_NUMBER,
-	      payload: alternativeSelection.note.number
-	    });
-			dispatch({
-	      type: UPDATE_ALTERNATIVE_SELECTIONS,
-	      payload: alternativeSelectionsToAlternativeSelection
-	    });
-      if(noteSelections.custom){
-        const newNoteSelections = removeCustomSelection(noteSelections);
-        dispatch({
-          type: selectedSelectionType === 'scale' ? UPDATE_SCALES : UPDATE_CHORDS,
-          payload: newNoteSelections
-        });
-      }
-		} else {
-      const newNoteSelections = addCustomSelection(noteSelections, selectedHalfSteps, selectedSelectionType);
-      dispatch({
-        type: selectedSelectionType === 'scale' ? UPDATE_SCALES : UPDATE_CHORDS,
-        payload: newNoteSelections
-      });
-      dispatch({
-	      type: UPDATE_ALTERNATIVE_SELECTIONS,
-	      payload: []
-	    });
-      dispatch({
-        type: selectedSelectionType === 'scale' ? UPDATE_SELECTED_SCALE_NAME : UPDATE_SELECTED_CHORD_NAME,
-        payload: 'custom'
-      });
+  } else {
+    const matches = getScalesFromSelectedNotes(selectedNoteNumbers);
+    const primary = findPrimaryScaleMatch(matches, selectedKeyNumber);
+
+    if (primary) {
+      const alternatives = matches
+        .filter(m => !isPrimaryScale(m, primary))
+        .map(scaleMatchToAlternative);
+
+      dispatch({ type: UPDATE_SELECTED_SCALE_NAME, payload: primary.scale.scaleType.name });
+      dispatch({ type: UPDATE_SELECTED_KEY_NUMBER, payload: primary.scale.rootNote.number });
+      dispatch({ type: UPDATE_ALTERNATIVE_SELECTIONS, payload: alternatives });
+    } else {
+      dispatch({ type: UPDATE_SELECTED_SCALE_NAME, payload: 'custom' });
+      dispatch({ type: UPDATE_ALTERNATIVE_SELECTIONS, payload: [] });
     }
-	}
-}
+  }
+};

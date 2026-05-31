@@ -1,6 +1,6 @@
-import intervals from 'data/intervals.json';
+import { intervals } from '@benjamindehli/music-utils';
 
-const initialState = intervals;
+const initialState = Object.fromEntries(intervals.map(i => [i.number, i.name]));
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {

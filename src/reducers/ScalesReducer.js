@@ -1,13 +1,14 @@
-import { UPDATE_SCALES } from 'constants/types';
+import { scaleTypes } from '@benjamindehli/music-utils';
 
-import scales from 'data/scales.json';
-
-const initialState = scales;
+const initialState = Object.fromEntries(
+  scaleTypes.map(st => [st.name, {
+    halfSteps: st.halfSteps,
+    parsedHalfSteps: st.getParsedHalfSteps()
+  }])
+);
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case UPDATE_SCALES:
-			return action.payload;
     default:
       return state;
   }

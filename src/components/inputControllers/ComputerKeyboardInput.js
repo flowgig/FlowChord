@@ -23,9 +23,9 @@ class ComputerKeyboardInput extends Component {
     document.removeEventListener("keydown", this.keyDownFunction, false);
   }
 
-  handleNoteToggle(checked, noteNumber, selectedKeyNumber, noteSelections, selectedSelectionType) {
+  handleNoteToggle(checked, noteNumber, selectedKeyNumber, selectedSelectionType) {
     const newNotes = this.props.toggleNote(noteNumber, checked);
-    this.props.updateSelectedSelectionNameFromNotes(newNotes, selectedKeyNumber, noteSelections, selectedSelectionType);
+    this.props.updateSelectedSelectionNameFromNotes(newNotes, selectedKeyNumber, selectedSelectionType);
   }
 
   keyDownFunction(event) {
@@ -35,10 +35,7 @@ class ComputerKeyboardInput extends Component {
     const keyNumber = this.props.keyCodeNoteNumbers[event.keyCode];
     if(typeof keyNumber === 'number'){
       const note = getNoteByNoteNumber(this.props.notes, keyNumber);
-      const noteSelections = this.props.selectedSelectionType === 'scale'
-        ? this.props.scales
-        : this.props.chords;
-      this.handleNoteToggle(!note.selected, keyNumber, this.props.selectedKeyNumber, noteSelections, this.props.selectedSelectionType)
+      this.handleNoteToggle(!note.selected, keyNumber, this.props.selectedKeyNumber, this.props.selectedSelectionType)
     }
   }
 
@@ -49,8 +46,6 @@ class ComputerKeyboardInput extends Component {
 
 const mapStateToProps = state => ({
   notes: state.notes,
-  chords: state.chords,
-  scales: state.scales,
   selectedSelectionType: state.selectedSelectionType,
   selectedKeyNumber: state.selectedKeyNumber,
   keyCodeNoteNumbers: state.keyCodeNoteNumbers,

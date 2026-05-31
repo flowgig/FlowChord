@@ -13,6 +13,7 @@ import TextField from '@mui/material/TextField';
 // Actions
 import { updateSelectedKeyNumber } from 'actions/SelectedKeyNumberActions';
 import { updateSelectedChordName, updateSelectedScaleName, updateSelectedSelectionSelectList } from 'actions/SelectedSelectionNameActions';
+import { updateSelectedChordBassNoteNumber } from 'actions/SelectedChordBassNoteActions';
 import { updateComputerKeyboardInputEnabled } from 'actions/ComputerKeyboardInputEnabledActions';
 
 // Stylesheets
@@ -50,13 +51,31 @@ class Selection extends Component {
     );
   }
 
+  handleBassNoteChange(value) {
+    const bassNoteNumber = value === '' ? null : parseInt(value);
+    this.props.updateSelectedChordBassNoteNumber(bassNoteNumber);
+  }
+
   renderKeyOptions(notes) {
     return notes.map(note => {
       return <MenuItem value={note.number} key={note.number}>{note.name}</MenuItem>;
     })
   }
 
+  renderBassNoteOptions(notes) {
+    return [
+      <MenuItem value="" key="none"><em>None</em></MenuItem>,
+      ...notes.map(note => (
+        <MenuItem value={note.number} key={note.number}>{note.name}</MenuItem>
+      ))
+    ];
+  }
+
   render() {
+    const bassNoteValue = this.props.selectedChordBassNoteNumber !== null && this.props.selectedChordBassNoteNumber !== undefined
+      ? this.props.selectedChordBassNoteNumber
+      : '';
+
     return (
       <div className={style.selection}>
         <FormControl variant="standard" className={style.formControl}>
@@ -92,6 +111,22 @@ class Selection extends Component {
               />
             </FormControl>)
         }
+        {
+          this.props.selectedSelectionType === 'chord' && (
+            <FormControl variant="standard" className={style.formControl}>
+              <InputLabel id="bass-note-select-label">Bass</InputLabel>
+              <Select
+                className={style.select}
+                labelId="bass-note-select-label"
+                id="bass-note-select"
+                value={bassNoteValue}
+                onChange={event => this.handleBassNoteChange(event.target.value)}
+              >
+                {this.renderBassNoteOptions(this.props.notes)}
+              </Select>
+            </FormControl>
+          )
+        }
       </div>
     )
   }
@@ -103,6 +138,7 @@ const mapStateToProps = state => ({
   scales: state.scales,
   selectedKeyNumber: state.selectedKeyNumber,
   selectedChordName: state.selectedChordName,
+  selectedChordBassNoteNumber: state.selectedChordBassNoteNumber,
   selectedScaleName: state.selectedScaleName,
   selectedSelectionType: state.selectedSelectionType
 });
@@ -112,6 +148,7 @@ const mapDispatchToProps = {
   updateSelectedChordName,
   updateSelectedScaleName,
   updateSelectedSelectionSelectList,
+  updateSelectedChordBassNoteNumber,
   updateComputerKeyboardInputEnabled
 };
 

@@ -1,13 +1,14 @@
-import { UPDATE_CHORDS } from 'constants/types';
+import { chordTypes } from '@benjamindehli/music-utils';
 
-import chords from 'data/chords.json';
-
-const initialState = chords;
+const initialState = Object.fromEntries(
+  chordTypes.map(ct => [ct.name, {
+    halfSteps: ct.halfSteps,
+    parsedHalfSteps: ct.getParsedHalfSteps()
+  }])
+);
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case UPDATE_CHORDS:
-			return action.payload;
     default:
       return state;
   }
