@@ -15,7 +15,7 @@ import {
   getNoteByNoteNumber,
   noteNumbersToHalfSteps,
 	halfStepsToNoteNumbers
-} from 'helpers/noteHelpers.js';
+} from 'helpers/noteHelpers';
 
 const sortNumber = (a, b) => {
   return a - b;
