@@ -3,13 +3,13 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 // Material UI
-import Badge from '@material-ui/core/Badge';
-import CloseIcon from '@material-ui/icons/Close';
-import IconButton from '@material-ui/core/IconButton';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import Snackbar from '@material-ui/core/Snackbar';
-import QueueMusicIcon from '@material-ui/icons/QueueMusic';
+import Badge from '@mui/material/Badge';
+import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import Snackbar from '@mui/material/Snackbar';
+import QueueMusicIcon from '@mui/icons-material/QueueMusic';
 
 // Actions
 import {updateSelectedSelectionFromAlternativeSelectionList} from 'actions/SelectedSelectionNameActions';
@@ -87,7 +87,6 @@ class AlternativeSelections extends Component {
         anchorEl={this.state.anchorEl}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         id={this.state.listId}
-        getContentAnchorEl={null}
         keepMounted
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
         open={this.state.isListOpen}

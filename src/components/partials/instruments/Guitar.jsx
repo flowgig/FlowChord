@@ -3,8 +3,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 // Material UI
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 
 // Components
 import Fret from 'components/partials/instruments/Guitar/Fret';
@@ -27,7 +27,7 @@ class Guitar extends Component {
           return <MenuItem key={`noteNumber-${note.number}`} value={note.number}>{note.name}</MenuItem>
         });
         return (<div key={`${stringNumber}-${tuner.number}`} className={style.tuner}>
-          <Select value={tuner.number} className={style.tunerSelect} onChange={(event) => this.handleTunerChange(stringNumber, parseInt(event.target.value))}>
+          <Select variant="standard" value={tuner.number} className={style.tunerSelect} onChange={(event) => this.handleTunerChange(stringNumber, parseInt(event.target.value))}>
             {optionElements}
           </Select>
           <div className={style.fret}>

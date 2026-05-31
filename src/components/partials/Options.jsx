@@ -3,20 +3,18 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 // Material UI
-import Collapse from '@material-ui/core/Collapse';
-import Divider from '@material-ui/core/Divider';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import Switch from '@material-ui/core/Switch';
-import TextField from '@material-ui/core/TextField';
-
+import Collapse from '@mui/material/Collapse';
+import Divider from '@mui/material/Divider';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListSubheader from '@mui/material/ListSubheader';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import Switch from '@mui/material/Switch';
+import TextField from '@mui/material/TextField';
 
 // Actions
 import {updateSelectedSelectionType} from 'actions/SelectedSelectionTypeActions';
@@ -89,7 +87,7 @@ class Options extends Component {
     return (<React.Fragment>
       <List subheader={<ListSubheader>Settings</ListSubheader>} className={style.options}>
         <ListItem>
-          <FormControl fullWidth>
+          <FormControl variant="standard" fullWidth>
             <InputLabel id="selection-type-select-label">Selection type</InputLabel>
             <Select labelId="selection-type-select-label" id="selection-type-select" value={this.props.selectedSelectionType} onChange={event => this.handleSelectionTypeChange(event.target.value)}>
             {this.renderSelectionTypeOptions(this.props.selectionTypes)}
@@ -97,7 +95,7 @@ class Options extends Component {
           </FormControl>
         </ListItem>
         <ListItem>
-          <FormControl fullWidth>
+          <FormControl variant="standard" fullWidth>
             <InputLabel id="label-select-label">Label</InputLabel>
             <Select labelId="label-select-label" id="label-select" value={this.props.selectedLabel} onChange={event => this.handleLabelChange(event.target.value)}>
             {this.renderLabelOptions(this.props.labels)}
@@ -107,9 +105,8 @@ class Options extends Component {
       </List>
       <Divider />
       <List>
-        <ListItem>
-          <ListItemText id="switch-list-label-guitar" primary="Guitar" />
-          <ListItemSecondaryAction>
+        <ListItem
+          secondaryAction={
             <Switch
               edge="end"
               onChange={event => this.handleToggleGuitar(event.target.checked)}
@@ -117,21 +114,22 @@ class Options extends Component {
               color="primary"
               inputProps={{ 'aria-labelledby': 'switch-list-label-guitar' }}
             />
-          </ListItemSecondaryAction>
+          }
+        >
+          <ListItemText id="switch-list-label-guitar" primary="Guitar" />
         </ListItem>
         <Collapse in={this.props.settingsGuitar.show} timeout="auto" unmountOnExit>
           <List>
             <ListItem>
-              <TextField value={this.props.settingsGuitar.numberOfFrets} onChange={event => this.handleNumberOfFretsChange(event.target.value)} fullWidth id="number-of-frets" label="Number of frets" type="number" inputProps={{min: 0, max: 50}} InputLabelProps={{shrink: true}} />
+              <TextField variant="standard" value={this.props.settingsGuitar.numberOfFrets} onChange={event => this.handleNumberOfFretsChange(event.target.value)} fullWidth id="number-of-frets" label="Number of frets" type="number" inputProps={{min: 0, max: 50}} InputLabelProps={{shrink: true}} />
             </ListItem>
           </List>
         </Collapse>
       </List>
       <Divider />
       <List>
-        <ListItem>
-          <ListItemText id="switch-list-label-keyboard" primary="Keyboard" />
-          <ListItemSecondaryAction>
+        <ListItem
+          secondaryAction={
             <Switch
               edge="end"
               onChange={event => this.handleToggleKeyboard(event.target.checked)}
@@ -139,15 +137,17 @@ class Options extends Component {
               color="primary"
               inputProps={{ 'aria-labelledby': 'switch-list-label-keyboard' }}
             />
-          </ListItemSecondaryAction>
+          }
+        >
+          <ListItemText id="switch-list-label-keyboard" primary="Keyboard" />
         </ListItem>
         <Collapse in={this.props.settingsKeyboard.show} timeout="auto" unmountOnExit>
           <List>
             <ListItem>
-              <TextField value={this.props.settingsKeyboard.numberOfKeys} onChange={event => this.handleNumberOfKeysChange(event.target.value)} fullWidth id="number-of-keys" label="Number of keys" type="number" inputProps={{min: 0, max: 120}} InputLabelProps={{shrink: true}} />
+              <TextField variant="standard" value={this.props.settingsKeyboard.numberOfKeys} onChange={event => this.handleNumberOfKeysChange(event.target.value)} fullWidth id="number-of-keys" label="Number of keys" type="number" inputProps={{min: 0, max: 120}} InputLabelProps={{shrink: true}} />
             </ListItem>
             <ListItem>
-              <FormControl fullWidth>
+              <FormControl variant="standard" fullWidth>
                 <InputLabel id="lowestNote-select-label">Lowest note</InputLabel>
                 <Select labelId="lowestNote-select-label" id="lowestNote-select" value={this.props.settingsKeyboard.lowestNote} onChange={event => this.handleLowestNoteChange(event.target.value)}>
                 {this.renderLowestNoteOptions(this.props.notes)}

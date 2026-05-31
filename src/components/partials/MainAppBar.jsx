@@ -2,15 +2,14 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-// Material-UI
-import AppBar from '@material-ui/core/AppBar';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import Divider from '@material-ui/core/Divider';
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import Toolbar from '@material-ui/core/Toolbar';
-
+// Material UI
+import AppBar from '@mui/material/AppBar';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import Divider from '@mui/material/Divider';
+import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import Toolbar from '@mui/material/Toolbar';
 
 // Components
 import Selection from 'components/partials/Selection';
@@ -64,7 +63,5 @@ class MainAppBar extends Component {
     </React.Fragment>);
   }
 }
-
-
 
 export default connect(null, null)(MainAppBar);

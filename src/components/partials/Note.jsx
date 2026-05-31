@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
 // Material UI
-import Button from '@material-ui/core/Button';
+import Button from '@mui/material/Button';
 
 // Actions
 import {toggleNote} from 'actions/NotesActions';
@@ -57,7 +57,7 @@ class Note extends Component {
     
 
     return (<div className={style.note}>
-          <Button color="default"
+          <Button color="inherit"
                   disableElevation
                   variant={note.selected ? 'contained' : 'text'}
                   onClick={event => this.handleNoteOnClick(!note.selected, keyNumber, this.props.selectedKeyNumber, noteSelections, this.props.selectedSelectionType)}

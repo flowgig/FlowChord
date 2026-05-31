@@ -1,6 +1,5 @@
-import { createTheme } from '@material-ui/core/styles';
+import { createTheme } from '@mui/material/styles';
 
-// A custom theme for this app
 const theme = createTheme({
   palette: {
     primary: {
@@ -13,10 +12,12 @@ const theme = createTheme({
       default: '#fff',
     }
   },
-  overrides: {
-    MuiAppBar: { // Name of the component ⚛️ / style sheet
-      colorPrimary: { // Name of the rule
-         backgroundColor: '#272b2f', // Some CSS
+  components: {
+    MuiAppBar: {
+      styleOverrides: {
+        colorPrimary: {
+          backgroundColor: '#272b2f',
+        },
       },
     },
   },

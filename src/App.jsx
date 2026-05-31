@@ -4,10 +4,10 @@ import { Provider } from "react-redux";
 import { Route, Routes } from "react-router";
 import { HistoryRouter as Router } from "redux-first-history/rr6";
 import WebFont from "webfontloader";
-import { ThemeProvider } from "@material-ui/styles";
+import { ThemeProvider } from "@mui/material/styles";
 
 // Material UI
-import CssBaseline from "@material-ui/core/CssBaseline";
+import CssBaseline from "@mui/material/CssBaseline";
 
 // Utils
 import store, { history } from "utils/configureStore";

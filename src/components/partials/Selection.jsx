@@ -3,12 +3,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 // Material UI
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import TextField from '@mui/material/TextField';
 
 // Actions
 import { updateSelectedKeyNumber } from 'actions/SelectedKeyNumberActions';
@@ -56,23 +56,10 @@ class Selection extends Component {
     })
   }
 
-  renderChordOptions(chords) {
-    return Object.keys(chords).map(chordName => {
-      return <MenuItem key={chordName} value={chordName}>{chordName}</MenuItem>;
-    })
-  }
-
-  renderScaleOptions(scales) {
-    return Object.keys(scales).map(scaleName => {
-      return <MenuItem key={scaleName} value={scaleName}>{scaleName}</MenuItem>;
-    })
-  }
-
-
   render() {
     return (
       <div className={style.selection}>
-        <FormControl className={style.formControl}>
+        <FormControl variant="standard" className={style.formControl}>
           <InputLabel id="key-select-label">Key</InputLabel>
           <Select className={style.select} labelId="key-select-label" id="key-select" value={this.props.selectedKeyNumber} onChange={event => this.handleKeyChange(parseInt(event.target.value))}>
             {this.renderKeyOptions(this.props.notes)}
@@ -89,10 +76,8 @@ class Selection extends Component {
                 onBlur={() => this.props.updateComputerKeyboardInputEnabled(true)}
                 className={style.select}
                 options={Object.keys(this.props.chords)}
-                renderInput={(params) => <TextField {...params} label="Chord" className={style.input} />}
+                renderInput={(params) => <TextField {...params} variant="standard" label="Chord" className={style.input} />}
               />
-
-
             </FormControl>)
             : (<FormControl className={`${style.formControl} ${style.wide}`}>
               <Autocomplete
@@ -103,7 +88,7 @@ class Selection extends Component {
                 onBlur={() => this.props.updateComputerKeyboardInputEnabled(true)}
                 className={style.select}
                 options={Object.keys(this.props.scales)}
-                renderInput={(params) => <TextField {...params} label="Scale" className={style.input} />}
+                renderInput={(params) => <TextField {...params} variant="standard" label="Scale" className={style.input} />}
               />
             </FormControl>)
         }

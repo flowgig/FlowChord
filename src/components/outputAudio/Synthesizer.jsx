@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import * as Tone from 'tone';
 
 // Material UI
-import Fab from '@material-ui/core/Fab';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import Fab from '@mui/material/Fab';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
 // Helpers
 import { getNoteByNoteNumber } from 'helpers/noteHelpers';
