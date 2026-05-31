@@ -28,6 +28,13 @@ class Synthesizer extends Component {
     })
   };
 
+  getBassNoteTriggerName(bassNoteNumber, selectedKeyNumber, notes) {
+    const rootOctave = selectedKeyNumber > 5 ? 3 : 4;
+    const bassOctave = bassNoteNumber < selectedKeyNumber ? rootOctave : rootOctave - 1;
+    const note = getNoteByNoteNumber(notes, bassNoteNumber);
+    return `${note.name}${bassOctave}`;
+  }
+
   playSelection() {
     const synthesizer = this.props.synthesizer;
     const notes = this.props.notes;
@@ -36,29 +43,30 @@ class Synthesizer extends Component {
     if (selectedSelectionName) {
       const selectedSelection = selectedSelections[selectedSelectionName];
       const selectedHalfSteps = selectedSelection.halfSteps;
-      const selectedNotesTriggerNames = this.getSelectedNotesTriggerNames(selectedHalfSteps, this.props.selectedKeyNumber, notes);
-      const now = Tone.now()
+      const chordNoteNames = this.getSelectedNotesTriggerNames(selectedHalfSteps, this.props.selectedKeyNumber, notes);
+
+      const bassNoteNumber = this.props.selectedChordBassNoteNumber;
+      const bassNoteName = (this.props.selectedSelectionType === 'chord' && bassNoteNumber !== null && bassNoteNumber !== undefined)
+        ? this.getBassNoteTriggerName(bassNoteNumber, this.props.selectedKeyNumber, notes)
+        : null;
+
+      const now = Tone.now();
 
       if (this.props.selectedSelectionType === 'chord') {
+        const allNotes = bassNoteName ? [bassNoteName, ...chordNoteNames] : chordNoteNames;
         // Trigger simultaneously
-        synthesizer.triggerAttackRelease(selectedNotesTriggerNames, 0.5);
-        // Trigger consecutively
-        selectedNotesTriggerNames.forEach((selectedNotesTriggerName, index) => {
-          const noteLength = 0.25;
-          const noteStart = now + 0.75 + 0.25 * index;
-          synthesizer.triggerAttackRelease(selectedNotesTriggerName, noteLength, noteStart);
-        })
+        synthesizer.triggerAttackRelease(allNotes, 0.5);
+        // Trigger consecutively (bass note first, then chord notes)
+        allNotes.forEach((noteName, index) => {
+          synthesizer.triggerAttackRelease(noteName, 0.25, now + 0.75 + 0.25 * index);
+        });
       } else if (this.props.selectedSelectionType === 'scale') {
         // Trigger consecutively
-        selectedNotesTriggerNames.forEach((selectedNotesTriggerName, index) => {
-          const noteLength = 0.25;
-          const noteStart = now + 0.25 * index;
-          synthesizer.triggerAttackRelease(selectedNotesTriggerName, noteLength, noteStart);
-        })
+        chordNoteNames.forEach((noteName, index) => {
+          synthesizer.triggerAttackRelease(noteName, 0.25, now + 0.25 * index);
+        });
       }
-
     }
-
   }
 
   render() {
@@ -75,6 +83,7 @@ const mapStateToProps = state => ({
   chords: state.chords,
   scales: state.scales,
   selectedChordName: state.selectedChordName,
+  selectedChordBassNoteNumber: state.selectedChordBassNoteNumber,
   selectedScaleName: state.selectedScaleName,
   selectedKeyNumber: state.selectedKeyNumber,
   selectedSelectionType: state.selectedSelectionType,
