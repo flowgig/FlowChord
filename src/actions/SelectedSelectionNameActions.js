@@ -122,10 +122,13 @@ export const updateSelectedSelectionSelectList = (notes, selectedKeyNumber, sele
   }
 };
 
-export const updateSelectedSelectionNameFromNotes = (notes, selectedKeyNumber, selectedSelectionType) => dispatch => {
+export const updateSelectedSelectionNameFromNotes = (notes, selectedKeyNumber, selectedSelectionType) => (dispatch, getState) => {
   const selectedNoteNumbers = getSelectedNoteNumbersFromNotes(notes);
 
   if (!selectedNoteNumbers.length) return;
+
+  const currentBassNoteNumber = getState().selectedChordBassNoteNumber;
+  const bassNoteStillSelected = currentBassNoteNumber !== null && selectedNoteNumbers.includes(currentBassNoteNumber);
 
   if (selectedSelectionType === 'chord') {
     const matches = getChordsFromSelectedNotes(selectedNoteNumbers);
@@ -138,11 +141,15 @@ export const updateSelectedSelectionNameFromNotes = (notes, selectedKeyNumber, s
 
       dispatch({ type: UPDATE_SELECTED_CHORD_NAME, payload: primary.chord.chordType.name });
       dispatch({ type: UPDATE_SELECTED_KEY_NUMBER, payload: primary.chord.rootNote.number });
-      dispatch({ type: UPDATE_SELECTED_CHORD_BASS_NOTE_NUMBER, payload: null });
+      if (!bassNoteStillSelected) {
+        dispatch({ type: UPDATE_SELECTED_CHORD_BASS_NOTE_NUMBER, payload: null });
+      }
       dispatch({ type: UPDATE_ALTERNATIVE_SELECTIONS, payload: alternatives });
     } else {
       dispatch({ type: UPDATE_SELECTED_CHORD_NAME, payload: 'custom' });
-      dispatch({ type: UPDATE_SELECTED_CHORD_BASS_NOTE_NUMBER, payload: null });
+      if (!bassNoteStillSelected) {
+        dispatch({ type: UPDATE_SELECTED_CHORD_BASS_NOTE_NUMBER, payload: null });
+      }
       dispatch({ type: UPDATE_ALTERNATIVE_SELECTIONS, payload: [] });
     }
   } else {

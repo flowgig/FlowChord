@@ -12,8 +12,9 @@ import TextField from '@mui/material/TextField';
 
 // Actions
 import { updateSelectedKeyNumber } from 'actions/SelectedKeyNumberActions';
-import { updateSelectedChordName, updateSelectedScaleName, updateSelectedSelectionSelectList } from 'actions/SelectedSelectionNameActions';
+import { updateSelectedChordName, updateSelectedScaleName, updateSelectedSelectionSelectList, updateSelectedSelectionNameFromNotes } from 'actions/SelectedSelectionNameActions';
 import { updateSelectedChordBassNoteNumber } from 'actions/SelectedChordBassNoteActions';
+import { toggleNote } from 'actions/NotesActions';
 import { updateComputerKeyboardInputEnabled } from 'actions/ComputerKeyboardInputEnabledActions';
 
 // Stylesheets
@@ -22,6 +23,9 @@ import style from 'components/partials/Selection.module.scss';
 class Selection extends Component {
 
   handleKeyChange(keyNumber) {
+    if (this.props.selectedChordBassNoteNumber === keyNumber) {
+      this.props.updateSelectedChordBassNoteNumber(null);
+    }
     this.props.updateSelectedSelectionSelectList(
       this.props.notes,
       keyNumber,
@@ -52,7 +56,16 @@ class Selection extends Component {
   }
 
   handleBassNoteChange(value) {
-    const bassNoteNumber = value === '' ? null : parseInt(value);
+    if (value === '') {
+      this.props.updateSelectedChordBassNoteNumber(null);
+      return;
+    }
+    const bassNoteNumber = parseInt(value);
+    const note = this.props.notes.find(n => n.number === bassNoteNumber);
+    if (note && !note.selected) {
+      const newNotes = this.props.toggleNote(bassNoteNumber, true);
+      this.props.updateSelectedSelectionNameFromNotes(newNotes, this.props.selectedKeyNumber, this.props.selectedSelectionType);
+    }
     this.props.updateSelectedChordBassNoteNumber(bassNoteNumber);
   }
 
@@ -62,12 +75,14 @@ class Selection extends Component {
     })
   }
 
-  renderBassNoteOptions(notes) {
+  renderBassNoteOptions(notes, selectedKeyNumber) {
     return [
       <MenuItem value="" key="none"><em>None</em></MenuItem>,
-      ...notes.map(note => (
-        <MenuItem value={note.number} key={note.number}>{note.name}</MenuItem>
-      ))
+      ...notes
+        .filter(note => note.number !== selectedKeyNumber)
+        .map(note => (
+          <MenuItem value={note.number} key={note.number}>{note.name}</MenuItem>
+        ))
     ];
   }
 
@@ -122,7 +137,7 @@ class Selection extends Component {
                 value={bassNoteValue}
                 onChange={event => this.handleBassNoteChange(event.target.value)}
               >
-                {this.renderBassNoteOptions(this.props.notes)}
+                {this.renderBassNoteOptions(this.props.notes, this.props.selectedKeyNumber)}
               </Select>
             </FormControl>
           )
@@ -148,7 +163,9 @@ const mapDispatchToProps = {
   updateSelectedChordName,
   updateSelectedScaleName,
   updateSelectedSelectionSelectList,
+  updateSelectedSelectionNameFromNotes,
   updateSelectedChordBassNoteNumber,
+  toggleNote,
   updateComputerKeyboardInputEnabled
 };
 
