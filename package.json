@@ -17,7 +17,7 @@
     "redux": "^4.0.5",
     "redux-first-history": "^5.1.1",
     "redux-thunk": "^2.3.0",
-    "tone": "^14.7.58",
+    "tone": "^14.7.77",
     "webfontloader": "^1.6.28"
   },
   "scripts": {
