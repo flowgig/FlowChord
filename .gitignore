@@ -46,6 +46,15 @@ jspm_packages
 # Vite build output
 dist/
 
+# Yarn (Berry) — keep tracked config, ignore local caches/state
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+
 CLAUDE.md
 /.claude
 temp/
