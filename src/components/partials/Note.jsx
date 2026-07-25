@@ -11,14 +11,14 @@ import {toggleNote} from 'actions/NotesActions';
 import {updateSelectedSelectionNameFromNotes} from 'actions/SelectedSelectionNameActions';
 
 // Helpers
-import {noteNumberToHalfSteps} from 'helpers/noteHelpers';
+import {noteNumberToHalfSteps, getSpelledNoteNames} from 'helpers/noteHelpers';
 
 // Stylesheets
 import style from 'components/partials/Note.module.scss';
 
 class Note extends Component {
-	getKeyName(keyNumber){
-		return this.props.notes[keyNumber].name;
+	getKeyName(keyNumber, spelledNoteNames){
+		return spelledNoteNames[keyNumber] ?? this.props.notes[keyNumber].name;
 	}
 
   getInterval(halfSteps){
@@ -34,9 +34,10 @@ class Note extends Component {
     const noteSelections = this.props.selectedSelectionType === 'scale' ? this.props.scales : this.props.chords;
     const selectedSelectionName = this.props.selectedSelectionType === 'scale' ? this.props.selectedScaleName : this.props.selectedChordName;
     const selectedNoteSelection = noteSelections[selectedSelectionName];
+    const spelledNoteNames = getSpelledNoteNames(this.props.selectedKeyNumber, selectedNoteSelection);
 
     const keyNumber = this.props.keyNumber;
-    const keyName = this.getKeyName(keyNumber);
+    const keyName = this.getKeyName(keyNumber, spelledNoteNames);
     const note = this.props.note;
     const halfSteps = noteNumberToHalfSteps(keyNumber, this.props.selectedKeyNumber, selectedNoteSelection);
     const interval = this.getInterval(halfSteps);

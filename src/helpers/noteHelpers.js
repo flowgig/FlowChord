@@ -1,7 +1,22 @@
+import { getSpelledNotes } from '@benjamindehli/music-utils';
+
 export const getNoteByNoteNumber = (notes, noteNumber) => {
   return notes.find(note => {
     return note.number === noteNumber;
   })
+}
+
+// Context-aware note spelling: given a root note and the selected chord/scale,
+// returns a { [pitchClass]: name } map spelling each note from its interval above
+// the root (e.g. Bb instead of A# in an F major context). Notes outside the
+// selection are absent from the map — callers should fall back to the default name.
+export const getSpelledNoteNames = (rootNoteNumber, noteSelection) => {
+  const halfSteps = noteSelection?.halfSteps;
+  if (!halfSteps?.length) return {};
+  return getSpelledNotes(rootNoteNumber, halfSteps).reduce((spelledNoteNames, spelledNote) => {
+    spelledNoteNames[spelledNote.number] = spelledNote.name;
+    return spelledNoteNames;
+  }, {});
 }
 
 export const noteNumberToHalfSteps = (noteNumber, selectedKeyNumber, selectedNoteSelection) => {

@@ -17,6 +17,9 @@ import { updateSelectedChordBassNoteNumber } from 'actions/SelectedChordBassNote
 import { toggleNote } from 'actions/NotesActions';
 import { updateComputerKeyboardInputEnabled } from 'actions/ComputerKeyboardInputEnabledActions';
 
+// Helpers
+import { getSpelledNoteNames } from 'helpers/noteHelpers';
+
 // Stylesheets
 import style from 'components/partials/Selection.module.scss';
 
@@ -69,19 +72,19 @@ class Selection extends Component {
     this.props.updateSelectedChordBassNoteNumber(bassNoteNumber);
   }
 
-  renderKeyOptions(notes) {
+  renderKeyOptions(notes, spelledNoteNames) {
     return notes.map(note => {
-      return <MenuItem value={note.number} key={note.number}>{note.name}</MenuItem>;
+      return <MenuItem value={note.number} key={note.number}>{spelledNoteNames[note.number] ?? note.name}</MenuItem>;
     })
   }
 
-  renderBassNoteOptions(notes, selectedKeyNumber) {
+  renderBassNoteOptions(notes, selectedKeyNumber, spelledNoteNames) {
     return [
       <MenuItem value="" key="none"><em>None</em></MenuItem>,
       ...notes
         .filter(note => note.number !== selectedKeyNumber)
         .map(note => (
-          <MenuItem value={note.number} key={note.number}>{note.name}</MenuItem>
+          <MenuItem value={note.number} key={note.number}>{spelledNoteNames[note.number] ?? note.name}</MenuItem>
         ))
     ];
   }
@@ -91,12 +94,17 @@ class Selection extends Component {
       ? this.props.selectedChordBassNoteNumber
       : '';
 
+    const selectedNoteSelection = this.props.selectedSelectionType === 'scale'
+      ? this.props.scales[this.props.selectedScaleName]
+      : this.props.chords[this.props.selectedChordName];
+    const spelledNoteNames = getSpelledNoteNames(this.props.selectedKeyNumber, selectedNoteSelection);
+
     return (
       <div className={style.selection}>
         <FormControl variant="standard" className={style.formControl}>
           <InputLabel id="key-select-label">Key</InputLabel>
           <Select className={style.select} labelId="key-select-label" id="key-select" value={this.props.selectedKeyNumber} onChange={event => this.handleKeyChange(parseInt(event.target.value))}>
-            {this.renderKeyOptions(this.props.notes)}
+            {this.renderKeyOptions(this.props.notes, spelledNoteNames)}
           </Select>
         </FormControl>
         {
@@ -137,7 +145,7 @@ class Selection extends Component {
                 value={bassNoteValue}
                 onChange={event => this.handleBassNoteChange(event.target.value)}
               >
-                {this.renderBassNoteOptions(this.props.notes, this.props.selectedKeyNumber)}
+                {this.renderBassNoteOptions(this.props.notes, this.props.selectedKeyNumber, spelledNoteNames)}
               </Select>
             </FormControl>
           )
